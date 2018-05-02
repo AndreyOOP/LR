@@ -1,7 +1,7 @@
-﻿using LodeRunner;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using LodeRunner;
 
 namespace LodeRunnerTests.VisualTester
 {
@@ -32,7 +32,9 @@ namespace LodeRunnerTests.VisualTester
         private void OnPaint(object sender, PaintEventArgs e)
         {
             foreach (var element in elements)
+            {
                 element.Draw(e.Graphics);
+            }
 
             Invalidate();
         }

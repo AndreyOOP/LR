@@ -2,7 +2,7 @@
 using System.Drawing;
 
 // using System.Timers instead of System.Windows.Forms
-// Windows.Forms will work only if executed from the same thread, details - https://stackoverflow.com/questions/13412145/timer-wont-tick
+// Windows.Forms will work only if executed from the same thread - https://stackoverflow.com/questions/13412145/timer-wont-tick
 using System.Timers;
 
 namespace LodeRunner.Animation
@@ -15,28 +15,11 @@ namespace LodeRunner.Animation
 
         public AnimationImage(Bitmap animationImage, int frameLength, int speed)
         {
-            if (frameLength < 1)
-                throw new ArgumentException($"{nameof(frameLength)} has to be >= 1");
+            ArgumentsCheck(animationImage, frameLength, speed);
 
-            if (animationImage.Size.Width < frameLength)
-                throw new ArgumentException($"Width of {nameof(animationImage)} has to be longer than {nameof(frameLength)}");
+            timer = InitializeTimer(speed);
 
-            if (speed < 1)
-                throw new ArgumentException($"{nameof(speed)} has to be >= 1");
-
-            timer = new Timer() {
-                Enabled = false,
-                Interval = speed
-            };
-            timer.Elapsed += TimerTick;
-
-            frames = new Bitmap[animationImage.Size.Width / frameLength];
-
-            for (int i = 0; i < frames.Length; i++)
-            {
-                var copyArea = new Rectangle(i * frameLength, 0, frameLength, animationImage.Size.Height);
-                frames[i] = animationImage.Clone(copyArea, animationImage.PixelFormat);
-            }
+            frames = SplitImageOnFrames(animationImage, frameLength);
         }
 
         public void Start()
@@ -59,12 +42,54 @@ namespace LodeRunner.Animation
             return frames[currentFrame];
         }
 
+        private void ArgumentsCheck(Bitmap animationImage, int frameLength, int speed)
+        {
+            if (frameLength < 1)
+            {
+                throw new ArgumentException($"{nameof(frameLength)} has to be >= 1");
+            }
+
+            if (animationImage.Size.Width < frameLength)
+            {
+                throw new ArgumentException($"Width of {nameof(animationImage)} has to be longer than {nameof(frameLength)}");
+            }
+
+            if (speed < 1)
+            {
+                throw new ArgumentException($"{nameof(speed)} has to be >= 1");
+            }
+        }
+
+        private Timer InitializeTimer(int speed)
+        {
+            timer = new Timer();
+            timer.Enabled  = false;
+            timer.Interval = speed;
+            timer.Elapsed += TimerTick;
+
+            return timer;
+        }
+
         private void TimerTick(object sender, EventArgs e)
         {
-            currentFrame++;
-
-            if (currentFrame >= frames.Length)
+            if (++currentFrame >= frames.Length)
+            {
                 currentFrame = 0;
+            }
+        }
+
+        private Bitmap[] SplitImageOnFrames(Bitmap animationImage, int frameLength)
+        {
+            Rectangle copyArea;
+            var frames = new Bitmap[animationImage.Size.Width / frameLength];
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                copyArea  = new Rectangle(i * frameLength, 0, frameLength, animationImage.Size.Height);
+                frames[i] = animationImage.Clone(copyArea, animationImage.PixelFormat);
+            }
+
+            return frames;
         }
     }
 }

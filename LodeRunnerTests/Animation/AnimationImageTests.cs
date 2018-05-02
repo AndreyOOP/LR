@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Drawing;
+﻿using System.Drawing;
 using LodeRunnerTests.Animation;
 using LodeRunnerTests.VisualTester;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LodeRunner.Animation.Tests
 {
@@ -63,7 +63,7 @@ namespace LodeRunner.Animation.Tests
             var animation1     = new AnimationImage(animatedBitmap, 30, 50);
             var animation2     = new AnimationImage(animatedBitmap, 30, 150);
 
-            visualizer.Add(new TestAnimationElement(animation1, new Point( 0, 0)));
+            visualizer.Add(new TestAnimationElement(animation1, new Point(0, 0)));
             visualizer.Add(new TestAnimationElement(animation2, new Point(30, 0)));
 
             visualizer.Start();
@@ -76,6 +76,7 @@ namespace LodeRunner.Animation.Tests
             while (animationImage.TicksCounter != qty)
             {
             }
+
             animationImage.Stop();
         }
     }

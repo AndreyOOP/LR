@@ -1,13 +1,17 @@
-﻿using LodeRunner.Animation;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Timers;
-
+using LodeRunner.Animation;
 
 namespace LodeRunnerTests.Animation
 {
     public class AnimationImageTestClass : AnimationImage
     {
+        public AnimationImageTestClass(Bitmap animationImage, int frameLength, int speed) : base(animationImage, frameLength, speed)
+        {
+            timer.Elapsed += IncreaseTicksCounter;
+        }
+
         public int TicksCounter { get; set; }
 
         public int CurrentFrame
@@ -32,11 +36,6 @@ namespace LodeRunnerTests.Animation
             {
                 return timer;
             }
-        }
-
-        public AnimationImageTestClass(Bitmap animationImage, int frameLength, int speed) : base(animationImage, frameLength, speed)
-        {
-            timer.Elapsed += IncreaseTicksCounter;
         }
 
         private void IncreaseTicksCounter(object sender, EventArgs e)
