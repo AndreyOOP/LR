@@ -60,13 +60,13 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Animation\AnimationImageTestClass.cs" />
+    <Compile Include="Animation\Files\AnimationImageTestClass.cs" />
     <Compile Include="Animation\AnimationImageTests.cs" />
+    <Compile Include="Animation\Files\TestAnimationElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisualTester\StandForm.cs">
+    <Compile Include="ElementVisualizaer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VisualTester\VisualStand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -78,10 +78,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Animation\AnimatedTestImage.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Animation\SingleImage.png">
+    <Content Include="Animation\Files\AnimatedTestImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
