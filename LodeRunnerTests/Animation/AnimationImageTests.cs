@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using LodeRunnerTests.Animation;
 using LodeRunnerTests.VisualTester;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -67,6 +68,45 @@ namespace LodeRunner.Animation.Tests
             visualizer.Add(new TestAnimationElement(animation2, new Point(30, 0)));
 
             visualizer.Start();
+        }
+
+        [TestMethod]
+        public void IncorrectSpeedTest()
+        {
+            try
+            {
+                new AnimationImageTestClass(new Bitmap(10, 1), 1, 0);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("speed has to be >= 1", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void IncorrectFrameLengthTest()
+        {
+            try
+            {
+                new AnimationImageTestClass(new Bitmap(10, 1), 0, 1);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("frameLength has to be >= 1", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void IncorrectImageToFrameLengthRatioTest()
+        {
+            try
+            {
+                new AnimationImageTestClass(new Bitmap(10, 10), 15, 1);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual($"Width of animationImage has to be longer than frameLength", ex.Message);
+            }
         }
 
         private void AnimateTillFrame(int qty)
