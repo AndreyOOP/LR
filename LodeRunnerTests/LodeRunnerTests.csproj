@@ -58,8 +58,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Animation\AnimationImageTestClass.cs" />
     <Compile Include="Animation\AnimationImageTests.cs" />
-    <Compile Include="Animation\ProtAnim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

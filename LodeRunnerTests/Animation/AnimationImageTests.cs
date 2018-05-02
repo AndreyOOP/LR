@@ -4,39 +4,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Windows.Forms;
+using LodeRunnerTests.Animation;
+using System.Threading;
 
 namespace LodeRunner.Animation.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class AnimationImageTests
     {
-        [TestMethod()]
-        public void StartTest()
+        private AnimationImageTestClass animationImage;
+
+        [TestInitialize]
+        public void Initialize()
         {
-            var timer = new Timer();
-            var animation = new AnimationImage(new Bitmap(1, 1), 1, 10, timer);
-
-            animation.Start();
-
-            Assert.IsTrue(timer.Enabled);
-
-            animation.Stop();
-
-            Assert.IsFalse(timer.Enabled);
-
-            animation.Reset();
-            //assert get inner state ?
-
-            //add tick function on timer e.g. count
-
-            //add inner function which just counts timer activations, monitor it in cycle
-
-            //while not activated 5 do, then get current state
+            animationImage = new AnimationImageTestClass(new Bitmap(10, 1), 1, 10);
         }
 
-        //add visual testing only - bitmap & see how animation plays
+
+        [TestMethod]
+        public void StartTest()
+        {
+            animationImage.Start();
+
+            Assert.IsTrue(animationImage.Timer.Enabled);
+        }
+
+        [TestMethod]
+        public void StopTest()
+        {
+            animationImage.Stop();
+
+            Assert.IsFalse(animationImage.Timer.Enabled);
+        }
+
+        [TestMethod]
+        public void x() //todo 
+        {
+            animationImage.Start();
+
+            for(int i=0; i<15; i++)
+            {
+                Thread.Sleep(20);
+                Console.WriteLine(animationImage.CurrentFrame);
+            }
+                
+            //while (animationImage.CurrentFrame != 5) { }
+
+            //Assert.AreEqual(5, animationImage.CurrentFrame);
+        }
     }
 }

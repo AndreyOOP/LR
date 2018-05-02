@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
+
+// using System.Timers instead of System.Windows.Forms
+// Windows.Forms will work only if executed from the same thread, details - https://stackoverflow.com/questions/13412145/timer-wont-tick
+using System.Timers;
 
 namespace LodeRunner.Animation
 {
@@ -15,18 +18,17 @@ namespace LodeRunner.Animation
             if (frameLength < 1)
                 throw new ArgumentException($"{nameof(frameLength)} has to be >= 1");
 
-            if (animationImage.Size.Width >= frameLength)
+            if (animationImage.Size.Width < frameLength)
                 throw new ArgumentException($"Width of {nameof(animationImage)} has to be longer than {nameof(frameLength)}");
 
             if (speed < 1)
                 throw new ArgumentException($"{nameof(speed)} has to be >= 1");
 
-            timer = new Timer()
-            {
+            timer = new Timer() {
                 Enabled = false,
                 Interval = speed
             };
-            timer.Tick += TimerTick;
+            timer.Elapsed += TimerTick;
 
             frames = new Bitmap[animationImage.Size.Width / frameLength];
 
@@ -60,6 +62,9 @@ namespace LodeRunner.Animation
         private void TimerTick(object sender, EventArgs e)
         {
             currentFrame++;
+
+            if (currentFrame > frames.Length)
+                currentFrame = 0;
         }
     }
 }
