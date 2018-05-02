@@ -1,42 +1,123 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LodeRunner.Animation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
+using LodeRunnerTests.Animation;
+using LodeRunnerTests.VisualTester;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LodeRunner.Animation.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class AnimationImageTests
     {
-        [TestMethod()]
-        public void StartTest()
+        private AnimationImageTestClass animationImage;
+
+        [TestInitialize]
+        public void Initialize()
         {
-            var timer = new Timer();
-            var animation = new AnimationImage(new Bitmap(1, 1), 1, 10, timer);
-
-            animation.Start();
-
-            Assert.IsTrue(timer.Enabled);
-
-            animation.Stop();
-
-            Assert.IsFalse(timer.Enabled);
-
-            animation.Reset();
-            //assert get inner state ?
-
-            //add tick function on timer e.g. count
-
-            //add inner function which just counts timer activations, monitor it in cycle
-
-            //while not activated 5 do, then get current state
+            animationImage = new AnimationImageTestClass(new Bitmap(10, 1), 1, 1);
         }
 
-        //add visual testing only - bitmap & see how animation plays
+        [TestMethod]
+        public void StartTest()
+        {
+            animationImage.Start();
+            Assert.IsTrue(animationImage.Timer.Enabled);
+        }
+
+        [TestMethod]
+        public void StopTest()
+        {
+            animationImage.Stop();
+            Assert.IsFalse(animationImage.Timer.Enabled);
+        }
+
+        [TestMethod]
+        public void ResetTest()
+        {
+            AnimateTillFrame(5);
+            animationImage.Reset();
+            Assert.AreEqual(0, animationImage.CurrentFrame);
+        }
+
+        [TestMethod]
+        public void CurrentFrameTest()
+        {
+            AnimateTillFrame(0);
+            Assert.AreEqual(0, animationImage.CurrentFrame);
+
+            AnimateTillFrame(5);
+            Assert.AreEqual(5, animationImage.CurrentFrame);
+
+            AnimateTillFrame(10);
+            Assert.AreEqual(0, animationImage.CurrentFrame);
+
+            AnimateTillFrame(14);
+            Assert.AreEqual(4, animationImage.CurrentFrame);
+        }
+
+        [TestMethod]
+        public void ManualAnimationDisplayTest()
+        {
+            ElementVisualizaer visualizer = new ElementVisualizaer();
+
+            var animatedBitmap = new Bitmap(@"Animation\Files\AnimatedTestImage.png");
+            var animation1     = new AnimationImage(animatedBitmap, 30, 50);
+            var animation2     = new AnimationImage(animatedBitmap, 30, 150);
+
+            visualizer.Add(new TestAnimationElement(animation1, new Point(0, 0)));
+            visualizer.Add(new TestAnimationElement(animation2, new Point(30, 0)));
+
+            visualizer.Start();
+        }
+
+        [TestMethod]
+        public void IncorrectSpeedTest()
+        {
+            try
+            {
+                new AnimationImageTestClass(new Bitmap(10, 1), 1, 0);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("speed has to be >= 1", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void IncorrectFrameLengthTest()
+        {
+            try
+            {
+                new AnimationImageTestClass(new Bitmap(10, 1), 0, 1);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("frameLength has to be >= 1", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void IncorrectImageToFrameLengthRatioTest()
+        {
+            try
+            {
+                new AnimationImageTestClass(new Bitmap(10, 10), 15, 1);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual($"Width of animationImage has to be longer than frameLength", ex.Message);
+            }
+        }
+
+        private void AnimateTillFrame(int qty)
+        {
+            animationImage.Start();
+
+            while (animationImage.TicksCounter != qty)
+            {
+            }
+
+            animationImage.Stop();
+        }
     }
 }
