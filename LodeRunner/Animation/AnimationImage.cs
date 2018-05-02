@@ -63,7 +63,7 @@ namespace LodeRunner.Animation
         {
             currentFrame++;
 
-            if (currentFrame > frames.Length)
+            if (currentFrame >= frames.Length)
                 currentFrame = 0;
         }
     }
