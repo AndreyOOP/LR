@@ -2,14 +2,14 @@
 
 namespace LodeRunner.Model
 {
-    public interface IModel<T>
+    public interface IModel
     {
-        void Add(ComponentType type, T component);
+        void Add<T>(ComponentType type, T component) where T : IDrawable;
 
         void Remove(ComponentType type);
 
-        IEnumerable<T> GetAll();
+        IEnumerable<IDrawable> GetAll();
 
-        T Get(ComponentType type);
+        T Get<T>(ComponentType type) where T : IDrawable;
     }
 }
