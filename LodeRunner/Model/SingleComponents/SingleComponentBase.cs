@@ -3,7 +3,7 @@
 namespace LodeRunner.Model.ModelComponents
 {
     // should be used for elements like player, background, pause message, game over message
-    public abstract class SingleComponent : IDrawable
+    public abstract class SingleComponentBase : IDrawable
     {
         public int X { get; set; }
         public int Y { get; set; }

@@ -9,6 +9,7 @@ using LodeRunnerTests.Animation;
 using System.Drawing;
 using LodeRunner.Animation;
 using LodeRunner.Model.ModelComponents;
+using LodeRunner.Model.BaseClasses;
 
 namespace LodeRunner.Model.Tests
 {
@@ -20,7 +21,11 @@ namespace LodeRunner.Model.Tests
         {
             //var model = new Model();
 
-            //model.Add(ComponentType.Brick, new SingleComponent());
+            //model.Add(ComponentType.Brick, new Brick());
+            //model.Add(ComponentType.Background, new ComponentsCollection());
+
+
+
             //model.Add(ComponentType.Guard, new MultipleComponent());
 
 

@@ -1,24 +1,20 @@
 ﻿using System.Drawing;
-using LodeRunner;
 using LodeRunner.Animation;
+using LodeRunner.Model.ModelComponents;
 
 namespace LodeRunnerTests.Animation
 {
-    public class TestAnimationElement : VisualElement
+    public class TestAnimationElement : SingleComponentBase
     {
-        private AnimationImage animationImage;
+        public AnimationImage Animation { get; set; }
 
-        public TestAnimationElement(AnimationImage animationImage, Point position)
+        public TestAnimationElement()
         {
-            this.animationImage = animationImage;
-            Position = position;
-
-            animationImage.Start();
         }
 
         public override void Draw(Graphics g)
         {
-            g.DrawImage(animationImage.GetCurrentFrame(), Position);
+            g.DrawImage(Animation.GetCurrentFrame(), X, Y);
         }
     }
 }
