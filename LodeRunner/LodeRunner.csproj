@@ -51,7 +51,13 @@
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Model\SingleComponents\Player.cs" />
     <Compile Include="Model\SingleComponents\Stone.cs" />
+    <Compile Include="Services\Command\CommandA.cs" />
+    <Compile Include="Services\Command\CommandD.cs" />
+    <Compile Include="Services\Command\CommandNull.cs" />
+    <Compile Include="Services\Command\Commands.cs" />
+    <Compile Include="Services\Command\ICommand.cs" />
     <Compile Include="Services\IModelLoadService.cs" />
+    <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>

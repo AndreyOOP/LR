@@ -15,14 +15,29 @@ namespace LodeRunner
     {
         public Controller Controller { get; set; }
 
-        public View()
+        public View(Controller Controller)
         {
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(450, 450);
             Text = "View x";
             DoubleBuffered = true;
 
-            //Paint += OnPaint;
+            KeyPress += OnKeyPress;
+            Paint += OnPaint;
+
+            this.Controller = Controller;
+        }
+
+        private void OnKeyPress(object sender, KeyPressEventArgs e)
+        {
+            Controller.SetKeyInput(e.KeyChar);
+        }
+
+        private void OnPaint(object sender, PaintEventArgs e)
+        {
+            Controller.Model.Draw(e.Graphics);
+
+            Invalidate();
         }
     }
 }

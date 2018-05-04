@@ -1,6 +1,7 @@
 ﻿namespace LodeRunner.Services
 {
     using LodeRunner.Model;
+    using LodeRunner.Model.SingleComponents;
     using System;
     using System.ComponentModel;
 
@@ -9,14 +10,17 @@
     {
         public Model Load(string path)
         {
-            //var m = new Model();
-            //return m;
+            var m = new Model();
+
+            m.Add(ComponentType.Player, new Player());
+
+            return m;
 
             //m.Add(ComponentType.Background, new Background());
             //m.Add(ComponentType.Background, new Player());
             //m.Add(ComponentType.Brick, new ComponentCollection<Brick>());
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
