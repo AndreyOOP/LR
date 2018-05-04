@@ -64,7 +64,6 @@
     <Compile Include="Animation\AnimationImageTests.cs" />
     <Compile Include="Animation\Files\TestAnimationElement.cs" />
     <Compile Include="Model\ComponentCollection\ComponentsCollectionTests.cs" />
-    <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\ComponentCollection\Files\TestPicture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementVisualizaer.cs">

@@ -9,18 +9,18 @@ namespace LodeRunner.Model.ModelComponents.Tests
     [TestClass()]
     public class ComponentsCollectionTests
     {
-        private ComponentsCollection pictures;
+        private ComponentsCollection<TestPicture> pictures;
 
         [TestInitialize]
         public void SetupTest()
         {
-            pictures = new ComponentsCollection();
+            pictures = new ComponentsCollection<TestPicture>();
         }
 
         [TestMethod]
         public void InitialStateTest()
         {
-            pictures = new ComponentsCollection();
+            pictures = new ComponentsCollection<TestPicture>();
 
             Assert.AreEqual(0, GetInnerList(pictures).Count);
         }
@@ -54,7 +54,7 @@ namespace LodeRunner.Model.ModelComponents.Tests
             pictures.Add(new TestPicture());
             pictures.Add(new TestPicture());
 
-            Assert.AreEqual(typeof(List<TestPicture>), pictures.GetAll<TestPicture>().GetType());
+            Assert.AreEqual(typeof(List<TestPicture>), pictures.GetAll().GetType());
         }
 
         [TestMethod]
@@ -66,16 +66,16 @@ namespace LodeRunner.Model.ModelComponents.Tests
             pictures.Add(testPicture1);
             pictures.Add(testPicture2);
 
-            Assert.IsTrue(testPicture1 == pictures.Get<TestPicture>(1, 5));
-            Assert.IsTrue(testPicture2 == pictures.Get<TestPicture>(8, 1));
+            Assert.IsTrue(testPicture1 == pictures.Get(1, 5));
+            Assert.IsTrue(testPicture2 == pictures.Get(8, 1));
         }
 
         // todo how to test it without reflection?
-        private List<SingleComponentBase> GetInnerList(object obj)
+        private List<TestPicture> GetInnerList(object obj)
         {
-            FieldInfo listFieldInfo = typeof(ComponentsCollection).GetField("list", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo listFieldInfo = typeof(ComponentsCollection<TestPicture>).GetField("list", BindingFlags.Instance | BindingFlags.NonPublic);
 
-            return (List<SingleComponentBase>)listFieldInfo.GetValue(obj);
+            return (List<TestPicture>)listFieldInfo.GetValue(obj);
         }
     }
 }

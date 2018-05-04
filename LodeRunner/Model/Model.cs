@@ -3,26 +3,26 @@ using System.Drawing;
 
 namespace LodeRunner.Model
 {
-    public class Model : IModel, IDrawable
+    public class Model<T> : IModel<T>, IDrawable where T : IDrawable
     {
-        private SortedDictionary<ComponentType, IDrawable> sorted;
+        private SortedDictionary<ComponentType, T> sorted;
 
         public Model()
         {
-            sorted = new SortedDictionary<ComponentType, IDrawable>();
+            sorted = new SortedDictionary<ComponentType, T>();
         }
 
-        public void Add<T>(ComponentType type, T component) where T : IDrawable
+        public void Add(ComponentType type, T component)
         {
             sorted.Add(type, component);
         }
 
-        public T Get<T>(ComponentType type) where T : IDrawable
+        public T Get(ComponentType type)
         {
-            return (T)sorted[type];
+            return sorted[type];
         }
 
-        public IEnumerable<IDrawable> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return sorted.Values;
         }

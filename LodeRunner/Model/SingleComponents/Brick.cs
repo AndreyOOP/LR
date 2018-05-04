@@ -14,7 +14,7 @@ namespace LodeRunner.Model.BaseClasses
 
         public Brick()
         {
-            image = new Bitmap("path to brick image");
+            //image = new Bitmap("path to brick image");
         }
 
         public override void Draw(Graphics g)

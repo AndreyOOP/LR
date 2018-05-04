@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace LodeRunner.Model
 {
-    public interface IComponentsCollection
+    public interface IComponentsCollection<T>
     {
-        void Add(SingleComponentBase component);
+        void Add(T component);
 
-        void Remove(SingleComponentBase component);
+        void Remove(T component);
 
-        List<T> GetAll<T>() where T : SingleComponentBase;
+        List<T> GetAll();
 
-        T Get<T>(int x, int y) where T : SingleComponentBase;
+        T Get(int x, int y);
     }
 }

@@ -1,41 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace LodeRunner.Model.ModelComponents
 {
     //should be used for collection of elements like bricks, gold, water, guards etc
-    public class ComponentsCollection : IDrawable, IComponentsCollection 
+    public class ComponentsCollection<T> : IDrawable, IComponentsCollection<T> where T : SingleComponentBase
     {
-        private List<SingleComponentBase> list;
+        private List<T> list;
 
         public ComponentsCollection()
         {
-            list = new List<SingleComponentBase>();
+            list = new List<T>();
         }
 
-        public void Add(SingleComponentBase component)
+        public void Add(T component)
         {
             list.Add(component);
         }
 
-        public List<T> GetAll<T>() where T : SingleComponentBase
+        public List<T> GetAll()
         {
-            return list.Cast<T>().ToList();
+            return list;
         }
 
-        public void Remove(SingleComponentBase component)
+        public void Remove(T component)
         {
             list.Remove(component);
         }
 
-        public T Get<T>(int x, int y) where T : SingleComponentBase
+        // todo it is possible to implement more fast search if add array[,] 
+        public T Get(int x, int y)
         {
             foreach (var component in list)
             {
                 if (component.X == x && component.Y == y)
                 {
-                    return (T)component;
+                    return component;
                 }
             }
 
