@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LodeRunner.Control;
+using LodeRunner.Services;
 using System.Windows.Forms;
 
 namespace LodeRunner
 {
     public static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
         public static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var modelSer = new ModelLoadService();
+            var model = modelSer.Load("level 1");
+            
+            var controller = new Controller();
+            controller.Model = model;
+
+            var view = new View();
+            view.Controller = controller;
+            
+            Application.Run(view);
         }
     }
 }
