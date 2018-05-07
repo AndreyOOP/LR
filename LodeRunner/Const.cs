@@ -10,5 +10,6 @@
         public static readonly string WindowName = "Loderunner v0";
 
         public static readonly int FrameUpdatePeriod = 5;
+        public static readonly int BlockSize = 20;
     }
 }

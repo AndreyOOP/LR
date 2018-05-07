@@ -2,8 +2,6 @@
 {
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
-    using System;
-    using System.ComponentModel;
 
     // todo add interface for the service
     public class ModelLoadService : IModelLoadService

@@ -1,21 +1,19 @@
-﻿namespace LodeRunner.Services.Command
+﻿using LodeRunner.Model;
+using LodeRunner.Model.SingleComponents;
+using LodeRunner.Services.Rules;
+
+namespace LodeRunner.Services.Command
 {
-    using LodeRunner.Model;
-    using LodeRunner.Model.SingleComponents;
-
-    public class CommandD : ICommand
+    public class CommandD : CommandBase
     {
-        private Model model; // todo think about static model, as well add some base class for more easy extension
-
-        public CommandD(Model model)
+        public CommandD(Model.Model model) : base(model)
         {
-            this.model = model;
+            Rules.Add(new IsInFieldRightRule(model));
         }
 
-        public void Execute()
+        protected override void DoCommandAction()
         {
             var player = model.Get<Player>(ComponentType.Player);
-
             player.X += 1;
         }
     }

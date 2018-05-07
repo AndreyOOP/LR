@@ -8,7 +8,7 @@
     public class Controller
     {
         public Model Model { private get; set; }
-        public View View { get; set; }
+        public View View { get; private set; }
 
         private Timer timer;
         public Commands commands;
@@ -20,20 +20,24 @@
             Initialization();
         }
 
-        public void SetKeyInput(char key)
-        {
-            commands.SetUserInput(key);
-        }
-
         public void FrameUpdate(object sender, ElapsedEventArgs e)
         {
-            commands.GetActiveCommand().Execute();
+            //execute default rules like fall, guards update
+
+            commands.GetActiveCommand().Execute(); //or some checks have to be done in the command?
+            //execute rules related to command - get treasure, wall, is possible to go up on stairs
+
             View.Invalidate();
         }
 
         public Model GetModelForDraw()
         {
             return Model;
+        }
+
+        public void SetKeyInput(char key)
+        {
+            commands.SetUserInput(key);
         }
 
         private void Initialization()
@@ -47,10 +51,5 @@
             timer.Interval = Const.FrameUpdatePeriod;
             timer.Enabled = true;
         }
-
-        //public void EnableTimer()
-        //{
-        //    timer.Enabled = true;
-        //}
     }
 }

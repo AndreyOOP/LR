@@ -2,17 +2,16 @@
 {
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
+    using LodeRunner.Services.Rules;
 
-    public class CommandA : ICommand
+    public class CommandA : CommandBase
     {
-        private Model model;
-
-        public CommandA(Model model)
+        public CommandA(Model model) : base(model)
         {
-            this.model = model;
+            Rules.Add(new IsInFieldLeftRule(model));
         }
 
-        public void Execute()
+        protected override void DoCommandAction()
         {
             var player = model.Get<Player>(ComponentType.Player);
             player.X -= 1;
