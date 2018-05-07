@@ -7,19 +7,17 @@ namespace LodeRunner
 {
     public static class Program
     {
-        [STAThread]
         public static void Main()
         {
             var modelSer = new ModelLoadService();
             var model = modelSer.Load("level 1");
-            
-            var controller = new Controller(model);
-            controller.Model = model;
 
-            var view = new View(controller);
+            var view = new View();
 
-            controller.View = view;
-            
+            var controller = new Controller(model, view);
+
+            view.controller = controller;
+
             Application.Run(view);
         }
     }

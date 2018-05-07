@@ -9,16 +9,16 @@
     {
         Player player = new Player() { X = 10, Y = 0};
         Model model = new Model();
-        Controller controller = new Controller();
         View view = new View();
+        Controller controller;
+        
 
         [TestInitialize]
         public void Setup()
         {
             model.Add(ComponentType.Player, player);
 
-            controller.Model = model;
-            controller.View = view;
+            controller = new Controller(model, view);
         }
 
         [TestMethod()]
@@ -26,9 +26,11 @@
         {
             Assert.AreEqual(10, player.X);
 
-            controller.OnKeyInput();
+            // todo public property, to fix, think about testing
+            controller.commands.SetUserInput('d');
+            controller.commands.GetActiveCommand().Execute();
 
-            Assert.AreEqual(15, player.X);
+            Assert.AreEqual(11, player.X);
         }
     }
 }

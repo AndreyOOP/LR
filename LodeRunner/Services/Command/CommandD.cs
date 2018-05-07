@@ -16,7 +16,7 @@
         {
             var player = model.Get<Player>(ComponentType.Player);
 
-            player.X += 2;
+            player.X += 1;
         }
     }
 }
