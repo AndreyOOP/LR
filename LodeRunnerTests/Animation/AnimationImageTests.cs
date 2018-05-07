@@ -56,7 +56,7 @@ namespace LodeRunner.Animation.Tests
             Assert.AreEqual(4, animationImage.CurrentFrame);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void ManualAnimationDisplayTest()
         {
             ElementVisualizaer visualizer = new ElementVisualizaer();
