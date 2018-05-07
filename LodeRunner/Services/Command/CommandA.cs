@@ -15,6 +15,7 @@
         {
             var player = model.Get<Player>(ComponentType.Player);
             player.X -= 1;
+            player.ActivateLeftAnimation();
         }
     }
 }

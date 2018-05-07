@@ -42,7 +42,7 @@
 
         private void Initialization()
         {
-            commands = new Commands();
+            commands = new Commands(Model);
             commands.Add('a', new CommandA(Model));
             commands.Add('d', new CommandD(Model));
 

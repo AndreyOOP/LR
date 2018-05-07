@@ -4,6 +4,8 @@
     {
         public static readonly string WaterTexture = @"Resources\Water.png";
         public static readonly string StoneTexture = @"Resources\Stone.png";
+        public static readonly string PlayerRightAnimation = @"Resources\PlayerRightAnimation.png";
+        public static readonly string PlayerLeftAnimation = @"Resources\PlayerLeftAnimation.png";
 
         public static readonly int WindowXSize = 450;
         public static readonly int WindowYSize = 450;

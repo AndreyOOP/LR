@@ -52,11 +52,11 @@
     <Compile Include="Model\SingleComponents\Player.cs" />
     <Compile Include="Model\SingleComponents\Stone.cs" />
     <Compile Include="Services\Command\CommandA.cs" />
-    <Compile Include="Services\Command\CommandBase.cs" />
+    <Compile Include="Services\Command\BaseClass\CommandBase.cs" />
     <Compile Include="Services\Command\CommandD.cs" />
     <Compile Include="Services\Command\CommandNull.cs" />
-    <Compile Include="Services\Command\Commands.cs" />
-    <Compile Include="Services\Command\ICommand.cs" />
+    <Compile Include="Services\Command\BaseClass\Commands.cs" />
+    <Compile Include="Services\Command\BaseClass\ICommand.cs" />
     <Compile Include="Services\IModelLoadService.cs" />
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
@@ -100,6 +100,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\PlayerLeftAnimation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PlayerRightAnimation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Stone.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
