@@ -14,7 +14,13 @@
 
         public override bool Check()
         {
-            return player.X > 0;
+            if(player.X <= 0)
+            {
+                player.ActivatePlayerStand();
+                return false;
+            }
+
+            return true;
         }
     }
 }

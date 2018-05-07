@@ -14,7 +14,13 @@
 
         public override bool Check()
         {
-            return player.X < Const.WindowXSize - Const.BlockSize;
+            if(player.X >= Const.WindowXSize - Const.BlockSize)
+            {
+                player.ActivatePlayerStand();
+                return false;
+            }
+
+            return true;
         }
     }
 }

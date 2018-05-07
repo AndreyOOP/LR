@@ -14,7 +14,7 @@
 
         protected override void DoCommandAction()
         {
-            player.Animation.Stop();
+            player.ActivatePlayerStand();
         }
     }
 }
