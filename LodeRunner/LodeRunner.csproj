@@ -61,12 +61,18 @@
     <Compile Include="Services\Command\CommandNull.cs" />
     <Compile Include="Services\Command\BaseClass\Commands.cs" />
     <Compile Include="Services\Command\BaseClass\ICommand.cs" />
+    <Compile Include="Services\Command\CommandW.cs" />
     <Compile Include="Services\IModelLoadService.cs" />
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\IRule.cs" />
+    <Compile Include="Services\Rules\IsBrickLeftRule.cs" />
+    <Compile Include="Services\Rules\IsBrickRightRule.cs" />
+    <Compile Include="Services\Rules\IsFallRule.cs" />
+    <Compile Include="Services\Rules\IsFallStairs.cs" />
     <Compile Include="Services\Rules\IsInFieldLeftRule.cs" />
     <Compile Include="Services\Rules\IsInFieldRightRule.cs" />
+    <Compile Include="Services\Rules\IsOnStairsRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
@@ -114,6 +120,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Gold.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\FallAnimation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Player\PlayerAnimationUp.png">

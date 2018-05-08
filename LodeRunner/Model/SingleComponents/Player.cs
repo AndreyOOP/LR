@@ -11,6 +11,7 @@ namespace LodeRunner.Model.SingleComponents
         public AnimationImage Animation { get; set; }
         private Bitmap texture = new Bitmap(Const.PlayerStand);
 
+        private AnimationImage fallAnimation = new AnimationImage(Const.PlayerFallAnimation, Const.BlockSize, 200);
         private AnimationImage upAnimation = new AnimationImage(Const.PlayerUpAnimation, Const.BlockSize, 200);
         private AnimationImage rightAnimation = new AnimationImage(Const.PlayerRightAnimation, Const.BlockSize, 200);
         private AnimationImage leftAnimation = new AnimationImage(Const.PlayerLeftAnimation, Const.BlockSize, 200);
@@ -29,7 +30,13 @@ namespace LodeRunner.Model.SingleComponents
             texture = stand;
         }
 
-        public void ActivatePLayerUp()
+        public void ActivatePlayerFall()
+        {
+            Animation = fallAnimation;
+            Animation.Start();
+        }
+
+        public void ActivatePlayerUp()
         {
             Animation = upAnimation;
             Animation.Start();
@@ -69,10 +76,12 @@ namespace LodeRunner.Model.SingleComponents
         {
             if(Animation == null)
             {
+                g.DrawLine(Pens.Black, X, Y, X + 1, Y + 1); //temp
                 g.DrawImage(texture, X, Y);
             }
             else
             {
+                g.DrawLine(Pens.Black, X, Y, X + 1, Y + 1); //temp
                 g.DrawImage(Animation.GetCurrentFrame(), X, Y);
             }
         }

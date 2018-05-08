@@ -23,6 +23,7 @@
         public void FrameUpdate(object sender, ElapsedEventArgs e)
         {
             //execute default rules like fall, guards update
+            
 
             commands.GetActiveCommand().Execute(); //or some checks have to be done in the command?
             //execute rules related to command - get treasure, wall, is possible to go up on stairs
@@ -45,6 +46,7 @@
             commands = new Commands(Model);
             commands.Add('a', new CommandA(Model));
             commands.Add('d', new CommandD(Model));
+            commands.Add('w', new CommandW(Model));
 
             timer = new Timer();
             timer.Elapsed += FrameUpdate;

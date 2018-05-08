@@ -79,6 +79,7 @@
     <Compile Include="Controller\PlayerMovement\ComandATests.cs" />
     <Compile Include="Reflection.cs" />
     <Compile Include="Services\ModelLoadServiceTests.cs" />
+    <Compile Include="Services\Rules\IsFallRuleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

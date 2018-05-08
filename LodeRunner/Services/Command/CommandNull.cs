@@ -2,6 +2,7 @@
 {
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
+    using LodeRunner.Services.Rules;
 
     public class CommandNull : CommandBase
     {
@@ -10,6 +11,7 @@
         public CommandNull(Model model) : base(model)
         {
             player = model.Get<Player>(ComponentType.Player);
+            Rules.Add(new IsFallRule(model));
         }
 
         protected override void DoCommandAction()

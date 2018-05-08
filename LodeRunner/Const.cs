@@ -6,6 +6,7 @@
         public static readonly string BrickBurnAnimation = @"Resources\Brick\BrickBurnAnimation.png";
         public static readonly string BrickGrowAnimation = @"Resources\Brick\BrickGrowAnimation.png";
 
+        public static readonly string PlayerFallAnimation = @"Resources\Player\FallAnimation.png";
         public static readonly string PlayerUpAnimation = @"Resources\Player\PlayerAnimationUp.png";
         public static readonly string PlayerLeftAnimation = @"Resources\Player\PlayerLeftAnimation.png";
         public static readonly string PlayerRightAnimation = @"Resources\Player\PlayerRightAnimation.png";
