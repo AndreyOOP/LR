@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using LodeRunner.Model.ModelComponents;
+using LodeRunner.Model.SingleComponents;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace LodeRunner.Model
@@ -12,6 +14,8 @@ namespace LodeRunner.Model
         public Model()
         {
             dictionary = new SortedDictionary<ComponentType, IDrawable>();
+
+            dictionary.Add(ComponentType.Stone, new ComponentsCollection<Stone>());
         }
 
         public void Add<T>(ComponentType type, T component) where T : IDrawable

@@ -20,5 +20,10 @@
 
             //throw new NotImplementedException();
         }
+
+        public void Save(string path)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
