@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 namespace LodeRunner.Services
 {
+    using LodeRunner.Model;
+
     public class Commands : IUserInput
     {
         private char activeCommandKey;
         private Dictionary<char, ICommand> dictionary;
 
-        public Commands()
+        public Commands(Model model)
         {
             dictionary = new Dictionary<char, ICommand>();
-            dictionary['0'] = new CommandNull();
+            dictionary['0'] = new CommandNull(model);
         }
 
         public void Add(char key, ICommand command)

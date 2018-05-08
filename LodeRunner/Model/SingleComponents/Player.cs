@@ -6,20 +6,38 @@ namespace LodeRunner.Model.SingleComponents
 {
     public class Player : SingleComponentBase
     {
-        private static Rectangle rectangle = new Rectangle(0, 0, 20, 20);
-        private static AnimationImage texture = new AnimationImage(new Bitmap(Const.WaterTexture), 20, 200);
+        public AnimationImage Animation { get; set; }
+        private AnimationImage rightAnimation = new AnimationImage(new Bitmap(Const.PlayerRightAnimation), Const.BlockSize, 200);
+        private AnimationImage leftAnimation = new AnimationImage(new Bitmap(Const.PlayerLeftAnimation), Const.BlockSize, 200);
+        private Bitmap stand = new Bitmap(Const.PlayerStand);
 
-        static Player()
+        public void ActivatePlayerStand()
         {
-            texture.Start();
+            Animation = null;
+        }
+
+        public void ActivateLeftAnimation()
+        {
+            Animation = leftAnimation;
+            Animation.Start();
+        }
+
+        public void ActivateRightAnimation()
+        {
+            Animation = rightAnimation;
+            Animation.Start();
         }
 
         public override void Draw(Graphics g)
         {
-            //rectangle.Location = new Point(X, Y);
-            //g.DrawRectangle(Pens.Black, rectangle);
-
-            g.DrawImage(texture.GetCurrentFrame(), X, Y);
+            if(Animation == null)
+            {
+                g.DrawImage(stand, X, Y);
+            }
+            else
+            {
+                g.DrawImage(Animation.GetCurrentFrame(), X, Y);
+            }
         }
     }
 }

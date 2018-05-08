@@ -5,6 +5,8 @@ namespace LodeRunner.Model
 {
     public class Model : IModel, IDrawable
     {
+        public bool IsPaused { get; set; }
+
         private SortedDictionary<ComponentType, IDrawable> dictionary;
 
         public Model()

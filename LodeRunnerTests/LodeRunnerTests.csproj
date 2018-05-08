@@ -64,6 +64,7 @@
     <Compile Include="Animation\AnimationImageTests.cs" />
     <Compile Include="Animation\Files\TestAnimationElement.cs" />
     <Compile Include="Controller\ControllerTests.cs" />
+    <Compile Include="Controller\PlayerMovement\CommandDTests.cs" />
     <Compile Include="Model\ComponentCollection\ComponentsCollectionTests.cs" />
     <Compile Include="Model\ComponentCollection\Files\TestPicture.cs" />
     <Compile Include="Model\ModelTests.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="ElementVisualizaer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Controller\PlayerMovement\ComandATests.cs" />
+    <Compile Include="Reflection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
