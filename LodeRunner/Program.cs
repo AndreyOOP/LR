@@ -10,9 +10,8 @@ namespace LodeRunner
     {
         public static void Main()
         {
-            var modelSer = new ModelLoadService();
-            var model = modelSer.Load(@"C:\Users\Anik\Desktop\test.lev");
-            model.Add(Model.ComponentType.Player, new Player());
+            var service = new ModelLoadService();
+            var model = service.Load(@"C:\Users\Anik\Desktop\manualT.lev");
 
             var view = new View();
 

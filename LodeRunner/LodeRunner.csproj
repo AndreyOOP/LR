@@ -49,7 +49,11 @@
     <Compile Include="Animation\IAnimationImage.cs" />
     <Compile Include="Const.cs" />
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Model\SingleComponents\Brick.cs" />
+    <Compile Include="Model\SingleComponents\Gold.cs" />
     <Compile Include="Model\SingleComponents\Player.cs" />
+    <Compile Include="Model\SingleComponents\Rail.cs" />
+    <Compile Include="Model\SingleComponents\Stairs.cs" />
     <Compile Include="Model\SingleComponents\Stone.cs" />
     <Compile Include="Services\Command\CommandA.cs" />
     <Compile Include="Services\Command\BaseClass\CommandBase.cs" />
@@ -100,13 +104,43 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\PlayerLeftAnimation.png">
+    <Content Include="Resources\Brick\Brick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PlayerRightAnimation.png">
+    <Content Include="Resources\Brick\BrickBurnAnimation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\PlayerStand.png">
+    <Content Include="Resources\Brick\BrickGrowAnimation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Gold.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\PlayerAnimationUp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\PlayerLeftAnimation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\PlayerRightAnimation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\PlayerStairsDown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\PlayerStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\RailLeftAnimation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\RailRightAnimation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Rail.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Stairs.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Stone.png">

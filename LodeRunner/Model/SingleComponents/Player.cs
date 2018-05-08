@@ -1,19 +1,38 @@
 ﻿using LodeRunner.Model.ModelComponents;
 using LodeRunner.Animation;
 using System.Drawing;
+using System;
 
 namespace LodeRunner.Model.SingleComponents
 {
+    [Serializable]
     public class Player : SingleComponentBase
     {
         public AnimationImage Animation { get; set; }
-        private AnimationImage rightAnimation = new AnimationImage(new Bitmap(Const.PlayerRightAnimation), Const.BlockSize, 200);
-        private AnimationImage leftAnimation = new AnimationImage(new Bitmap(Const.PlayerLeftAnimation), Const.BlockSize, 200);
+        private Bitmap texture = new Bitmap(Const.PlayerStand);
+
+        private AnimationImage upAnimation = new AnimationImage(Const.PlayerUpAnimation, Const.BlockSize, 200);
+        private AnimationImage rightAnimation = new AnimationImage(Const.PlayerRightAnimation, Const.BlockSize, 200);
+        private AnimationImage leftAnimation = new AnimationImage(Const.PlayerLeftAnimation, Const.BlockSize, 200);
+        private AnimationImage railLeftAnimation = new AnimationImage(Const.PlayerRailLeftAnimation, Const.BlockSize, 200);
+        private AnimationImage railRightAnimation = new AnimationImage(Const.PlayerRailRightAnimation, Const.BlockSize, 200);
         private Bitmap stand = new Bitmap(Const.PlayerStand);
+        private Bitmap stairsDown = new Bitmap(Const.PlayerStairsDown);
+
+        public Player(int x, int y) : base(x, y)
+        {
+        }
 
         public void ActivatePlayerStand()
         {
             Animation = null;
+            texture = stand;
+        }
+
+        public void ActivatePLayerUp()
+        {
+            Animation = upAnimation;
+            Animation.Start();
         }
 
         public void ActivateLeftAnimation()
@@ -28,11 +47,29 @@ namespace LodeRunner.Model.SingleComponents
             Animation.Start();
         }
 
+        public void ActivateRailLeftAnimation()
+        {
+            Animation = railLeftAnimation;
+            Animation.Start();
+        }
+
+        public void ActivateRailRightAnimation()
+        {
+            Animation = railRightAnimation;
+            Animation.Start();
+        }
+
+        public void ActivatePlayerStairs()
+        {
+            Animation = null;
+            texture = stairsDown;
+        }
+
         public override void Draw(Graphics g)
         {
             if(Animation == null)
             {
-                g.DrawImage(stand, X, Y);
+                g.DrawImage(texture, X, Y);
             }
             else
             {

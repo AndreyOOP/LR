@@ -26,7 +26,7 @@ namespace LodeRunner.Model.Tests
         [TestMethod()]
         public void InitialStateTest()
         {
-            Assert.AreEqual(2, GetDictionary(model).Values.Count);
+            Assert.AreEqual(0, GetDictionary(model).Values.Count);
         }
 
         [TestMethod()]
@@ -35,7 +35,7 @@ namespace LodeRunner.Model.Tests
             model.Add(ComponentType.Background, component);
             model.Add(ComponentType.Brick, collection);
 
-            Assert.AreEqual(4, GetDictionary(model).Values.Count);
+            Assert.AreEqual(2, GetDictionary(model).Values.Count);
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace LodeRunner.Model.Tests
             model.Add(ComponentType.Background, new TestComponent());
             model.Add(ComponentType.Brick, new ComponentsCollection<TestComponent>());
 
-            Assert.AreEqual(4, model.GetAll().Count()); // todo return type, convert to list ?
+            Assert.AreEqual(2, model.GetAll().Count()); // todo return type, convert to list ?
         }
 
         [TestMethod]

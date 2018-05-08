@@ -19,7 +19,7 @@ namespace LodeRunner.Model.SingleComponents.Tests
             };
             timer.Elapsed += eh;
 
-            player = new Player() { X = 40, Y = 40 };
+            player = new Player(40, 40);
             var visualizer = new ElementVisualizaer();
 
             visualizer.Add(player);

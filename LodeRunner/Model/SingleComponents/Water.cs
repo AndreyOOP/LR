@@ -16,6 +16,10 @@ namespace LodeRunner.Model
             Image.Start();
         }
 
+        public Water(int x, int y) : base(x, y)
+        {
+        }
+
         public override void Draw(Graphics g)
         {
             g.DrawImage(Image.GetCurrentFrame(), X, Y);

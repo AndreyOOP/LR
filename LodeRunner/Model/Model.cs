@@ -16,9 +16,6 @@ namespace LodeRunner.Model
         public Model()
         {
             dictionary = new SortedDictionary<ComponentType, IDrawable>();
-
-            dictionary.Add(ComponentType.Stone, new ComponentsCollection<Stone>());
-            dictionary.Add(ComponentType.Water, new ComponentsCollection<Water>());
         }
 
         public void Add<T>(ComponentType type, T component) where T : IDrawable

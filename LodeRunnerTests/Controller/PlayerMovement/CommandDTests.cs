@@ -18,7 +18,7 @@
         public void TestSetup()
         {
             model = new Model();
-            model.Add(ComponentType.Player, new Player());
+            model.Add(ComponentType.Player, new Player(0, 0));
             player = model.Get<Player>(ComponentType.Player);
         }
 

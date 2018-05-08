@@ -4,6 +4,7 @@ using LodeRunner.Model;
 using LodeRunner.Model.ModelComponents;
 using LodeRunner.Model.SingleComponents;
 using LodeRunner.Services;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -31,6 +32,12 @@ namespace LevelEditor
 
             mls = new ModelLoadService();
             model = new Model();
+            model.Add(ComponentType.Stone, new ComponentsCollection<Stone>());
+            model.Add(ComponentType.Water, new ComponentsCollection<Water>());
+            model.Add(ComponentType.Brick, new ComponentsCollection<Brick>());
+            model.Add(ComponentType.Stairs, new ComponentsCollection<Stairs>());
+            model.Add(ComponentType.Rail, new ComponentsCollection<Rail>());
+            model.Add(ComponentType.Gold, new ComponentsCollection<Gold>());
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -84,7 +91,11 @@ namespace LevelEditor
         private bool IsAboveObject(int x, int y)
         {
             return model.Get<ComponentsCollection<Stone>>(ComponentType.Stone).Get(x, y) != null ||
-                   model.Get<ComponentsCollection<Water>>(ComponentType.Water).Get(x, y) != null;
+                   model.Get<ComponentsCollection<Water>>(ComponentType.Water).Get(x, y) != null ||
+                   model.Get<ComponentsCollection<Brick>>(ComponentType.Brick).Get(x, y) != null ||
+                   model.Get<ComponentsCollection<Stairs>>(ComponentType.Stairs).Get(x, y) != null ||
+                   model.Get<ComponentsCollection<Rail>>(ComponentType.Rail).Get(x, y) != null ||
+                   model.Get<ComponentsCollection<Gold>>(ComponentType.Gold).Get(x, y) != null;
         }
 
         private void SwitchTexture(char c)
@@ -98,7 +109,26 @@ namespace LevelEditor
                 case '2':
                     var image = new Bitmap(Const.WaterTexture);
                     currentObject = image.Clone(new Rectangle(0, 0, Const.BlockSize, Const.BlockSize), image.PixelFormat);
-                    
+                    break;
+
+                case '3':
+                    currentObject = new Bitmap(Const.BrickTexture);
+                    break;
+
+                case '4':
+                    currentObject = new Bitmap(Const.StairsTexture);
+                    break;
+
+                case '5':
+                    currentObject = new Bitmap(Const.RailTexture);
+                    break;
+
+                case '6':
+                    currentObject = new Bitmap(Const.GoldTexture);
+                    break;
+
+                case '7':
+                    currentObject = new Bitmap(Const.PlayerStand);
                     break;
 
                 default:
@@ -131,11 +161,32 @@ namespace LevelEditor
                 switch (selectedObject)
                 {
                     case '1':
-                        model.Get<ComponentsCollection<Stone>>(ComponentType.Stone).Add(new Stone() { X = x, Y = y });
+                        model.Get<ComponentsCollection<Stone>>(ComponentType.Stone).Add(new Stone(x, y));
                         break;
 
                     case '2':
-                        model.Get<ComponentsCollection<Water>>(ComponentType.Water).Add(new Water() { X = x, Y = y });
+                        model.Get<ComponentsCollection<Water>>(ComponentType.Water).Add(new Water(x, y));
+                        break;
+
+                    case '3':
+                        model.Get<ComponentsCollection<Brick>>(ComponentType.Brick).Add(new Brick(x, y));
+                        break;
+
+                    case '4':
+                        model.Get<ComponentsCollection<Stairs>>(ComponentType.Stairs).Add(new Stairs(x, y));
+                        break;
+
+                    case '5':
+                        model.Get<ComponentsCollection<Rail>>(ComponentType.Rail).Add(new Rail(x, y));
+                        break;
+
+                    case '6':
+                        model.Get<ComponentsCollection<Gold>>(ComponentType.Gold).Add(new Gold(x, y));
+                        break;
+
+                    case '7':
+                        model.Remove(ComponentType.Player);
+                        model.Add(ComponentType.Player, new Player(x, y));
                         break;
                 }
             }
@@ -143,19 +194,33 @@ namespace LevelEditor
 
         private void RemoveObject(int x, int y)
         {
-            var col = model.Get<ComponentsCollection<Stone>>(ComponentType.Stone);
-            var el = col.Get(x, y);
-            if (el != null)
-            {
-                col.Remove(el);
-            }
+            Remove<ComponentsCollection<Stone>>(ComponentType.Stone, x, y);
+            Remove<ComponentsCollection<Water>>(ComponentType.Water, x, y);
+            Remove<ComponentsCollection<Brick>>(ComponentType.Brick, x, y);
+            Remove<ComponentsCollection<Stairs>>(ComponentType.Stairs, x, y);
+            Remove<ComponentsCollection<Rail>>(ComponentType.Rail, x, y);
+            Remove<ComponentsCollection<Gold>>(ComponentType.Gold, x, y);
 
-            var col1 = model.Get<ComponentsCollection<Water>>(ComponentType.Water);
-            var el1 = col1.Get(x, y);
-            if (el1 != null)
+            try
             {
-                col1.Remove(el1);
+                var player = model.Get<Player>(ComponentType.Player);
+                if (x == player.X && y == player.Y)
+                {
+                    model.Remove(ComponentType.Player);
+                }
+            }
+            catch (Exception e) { }
+        }
+
+        private void Remove<T>(ComponentType type, int x, int y) where T : IDrawable
+        {
+            dynamic collection = model.Get<T>(type);
+            dynamic element = collection.Get(x, y);
+            if (element != null)
+            {
+                collection.Remove(element);
             }
         }
+
     }
 }
