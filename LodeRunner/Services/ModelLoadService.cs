@@ -21,8 +21,9 @@
             //throw new NotImplementedException();
         }
 
-        public void Save(string path)
+        public void Save(string path, Model model)
         {
+            //serialize model 
             throw new System.NotImplementedException();
         }
     }

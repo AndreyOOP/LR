@@ -1,28 +1,23 @@
 ﻿using LodeRunner;
+using LodeRunner.Animation;
 using LodeRunner.Model;
 using LodeRunner.Model.ModelComponents;
 using LodeRunner.Model.SingleComponents;
 using LodeRunner.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LevelEditor
 {
-    public partial class View : Form
+    public partial class Editor : Form
     {
         private Model model;
         private char selectedObject;
+        private Bitmap currentObject = new Bitmap(1, 1);
         private ModelLoadService mls;
         private int pointerX, pointerY;
 
-        public View()
+        public Editor()
         {
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(Const.WindowXSize, Const.WindowYSize);
@@ -38,61 +33,123 @@ namespace LevelEditor
             model = new Model();
         }
 
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            pointerX = e.X - e.X % Const.BlockSize;
-            pointerY = e.Y - e.Y % Const.BlockSize;
-            Refresh();
-        }
+        
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
             model.Draw(e.Graphics);
 
-            if(selectedObject == '1')
-            {
-                e.Graphics.DrawRectangle(Pens.Black, new Rectangle(pointerX, pointerY, Const.BlockSize, Const.BlockSize));
-                
-            }
+            e.Graphics.DrawImage(currentObject, pointerX, pointerY);
+            e.Graphics.DrawRectangle(Pens.Blue, new Rectangle(pointerX, pointerY, Const.BlockSize, Const.BlockSize));
         }
 
         private void OnKeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == 's')
             {
-                mls.Save(""); //how to generate path?
+                var x = new OpenFileDialog();
+                x.ShowDialog();
+
+                MessageBox.Show(x.FileName);
+
+                mls.Save(x.FileName, model); //how to generate path?
             }
             else if(e.KeyChar == 'l')
             {
                 mls.Load(""); //how to generate path ?
             }
 
-            selectedObject = e.KeyChar; //or set work collection to ...
+            selectedObject = char.ToLower(e.KeyChar); //or set work collection to ...
+
+            SwitchTexture(selectedObject);
+
+            
+
+            Refresh();
         }
 
         private void OnMouseClick(object sender, MouseEventArgs e)
         {
-            bool isDoublicate = false;
-            int x = e.X - e.X % Const.BlockSize;
-            int y = e.Y - e.Y % Const.BlockSize;
+            MouseClicksHandling(e);
+        }
 
-            if (selectedObject == '1') //stone block
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            MouseClicksHandling(e);
+        }
+
+        private bool IsAboveObject(int x, int y)
+        {
+            return model.Get<ComponentsCollection<Stone>>(ComponentType.Stone).Get(x, y) != null ||
+                   model.Get<ComponentsCollection<Water>>(ComponentType.Water).Get(x, y) != null;
+        }
+
+        private void SwitchTexture(char c)
+        {
+            switch (c)
             {
-                var col = model.Get<ComponentsCollection<Stone>>(ComponentType.Stone);
+                case '1':
+                    currentObject = new Bitmap(Const.StoneTexture);
+                    break;
 
-                foreach (var c in col.GetAll())
+                case '2':
+                    var image = new Bitmap(Const.WaterTexture);
+                    currentObject = image.Clone(new Rectangle(0, 0, Const.BlockSize, Const.BlockSize), image.PixelFormat);
+                    
+                    break;
+
+                default:
+                    currentObject = new Bitmap(1, 1);
+                    break;
+            }
+        }
+
+        private void AddObject(int x, int y)
+        {
+            if (!IsAboveObject(x, y))
+            {
+                switch (selectedObject)
                 {
-                    if (c.X == x && c.Y == y)
-                    {
-                        isDoublicate = true;
+                    case '1':
+                        model.Get<ComponentsCollection<Stone>>(ComponentType.Stone).Add(new Stone() { X = x, Y = y });
                         break;
-                    }
-                }
 
-                if (!isDoublicate)
-                {
-                    col.Add(new Stone() { X = x, Y = y });
+                    case '2':
+                        model.Get<ComponentsCollection<Water>>(ComponentType.Water).Add(new Water() { X = x, Y = y });
+                        break;
                 }
+            }
+        }
+
+        private void RemoveObject(int x, int y)
+        {
+            var col = model.Get<ComponentsCollection<Stone>>(ComponentType.Stone);
+            var el = col.Get(x, y);
+            if (el != null)
+            {
+                col.Remove(el);
+            }
+
+            var col1 = model.Get<ComponentsCollection<Water>>(ComponentType.Water);
+            var el1 = col1.Get(x, y);
+            if (el1 != null)
+            {
+                col1.Remove(el1);
+            }
+        }
+
+        private void MouseClicksHandling(MouseEventArgs e)
+        {
+            pointerX = e.X - e.X % Const.BlockSize;
+            pointerY = e.Y - e.Y % Const.BlockSize;
+
+            if (e.Button == MouseButtons.Left)
+            {
+                AddObject(pointerX, pointerY);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                RemoveObject(pointerX, pointerY);
             }
 
             Refresh();
