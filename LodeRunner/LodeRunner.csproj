@@ -69,8 +69,12 @@
     <Compile Include="Services\Rules\IsFallRule.cs" />
     <Compile Include="Services\Rules\IsPossibleMoveLeftRule.cs" />
     <Compile Include="Services\Rules\IsPossibleMoveRightRule.cs" />
-    <Compile Include="Services\Rules\IsOnStairsRule.cs" />
+    <Compile Include="Services\Rules\MoveLeftRule.cs" />
+    <Compile Include="Services\Rules\MoveRightRule.cs" />
+    <Compile Include="Services\Rules\MoveUpRule.cs" />
+    <Compile Include="Services\Rules\NoInputRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
+    <Compile Include="Services\Rules\StopOnStairsRule.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
     </Compile>

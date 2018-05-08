@@ -8,12 +8,11 @@
     {
         protected Model model;
 
-        public List<IRule> Rules { get; set; }
+        public List<IRule> Rules { get; set; } = new List<IRule>();
 
         public CommandBase(Model model)
         {
             this.model = model;
-            Rules = new List<IRule>();
         }
 
         public void Execute()
@@ -25,10 +24,6 @@
                     return;
                 }
             }
-            
-            DoCommandAction();
         }
-
-        protected abstract void DoCommandAction();
     }
 }

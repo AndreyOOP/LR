@@ -2,34 +2,23 @@
 
 namespace LodeRunner.Services.Rules.Tests
 {
-    using LodeRunner.Model;
-    using LodeRunner.Model.ModelComponents;
     using LodeRunner.Model.SingleComponents;
+    using LodeRunnerTests.TestModels;
 
     [TestClass()]
     public class IsFallRuleTests
     {
+        private TestModelFactory testModelFactory = new TestModelFactory();
         private Player player;
         private IsFallRule isFallRule;
 
         [TestInitialize]
         public void Setup()
         {
-            var stairs = new ComponentsCollection<Stairs>();
-            var bricks = new ComponentsCollection<Brick>();
-            var stones = new ComponentsCollection<Stone>();
-            bricks.Add(new Brick(40, 40));
-            bricks.Add(new Brick(60, 40));
+            testModelFactory.SetFallRuleTestModel();
+            player = testModelFactory.Player;
 
-            player = new Player(0, 20);
-
-            var model = new Model();
-            model.Add(ComponentType.Brick, bricks);
-            model.Add(ComponentType.Player, player);
-            model.Add(ComponentType.Stairs, stairs);
-            model.Add(ComponentType.Stone, stones);
-
-            isFallRule = new IsFallRule(model);
+            isFallRule = new IsFallRule(testModelFactory.Model);
         }
 
         [TestMethod()]
@@ -91,6 +80,31 @@ namespace LodeRunner.Services.Rules.Tests
             isFallRule.Check();
 
             Assert.AreEqual(20, player.Y);
+        }
+
+        //Model default setup:
+        // space|player|space
+        // brick|space |brick
+
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            testModelFactory.SetFallRuleTestModel1();
+
+            isFallRule = new IsFallRule(testModelFactory.Model);
+
+            Assert.IsFalse(isFallRule.Check());
+        }
+
+        [TestMethod]
+        public void MyTestMethod2()
+        {
+            testModelFactory.SetFallRuleTestModel1();
+            testModelFactory.Player.X += 30;
+
+            isFallRule = new IsFallRule(testModelFactory.Model);
+
+            Assert.IsTrue(isFallRule.Check());
         }
     }
 }

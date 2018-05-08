@@ -12,11 +12,7 @@
         {
             player = model.Get<Player>(ComponentType.Player);
             Rules.Add(new IsFallRule(model));
-        }
-
-        protected override void DoCommandAction()
-        {
-            player.ActivatePlayerStand();
+            Rules.Add(new NoInputRule(model));
         }
     }
 }

@@ -80,10 +80,22 @@
     <Compile Include="Reflection.cs" />
     <Compile Include="Services\ModelLoadServiceTests.cs" />
     <Compile Include="Services\Rules\IsFallRuleTests.cs" />
+    <Compile Include="Services\Rules\IsPossibleMoveRightTest.cs" />
+    <Compile Include="Services\Rules\IsPossibleMoveLeftTest.cs" />
+    <Compile Include="TestModels\TestModelFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Services\TestFiles\x.lev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestModels\FallBetweenBricks.lev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestModels\IsPossibleMoveLeft.lev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestModels\IsPossibleMoveRight.lev">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
