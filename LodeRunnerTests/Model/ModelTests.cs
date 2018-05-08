@@ -30,7 +30,7 @@ namespace LodeRunner.Model.Tests
         }
 
         [TestMethod()]
-        public void AddTest()
+        public void AddTest() 
         {
             model.Add(ComponentType.Background, component);
             model.Add(ComponentType.Brick, collection);
@@ -83,6 +83,9 @@ namespace LodeRunner.Model.Tests
             // it is match with sequence in ComponentType
             // todo looks bad because we depend on inner model structure which is SortedDictionary
             // as well it looks too much complexity with model inner structure & ComponentType
+            model.Remove(ComponentType.Stone);
+            model.Remove(ComponentType.Water);
+
             model.Add(ComponentType.Brick     , new TestComponent("3"));
             model.Add(ComponentType.Background, new TestComponent("4"));
             model.Add(ComponentType.Guard     , new TestComponent("2"));

@@ -1,24 +1,27 @@
 ﻿namespace LodeRunner.Services
 {
     using LodeRunner.Model;
-    using LodeRunner.Model.SingleComponents;
+    using System.IO;
+    using System.Runtime.Serialization.Formatters.Binary;
 
-    // todo add interface for the service
     public class ModelLoadService : IModelLoadService
     {
+        private static BinaryFormatter formatter = new BinaryFormatter();
+
         public Model Load(string path)
         {
-            var m = new Model();
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                return (Model)formatter.Deserialize(fs);
+            }
+        }
 
-            m.Add(ComponentType.Player, new Player());
-
-            return m;
-
-            //m.Add(ComponentType.Background, new Background());
-            //m.Add(ComponentType.Background, new Player());
-            //m.Add(ComponentType.Brick, new ComponentCollection<Brick>());
-
-            //throw new NotImplementedException();
+        public void Save(string path, Model model)
+        {
+            using(FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, model);
+            }
         }
     }
 }

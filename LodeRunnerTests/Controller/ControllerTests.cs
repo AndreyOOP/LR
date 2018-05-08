@@ -7,7 +7,7 @@
     [TestClass()]
     public class ControllerTests
     {
-        Player player = new Player() { X = 10, Y = 0};
+        Player player = new Player(10, 0);
         Model model = new Model();
         View view = new View();
         Controller controller;

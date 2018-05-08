@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using LodeRunner.Model.ModelComponents;
+using LodeRunner.Model.SingleComponents;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace LodeRunner.Model
 {
+    [Serializable]
     public class Model : IModel, IDrawable
     {
         public bool IsPaused { get; set; }

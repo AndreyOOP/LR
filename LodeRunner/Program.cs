@@ -1,4 +1,5 @@
 ﻿using LodeRunner.Control;
+using LodeRunner.Model.SingleComponents;
 using LodeRunner.Services;
 using System;
 using System.Windows.Forms;
@@ -9,8 +10,8 @@ namespace LodeRunner
     {
         public static void Main()
         {
-            var modelSer = new ModelLoadService();
-            var model = modelSer.Load("level 1");
+            var service = new ModelLoadService();
+            var model = service.Load(@"C:\Users\Anik\Desktop\manualT.lev");
 
             var view = new View();
 

@@ -11,9 +11,9 @@ namespace LodeRunner.Model.SingleComponents.Tests
         {
             var visualizer = new ElementVisualizaer();
 
-            visualizer.Add(new Stone() { X = 0,  Y = 0 });
-            visualizer.Add(new Stone() { X = 20, Y = 0 });
-            visualizer.Add(new Stone() { X = 20, Y = 20 });
+            visualizer.Add(new Stone(0, 0));
+            visualizer.Add(new Stone(20, 0));
+            visualizer.Add(new Stone(20, 20));
 
             visualizer.Start();
         }

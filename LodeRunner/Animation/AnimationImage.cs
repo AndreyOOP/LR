@@ -7,23 +7,36 @@ using System.Timers;
 
 namespace LodeRunner.Animation
 {
+    [Serializable]
     public class AnimationImage : IAnimationImage
     {
+        private int speed;
         protected int      currentFrame;
         protected Bitmap[] frames;
+
+        [NonSerialized]
         protected Timer    timer;
+
+        public AnimationImage(string animationImage, int frameLength, int speed) : this (new Bitmap(animationImage), frameLength, speed)
+        {
+        }
 
         public AnimationImage(Bitmap animationImage, int frameLength, int speed)
         {
             ArgumentsCheck(animationImage, frameLength, speed);
 
             timer = InitializeTimer(speed);
+            this.speed = speed;
 
             frames = SplitImageOnFrames(animationImage, frameLength);
         }
 
         public void Start()
         {
+            if(timer == null)
+            {
+                timer = InitializeTimer(speed);
+            }
             timer.Start();
         }
 
@@ -60,7 +73,7 @@ namespace LodeRunner.Animation
             }
         }
 
-        private Timer InitializeTimer(int speed)
+        public Timer InitializeTimer(int speed)
         {
             timer = new Timer();
             timer.Enabled  = false;

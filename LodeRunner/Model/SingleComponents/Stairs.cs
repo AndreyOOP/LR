@@ -5,17 +5,17 @@ using System.Drawing;
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Stone : SingleComponentBase
+    public class Stairs : SingleComponentBase
     {
-        public static Bitmap Image { get; set; } = new Bitmap(Const.StoneTexture);
+        private static Bitmap texture = new Bitmap(Const.StairsTexture);
 
-        public Stone(int x, int y) : base(x, y)
+        public Stairs(int x, int y) : base(x, y)
         {
         }
 
         public override void Draw(Graphics g)
         {
-            g.DrawImage(Image, X, Y);
+            g.DrawImage(texture, X, Y);
         }
     }
 }
