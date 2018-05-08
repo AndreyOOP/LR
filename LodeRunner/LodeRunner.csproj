@@ -66,12 +66,9 @@
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\IRule.cs" />
-    <Compile Include="Services\Rules\IsBrickLeftRule.cs" />
-    <Compile Include="Services\Rules\IsBrickRightRule.cs" />
     <Compile Include="Services\Rules\IsFallRule.cs" />
-    <Compile Include="Services\Rules\IsFallStairs.cs" />
-    <Compile Include="Services\Rules\IsInFieldLeftRule.cs" />
-    <Compile Include="Services\Rules\IsInFieldRightRule.cs" />
+    <Compile Include="Services\Rules\IsPossibleMoveLeftRule.cs" />
+    <Compile Include="Services\Rules\IsPossibleMoveRightRule.cs" />
     <Compile Include="Services\Rules\IsOnStairsRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="View.cs">

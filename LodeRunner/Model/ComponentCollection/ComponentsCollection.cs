@@ -44,6 +44,19 @@ namespace LodeRunner.Model.ModelComponents
             return null;
         }
 
+        public T GetBlock(int x, int y)
+        {
+            foreach (var component in list)
+            {
+                if (component.BlockX == x && component.BlockY == y)
+                {
+                    return component;
+                }
+            }
+
+            return null;
+        }
+
         public void Draw(Graphics g)
         {
             foreach(var component in list)

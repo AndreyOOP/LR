@@ -9,8 +9,7 @@ namespace LodeRunner.Services.Command
         public CommandD(Model.Model model) : base(model)
         {
             Rules.Add(new IsFallRule(model));
-            Rules.Add(new IsBrickRightRule(model));
-            Rules.Add(new IsInFieldRightRule(model));
+            Rules.Add(new IsPossibleMoveRightRule(model));
         }
 
         protected override void DoCommandAction()

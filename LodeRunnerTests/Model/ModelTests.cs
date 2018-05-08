@@ -1,10 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using LodeRunner.Model;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using LodeRunnerTests.Model;
 using LodeRunner.Model.ModelComponents;
+using LodeRunner.Model.SingleComponents;
 
 namespace LodeRunner.Model.Tests
 {
@@ -30,7 +32,7 @@ namespace LodeRunner.Model.Tests
         }
 
         [TestMethod()]
-        public void AddTest() 
+        public void AddTest()
         {
             model.Add(ComponentType.Background, component);
             model.Add(ComponentType.Brick, collection);
@@ -41,11 +43,11 @@ namespace LodeRunner.Model.Tests
         [TestMethod]
         public void AddSameKey()
         {
-            Assert.ThrowsException<ArgumentException>( () =>
-            {
-                model.Add(ComponentType.Background, new TestComponent());
-                model.Add(ComponentType.Background, new TestComponent());
-            });
+            Assert.ThrowsException<ArgumentException>(() =>
+           {
+               model.Add(ComponentType.Background, new TestComponent());
+               model.Add(ComponentType.Background, new TestComponent());
+           });
         }
 
         [TestMethod]
@@ -86,10 +88,10 @@ namespace LodeRunner.Model.Tests
             model.Remove(ComponentType.Stone);
             model.Remove(ComponentType.Water);
 
-            model.Add(ComponentType.Brick     , new TestComponent("3"));
+            model.Add(ComponentType.Brick, new TestComponent("3"));
             model.Add(ComponentType.Background, new TestComponent("4"));
-            model.Add(ComponentType.Guard     , new TestComponent("2"));
-            model.Add(ComponentType.Player    , new TestComponent("1"));
+            model.Add(ComponentType.Guard, new TestComponent("2"));
+            model.Add(ComponentType.Player, new TestComponent("1"));
 
             var actual = "";
             GetDictionary(model).Values.Cast<TestComponent>()
@@ -104,6 +106,18 @@ namespace LodeRunner.Model.Tests
             FieldInfo fi = obj.GetType().GetField("dictionary", BindingFlags.Instance | BindingFlags.NonPublic);
 
             return (SortedDictionary<ComponentType, IDrawable>)fi.GetValue(obj);
+        }
+
+        [TestMethod()]
+        public void GetComponentTest()
+        {
+            var bricks = new ComponentsCollection<Brick>();
+            bricks.Add(new Brick(0, 0));
+            bricks.Add(new Brick(0, 10));
+
+            model.Add(ComponentType.Brick, bricks);
+
+            Assert.AreEqual(bricks, model.Get<Brick>());
         }
     }
 }

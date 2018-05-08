@@ -9,8 +9,7 @@
         public CommandA(Model model) : base(model)
         {
             Rules.Add(new IsFallRule(model));
-            Rules.Add(new IsBrickLeftRule(model));
-            Rules.Add(new IsInFieldLeftRule(model));
+            Rules.Add(new IsPossibleMoveLeftRule(model));
         }
 
         protected override void DoCommandAction()

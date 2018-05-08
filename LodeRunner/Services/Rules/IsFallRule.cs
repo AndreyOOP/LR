@@ -1,30 +1,18 @@
-﻿using LodeRunner.Model;
-using LodeRunner.Model.ModelComponents;
-using LodeRunner.Model.SingleComponents;
-
-namespace LodeRunner.Services.Rules
+﻿namespace LodeRunner.Services.Rules
 {
+    using LodeRunner.Model;
+    using LodeRunner.Model.ModelComponents;
+    using LodeRunner.Model.SingleComponents;
+
     public class IsFallRule : RuleBase
     {
-        private Player player;
-        
-
-        public IsFallRule(Model.Model model) : base(model)
+        public IsFallRule(Model model) : base(model)
         {
-            player = model.Get<Player>(ComponentType.Player);
         }
 
         public override bool Check()
         {
-            int x = (player.X / Const.BlockSize) * Const.BlockSize;
-            int x2 = (player.X / Const.BlockSize + 1) * Const.BlockSize;
-            int y = (player.Y / Const.BlockSize + 1) * Const.BlockSize;
-
-            if ((model.Get<ComponentsCollection<Brick>>(ComponentType.Brick).Get(x, y) == null &&
-               model.Get<ComponentsCollection<Brick>>(ComponentType.Brick).Get(x2, y) == null) &
-               (model.Get<ComponentsCollection<Stairs>>(ComponentType.Stairs).Get(x, y) == null &&
-               model.Get<ComponentsCollection<Stairs>>(ComponentType.Stairs).Get(x2, y) == null)
-               )
+            if(BottomLineCheck<Brick>() && BottomLineCheck<Stairs>() && BottomLineCheck<Stone>())
             {
                 player.Y += 1;
                 player.ActivatePlayerFall();
@@ -32,6 +20,23 @@ namespace LodeRunner.Services.Rules
             }
 
             return true;
+        }
+
+        private bool BottomLineCheck<T>() where T : SingleComponentBase
+        {
+            int x1 = player.X;
+            int y1 = player.Y + 20;
+
+            int x2 = player.X+19;
+            int y2 = player.Y + 20;
+
+            int x1B = (x1 / 20);
+            int y1B = (y1 / 20);
+
+            int x2B = (x2 / 20);
+            int y2B = (y2 / 20);
+
+            return model.Get<T>().GetBlock(x1B, y1B) == null && model.Get<T>().GetBlock(x2B, y2B) == null;
         }
     }
 }

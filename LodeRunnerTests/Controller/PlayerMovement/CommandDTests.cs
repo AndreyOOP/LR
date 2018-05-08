@@ -7,6 +7,7 @@
     using LodeRunner;
     using LodeRunner.Animation;
     using System.Drawing;
+    using LodeRunner.Model.ModelComponents;
 
     [TestClass]
     public class CommandDTests
@@ -17,20 +18,26 @@
         [TestInitialize]
         public void TestSetup()
         {
+            var bricks = new ComponentsCollection<Brick>();
+            bricks.Add(new Brick(Const.WindowXSize - Const.BlockSize, 20));
+
             model = new Model();
             model.Add(ComponentType.Player, new Player(0, 0));
+            model.Add(ComponentType.Brick, bricks);
+            model.Add(ComponentType.Stone, new ComponentsCollection<Stone>());
+            model.Add(ComponentType.Stairs, new ComponentsCollection<Stairs>());
             player = model.Get<Player>(ComponentType.Player);
         }
 
         [TestMethod]
         public void ComandDInFieldTest()
         {
-            player.X = 10;
+            player.X = Const.WindowXSize - Const.BlockSize - 5;
             player.Animation = null;
 
             new CommandD(model).Execute();
 
-            Assert.AreEqual(11, player.X);
+            Assert.AreEqual(426, player.X);
             Assert.AreEqual(Reflection.GetPrivateField<AnimationImage>(player, "rightAnimation"), player.Animation);
         }
 

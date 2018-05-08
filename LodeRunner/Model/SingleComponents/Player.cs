@@ -20,6 +20,15 @@ namespace LodeRunner.Model.SingleComponents
         private Bitmap stand = new Bitmap(Const.PlayerStand);
         private Bitmap stairsDown = new Bitmap(Const.PlayerStairsDown);
 
+        public int GetX(int right)
+        {
+            return (X / Const.BlockSize + right) * Const.BlockSize;
+        }
+        public int GetY(int bottom)
+        {
+            return (Y / Const.BlockSize + bottom) * Const.BlockSize;
+        }
+
         public Player(int x, int y) : base(x, y)
         {
         }
@@ -76,11 +85,13 @@ namespace LodeRunner.Model.SingleComponents
         {
             if(Animation == null)
             {
+                g.DrawRectangle(Pens.Blue, new Rectangle(X, Y, Const.BlockSize-1, Const.BlockSize-1));
                 g.DrawLine(Pens.Black, X, Y, X + 1, Y + 1); //temp
                 g.DrawImage(texture, X, Y);
             }
             else
             {
+                g.DrawRectangle(Pens.Blue, new Rectangle(X, Y, Const.BlockSize-1, Const.BlockSize-1));
                 g.DrawLine(Pens.Black, X, Y, X + 1, Y + 1); //temp
                 g.DrawImage(Animation.GetCurrentFrame(), X, Y);
             }

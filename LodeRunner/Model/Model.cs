@@ -28,6 +28,38 @@ namespace LodeRunner.Model
             return (T)dictionary[type];
         }
 
+        // temp solution just to check if this method is more easy to use
+        public ComponentsCollection<T> Get<T>() where T : SingleComponentBase
+        {
+            
+            if(typeof(T) == typeof(Brick))
+            {
+                return (ComponentsCollection<T>)dictionary[ComponentType.Brick];
+            }
+            else if (typeof(T) == typeof(Gold))
+            {
+                return (ComponentsCollection<T>)dictionary[ComponentType.Gold];
+            }
+            else if (typeof(T) == typeof(Rail))
+            {
+                return (ComponentsCollection<T>)dictionary[ComponentType.Rail];
+            }
+            else if (typeof(T) == typeof(Stairs))
+            {
+                return (ComponentsCollection<T>)dictionary[ComponentType.Stairs];
+            }
+            else if (typeof(T) == typeof(Stone))
+            {
+                return (ComponentsCollection<T>)dictionary[ComponentType.Stone];
+            }
+            else if (typeof(T) == typeof(Water))
+            {
+                return (ComponentsCollection<T>)dictionary[ComponentType.Water];
+            }
+
+            return null;
+        }
+
         public IEnumerable<IDrawable> GetAll()
         {
             return dictionary.Values;

@@ -7,6 +7,7 @@
     using LodeRunner.Animation;
     using LodeRunnerTests;
     using System.Drawing;
+    using LodeRunner.Model.ModelComponents;
 
     [TestClass()]
     public class ComandATests
@@ -17,8 +18,14 @@
         [TestInitialize]
         public void TestSetup()
         {
+            var bricks = new ComponentsCollection<Brick>();
+            bricks.Add(new Brick(0, 20));
+
             model = new Model();
             model.Add(ComponentType.Player, new Player(0, 0));
+            model.Add(ComponentType.Brick, bricks);
+            model.Add(ComponentType.Stone, new ComponentsCollection<Stone>());
+            model.Add(ComponentType.Stairs, new ComponentsCollection<Stairs>());
             player = model.Get<Player>(ComponentType.Player);
         }
 
