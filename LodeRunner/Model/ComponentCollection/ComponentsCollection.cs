@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace LodeRunner.Model.ModelComponents
 {
     //should be used for collection of elements like bricks, gold, water, guards etc
+    [Serializable]
     public class ComponentsCollection<T> : IDrawable, IComponentsCollection<T> where T : SingleComponentBase
     {
         private List<T> list;

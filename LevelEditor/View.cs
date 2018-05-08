@@ -33,8 +33,6 @@ namespace LevelEditor
             model = new Model();
         }
 
-        
-
         private void OnPaint(object sender, PaintEventArgs e)
         {
             model.Draw(e.Graphics);
@@ -47,23 +45,28 @@ namespace LevelEditor
         {
             if(e.KeyChar == 's')
             {
-                var x = new OpenFileDialog();
-                x.ShowDialog();
-
-                MessageBox.Show(x.FileName);
-
-                mls.Save(x.FileName, model); //how to generate path?
+                var sfd = new SaveFileDialog();
+                sfd.Filter = "Level files (*.lev)|*.lev";
+                sfd.ShowDialog();
+                if(sfd.FileName != "")
+                {
+                    mls.Save(sfd.FileName, model);
+                }
             }
             else if(e.KeyChar == 'l')
             {
-                mls.Load(""); //how to generate path ?
+                var fd = new OpenFileDialog();
+                fd.Filter = "Level files (*.lev)|*.lev";
+                fd.ShowDialog();
+                if(fd.FileName != "")
+                {
+                    model = mls.Load(fd.FileName);
+                }
             }
 
             selectedObject = char.ToLower(e.KeyChar); //or set work collection to ...
 
             SwitchTexture(selectedObject);
-
-            
 
             Refresh();
         }
@@ -104,6 +107,23 @@ namespace LevelEditor
             }
         }
 
+        private void MouseClicksHandling(MouseEventArgs e)
+        {
+            pointerX = e.X - e.X % Const.BlockSize;
+            pointerY = e.Y - e.Y % Const.BlockSize;
+
+            if (e.Button == MouseButtons.Left)
+            {
+                AddObject(pointerX, pointerY);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                RemoveObject(pointerX, pointerY);
+            }
+
+            Refresh();
+        }
+
         private void AddObject(int x, int y)
         {
             if (!IsAboveObject(x, y))
@@ -136,23 +156,6 @@ namespace LevelEditor
             {
                 col1.Remove(el1);
             }
-        }
-
-        private void MouseClicksHandling(MouseEventArgs e)
-        {
-            pointerX = e.X - e.X % Const.BlockSize;
-            pointerY = e.Y - e.Y % Const.BlockSize;
-
-            if (e.Button == MouseButtons.Left)
-            {
-                AddObject(pointerX, pointerY);
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                RemoveObject(pointerX, pointerY);
-            }
-
-            Refresh();
         }
     }
 }

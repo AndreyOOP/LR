@@ -26,16 +26,16 @@ namespace LodeRunner.Model.Tests
         [TestMethod()]
         public void InitialStateTest()
         {
-            Assert.AreEqual(0, GetDictionary(model).Values.Count);
+            Assert.AreEqual(2, GetDictionary(model).Values.Count);
         }
 
         [TestMethod()]
-        public void AddTest()
+        public void AddTest() 
         {
             model.Add(ComponentType.Background, component);
             model.Add(ComponentType.Brick, collection);
 
-            Assert.AreEqual(2, GetDictionary(model).Values.Count);
+            Assert.AreEqual(4, GetDictionary(model).Values.Count);
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace LodeRunner.Model.Tests
             model.Add(ComponentType.Background, new TestComponent());
             model.Add(ComponentType.Brick, new ComponentsCollection<TestComponent>());
 
-            Assert.AreEqual(2, model.GetAll().Count()); // todo return type, convert to list ?
+            Assert.AreEqual(4, model.GetAll().Count()); // todo return type, convert to list ?
         }
 
         [TestMethod]
@@ -83,6 +83,9 @@ namespace LodeRunner.Model.Tests
             // it is match with sequence in ComponentType
             // todo looks bad because we depend on inner model structure which is SortedDictionary
             // as well it looks too much complexity with model inner structure & ComponentType
+            model.Remove(ComponentType.Stone);
+            model.Remove(ComponentType.Water);
+
             model.Add(ComponentType.Brick     , new TestComponent("3"));
             model.Add(ComponentType.Background, new TestComponent("4"));
             model.Add(ComponentType.Guard     , new TestComponent("2"));

@@ -78,9 +78,13 @@
     </Compile>
     <Compile Include="Controller\PlayerMovement\ComandATests.cs" />
     <Compile Include="Reflection.cs" />
+    <Compile Include="Services\ModelLoadServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Services\TestFiles\x.lev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LodeRunner\LodeRunner.csproj">
@@ -93,6 +97,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

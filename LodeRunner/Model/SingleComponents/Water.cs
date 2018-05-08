@@ -1,9 +1,11 @@
 ﻿using LodeRunner.Animation;
 using LodeRunner.Model.ModelComponents;
+using System;
 using System.Drawing;
 
 namespace LodeRunner.Model
 {
+    [Serializable]
     public class Water : SingleComponentBase
     {
         public static AnimationImage Image { get; set; } 
