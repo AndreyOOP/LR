@@ -1,9 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace LodeRunner.Services.Rules.Tests
+﻿namespace LodeRunnerTests.Services.Rules
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using LodeRunner.Model.SingleComponents;
     using LodeRunner.Model;
+    using LodeRunner.Services.Rules;
+    using LodeRunner.Services;
 
     [TestClass()]
     public class IsFallRuleTests
@@ -19,7 +20,7 @@ namespace LodeRunner.Services.Rules.Tests
         public void Setup()
         {
             model = new ModelLoadService().Load(@"TestModels\FallBetweenBricks.lev");
-            player = model.Get<Player>(ComponentType.Player);
+            player = model.Player;
             rule = new IsNotFallRule(model);
         }
 

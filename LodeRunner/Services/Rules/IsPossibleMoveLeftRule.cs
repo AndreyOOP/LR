@@ -13,8 +13,7 @@
         public override bool Check()
         {
             if (player.X == 0 ||
-                LeftLineCheck<Brick>() ||
-                LeftLineCheck<Stone>()
+                LeftLineCheck()
               )
             {
                 player.ActivatePlayerStand();
@@ -24,7 +23,7 @@
             return true;
         }
 
-        private bool LeftLineCheck<T>() where T : SingleComponentBase
+        private bool LeftLineCheck()
         {
             int x1 = player.X-1;
             int y1 = player.Y;
@@ -38,7 +37,7 @@
             int x2B = (x2 / 20);
             int y2B = (y2 / 20);
 
-            return model.Get<T>().GetBlock(x1B, y1B) != null || model.Get<T>().GetBlock(x2B, y2B) != null;
+            return model.Get(x1B, y1B) is Brick || model.Get(x2B, y2B) is Brick;
         }
     }
 }

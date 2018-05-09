@@ -78,7 +78,6 @@
     <Compile Include="Model\Interfaces\IComponentsCollection.cs" />
     <Compile Include="Model\Interfaces\IModel.cs" />
     <Compile Include="Model\Model.cs" />
-    <Compile Include="Model\ComponentCollection\ComponentsCollection.cs" />
     <Compile Include="Model\SingleComponents\SingleComponentBase.cs" />
     <Compile Include="Model\SingleComponents\Water.cs" />
     <Compile Include="Program.cs" />

@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace LodeRunner.Services.Tests
 {
     using LodeRunner.Model;
+    using LodeRunner.Model.SingleComponents;
     using System.IO;
 
     [TestClass()]
@@ -28,7 +28,7 @@ namespace LodeRunner.Services.Tests
             var service = new ModelLoadService();
             var model = service.Load(@"Services\TestFiles\x.lev");
 
-            Assert.AreEqual(2, model.GetAll().Count());
+            Assert.AreEqual(typeof(Stone), model.Get(0, 0).GetType());
         }
     }
 }

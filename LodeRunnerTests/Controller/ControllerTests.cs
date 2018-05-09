@@ -4,7 +4,7 @@
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
 
-    [TestClass, Ignore]
+    [TestClass]
     public class ControllerTests
     {
         Player player = new Player(10, 0);
@@ -16,7 +16,8 @@
         [TestInitialize]
         public void Setup()
         {
-            model.Add(ComponentType.Player, player);
+            model.Player = player;
+            model.Add(new Brick(0, 20));
 
             controller = new Controller(model, view);
         }
@@ -26,7 +27,6 @@
         {
             Assert.AreEqual(10, player.X);
 
-            // todo public property, to fix, think about testing
             controller.commands.SetUserInput('d');
             controller.commands.GetActiveCommand().Execute();
 

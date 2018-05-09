@@ -10,7 +10,7 @@ namespace LodeRunner.Model.SingleComponents.Tests
         private Player player;
         private Timer timer;
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void DrawTest() // todo refactor
         {
             timer = new Timer() {

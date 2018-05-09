@@ -1,7 +1,6 @@
 ﻿namespace LodeRunner.Services.Rules
 {
     using LodeRunner.Model;
-    using LodeRunner.Model.ModelComponents;
     using LodeRunner.Model.SingleComponents;
 
     public class IsPossibleMoveRightRule : RuleBase
@@ -13,7 +12,7 @@
         public override bool Check()
         {
             if((player.X >= Const.WindowXSize - Const.BlockSize) ||
-               (RightLineCheck<Brick>())
+               (RightLineCheck())
               )
             {
                 player.ActivatePlayerStand();
@@ -23,7 +22,7 @@
             return true;
         }
 
-        private bool RightLineCheck<T>() where T : SingleComponentBase
+        private bool RightLineCheck()
         {
             int x1 = player.X+20;
             int y1 = player.Y;
@@ -37,7 +36,7 @@
             int x2B = (x2 / 20);
             int y2B = (y2 / 20);
 
-            return model.Get<T>().GetBlock(x1B, y1B) != null || model.Get<T>().GetBlock(x2B, y2B) != null;
+            return model.Get(x1B, y1B) is Brick || model.Get(x2B, y2B) is Brick;
         }
     }
 }

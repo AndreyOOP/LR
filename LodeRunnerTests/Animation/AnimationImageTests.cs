@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using LodeRunnerTests.Animation;
-using LodeRunnerTests.Model.SingleComponents;
 using LodeRunnerTests.VisualTester;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
