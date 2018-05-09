@@ -20,8 +20,7 @@
         [TestInitialize]
         public void Setup()
         {
-            ModelLoadService mls = new ModelLoadService();
-            model = mls.Load(@"TestModels\IsPossibleMoveLeft.lev");
+            model = new ModelLoadService().Load(@"TestModels\IsPossibleMoveLeft.lev");
             player = model.Get<Player>(ComponentType.Player);
             rule = new IsPossibleMoveLeftRule(model);
         }
@@ -29,39 +28,25 @@
         [TestMethod]
         public void CannotMoveLeftTest()
         {
-            int[] YPosCannotMove = { 1, 10, 20, 40, 45, 59 };
+            int[] list = { 1, 10, 20, 40, 45, 59 };
 
-            foreach(int y in YPosCannotMove)
+            foreach (int y in list)
             {
                 player.Y = y;
-                Assert.IsFalse(rule.Check());
+                Assert.AreEqual(false, rule.Check(), $"Fail on player.Y = {y}");
             }
         }
 
         [TestMethod]
         public void CanMoveLeftTest()
         {
-            int[] YPosCanMove = { 0, 60, 70 };
+            int[] list = { 0, 60, 70 };
 
-            foreach (int y in YPosCanMove)
+            foreach (int y in list)
             {
                 player.Y = y;
-                Assert.IsTrue(rule.Check());
+                Assert.AreEqual(true, rule.Check(), $"Fail on player.Y = {y}");
             }
-        }
-
-        [TestMethod]
-        public void TestMethod2()
-        {
-            player.X -= 10;
-            Assert.IsTrue(rule.Check());
-        }
-
-        [TestMethod]
-        public void TestMethod3()
-        {
-            player.X -= 20;
-            Assert.IsFalse(rule.Check());
         }
     }
 }

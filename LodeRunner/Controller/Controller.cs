@@ -41,24 +41,24 @@
         {
             commands.Add('0', new Command()
             {
-                new IsFallRule(Model),
+                new IsNotFallRule(Model),
                 new NoInputRule(Model)
             });
             commands.Add('a', new Command()
             {
-                new IsFallRule(Model),
+                new IsNotFallRule(Model),
                 new IsPossibleMoveLeftRule(Model),
                 new MoveLeftRule(Model)
             });
             commands.Add('d', new Command()
             {
-                new IsFallRule(Model),
+                new IsNotFallRule(Model),
                 new IsPossibleMoveRightRule(Model),
                 new MoveRightRule(Model)
             });
             commands.Add('w', new Command()
             {
-                new IsFallRule(Model),
+                new IsNotFallRule(Model),
                 // todo add isPossibleMoveUpRule    
                 new MoveUpRule(Model)
             });

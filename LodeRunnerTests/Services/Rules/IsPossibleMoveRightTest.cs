@@ -20,48 +20,33 @@
         [TestInitialize]
         public void Setup()
         {
-            ModelLoadService mls = new ModelLoadService();
-            model = mls.Load(@"TestModels\IsPossibleMoveRight.lev");
+            model = new ModelLoadService().Load(@"TestModels\IsPossibleMoveRight.lev");
             player = model.Get<Player>(ComponentType.Player);
             rule = new IsPossibleMoveRightRule(model);
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void PossibleMoveRightTest()
         {
-            Assert.IsTrue(rule.Check());
+            int[] list = { 0, 60, 61 };
+
+            foreach (int y in list)
+            {
+                player.Y = y;
+                Assert.AreEqual(true, rule.Check(), $"Fail on player.Y = {y}");
+            }
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public void NotPossibleMoveRightTest()
         {
-            player.Y += 10;
+            int[] list = { 1, 10, 19, 20, 30, 59 };
 
-            Assert.IsFalse(rule.Check());
-        }
-
-        [TestMethod]
-        public void TestMethod3()
-        {
-            player.Y += 40;
-
-            Assert.IsFalse(rule.Check());
-        }
-
-        [TestMethod]
-        public void TestMethod4()
-        {
-            player.Y += 59;
-
-            Assert.IsFalse(rule.Check());
-        }
-
-        [TestMethod]
-        public void TestMethod5()
-        {
-            player.Y += 60;
-
-            Assert.IsTrue(rule.Check());
+            foreach (int y in list)
+            {
+                player.Y = y;
+                Assert.AreEqual(false, rule.Check(), $"Fail on player.Y = {y}");
+            }
         }
     }
 }

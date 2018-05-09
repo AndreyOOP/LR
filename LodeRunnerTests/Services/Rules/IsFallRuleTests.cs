@@ -3,108 +3,48 @@
 namespace LodeRunner.Services.Rules.Tests
 {
     using LodeRunner.Model.SingleComponents;
-    using LodeRunnerTests.TestModels;
+    using LodeRunner.Model;
 
     [TestClass()]
     public class IsFallRuleTests
     {
-        private TestModelFactory testModelFactory = new TestModelFactory();
+        private Model model;
         private Player player;
-        private IsFallRule isFallRule;
+        private IsNotFallRule rule;
 
+        // Model default setup:
+        // space|player|space
+        // brick|space |brick
         [TestInitialize]
         public void Setup()
         {
-            testModelFactory.SetFallRuleTestModel();
-            player = testModelFactory.Player;
-
-            isFallRule = new IsFallRule(testModelFactory.Model);
-        }
-
-        [TestMethod()]
-        public void LeftOutTest()
-        {
-            player.X = 10;
-
-            isFallRule.Check();
-
-            Assert.AreEqual(21, player.Y);
-        }
-
-        [TestMethod()]
-        public void LeftHalfOutTest()
-        {
-            player.X = 25;
-
-            isFallRule.Check();
-
-            Assert.AreEqual(20, player.Y);
-        }
-
-        [TestMethod()]
-        public void AboveTest()
-        {
-            player.X = 45;
-
-            isFallRule.Check();
-
-            Assert.AreEqual(20, player.Y);
-        }
-
-        [TestMethod()]
-        public void RightOutTest()
-        {
-            player.X = 79;
-
-            isFallRule.Check();
-
-            Assert.AreEqual(20, player.Y);
-        }
-
-        [TestMethod()]
-        public void OutTest()
-        {
-            player.X = 80;
-
-            isFallRule.Check();
-
-            Assert.AreEqual(21, player.Y);
-        }
-
-        [TestMethod()]
-        public void OutYTest()
-        {
-            player.X = 79;
-            player.Y = 19;
-
-            isFallRule.Check();
-
-            Assert.AreEqual(20, player.Y);
-        }
-
-        //Model default setup:
-        // space|player|space
-        // brick|space |brick
-
-        [TestMethod]
-        public void MyTestMethod()
-        {
-            testModelFactory.SetFallRuleTestModel1();
-
-            isFallRule = new IsFallRule(testModelFactory.Model);
-
-            Assert.IsFalse(isFallRule.Check());
+            model = new ModelLoadService().Load(@"TestModels\FallBetweenBricks.lev");
+            player = model.Get<Player>(ComponentType.Player);
+            rule = new IsNotFallRule(model);
         }
 
         [TestMethod]
-        public void MyTestMethod2()
+        public void IsNotFallTest()
         {
-            testModelFactory.SetFallRuleTestModel1();
-            testModelFactory.Player.X += 30;
+            int[] list = {0, 19, 21, 40, 59};
 
-            isFallRule = new IsFallRule(testModelFactory.Model);
+            foreach(int x in list)
+            {
+                player.X = x;
+                Assert.AreEqual(true, rule.Check(), $"Fail on player.X = {x}");
+            }
+        }
 
-            Assert.IsTrue(isFallRule.Check());
+        [TestMethod]
+        public void IsFallTest()
+        {
+            int[] list = {20, 60};
+
+            foreach (int x in list)
+            {
+                player.X = x;
+                Assert.AreEqual(false, rule.Check(), $"Fail on player.X = {x}");
+            }
         }
     }
 }

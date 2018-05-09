@@ -4,9 +4,9 @@
     using LodeRunner.Model.ModelComponents;
     using LodeRunner.Model.SingleComponents;
 
-    public class IsFallRule : RuleBase
+    public class IsNotFallRule : RuleBase
     {
-        public IsFallRule(Model model) : base(model)
+        public IsNotFallRule(Model model) : base(model)
         {
         }
 
