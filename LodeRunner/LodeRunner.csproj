@@ -55,13 +55,9 @@
     <Compile Include="Model\SingleComponents\Rail.cs" />
     <Compile Include="Model\SingleComponents\Stairs.cs" />
     <Compile Include="Model\SingleComponents\Stone.cs" />
-    <Compile Include="Services\Command\CommandA.cs" />
-    <Compile Include="Services\Command\BaseClass\CommandBase.cs" />
-    <Compile Include="Services\Command\CommandD.cs" />
-    <Compile Include="Services\Command\CommandNull.cs" />
-    <Compile Include="Services\Command\BaseClass\Commands.cs" />
-    <Compile Include="Services\Command\BaseClass\ICommand.cs" />
-    <Compile Include="Services\Command\CommandW.cs" />
+    <Compile Include="Services\Command\Command.cs" />
+    <Compile Include="Services\Command\Commands.cs" />
+    <Compile Include="Services\Command\ICommand.cs" />
     <Compile Include="Services\IModelLoadService.cs" />
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
@@ -74,7 +70,6 @@
     <Compile Include="Services\Rules\MoveUpRule.cs" />
     <Compile Include="Services\Rules\NoInputRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
-    <Compile Include="Services\Rules\StopOnStairsRule.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
     </Compile>

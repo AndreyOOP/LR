@@ -37,7 +37,11 @@ namespace LodeRunner.Animation
             {
                 timer = InitializeTimer(speed);
             }
-            timer.Start();
+
+            if (!timer.Enabled)
+            {
+                timer.Start();
+            }
         }
 
         public void Stop()
