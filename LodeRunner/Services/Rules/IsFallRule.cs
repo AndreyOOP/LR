@@ -36,7 +36,8 @@
             int x2B = (x2 / 20);
             int y2B = (y2 / 20);
 
-            return model.Get<T>().GetBlock(x1B, y1B) == null && model.Get<T>().GetBlock(x2B, y2B) == null;
+            return model.Get(x1B, y1B) == null && model.Get(x2B, y2B) == null;
+            //return model.Get<T>().GetBlock(x1B, y1B) == null && model.Get<T>().GetBlock(x2B, y2B) == null;
         }
     }
 }

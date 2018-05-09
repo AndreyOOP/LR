@@ -64,8 +64,6 @@
     <Compile Include="Animation\AnimationImageTests.cs" />
     <Compile Include="Animation\Files\TestAnimationElement.cs" />
     <Compile Include="Controller\ControllerTests.cs" />
-    <Compile Include="Model\ComponentCollection\ComponentsCollectionTests.cs" />
-    <Compile Include="Model\ComponentCollection\Files\TestPicture.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\SingleComponents\PlayerTests.cs" />
     <Compile Include="Model\SingleComponents\StoneTests.cs" />
@@ -80,7 +78,7 @@
     <Compile Include="Services\Rules\IsFallRuleTests.cs" />
     <Compile Include="Services\Rules\IsPossibleMoveRightTest.cs" />
     <Compile Include="Services\Rules\IsPossibleMoveLeftTest.cs" />
-    <Compile Include="TestModels\TestModelFactory.cs" />
+    <Compile Include="Services\Rules\MoveUpRuleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -94,6 +92,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestModels\IsPossibleMoveRight.lev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestModels\MoveUp.lev">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

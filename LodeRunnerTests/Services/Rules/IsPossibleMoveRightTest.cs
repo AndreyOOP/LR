@@ -21,7 +21,7 @@
         public void Setup()
         {
             model = new ModelLoadService().Load(@"TestModels\IsPossibleMoveRight.lev");
-            player = model.Get<Player>(ComponentType.Player);
+            player = model.Player;
             rule = new IsPossibleMoveRightRule(model);
         }
 
