@@ -11,7 +11,6 @@
         public RuleBase(Model model)
         {
             this.model = model;
-            //player = model.Get<Player>(ComponentType.Player);
             player = model.Player;
         }
 

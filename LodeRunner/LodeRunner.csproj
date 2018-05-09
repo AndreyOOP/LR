@@ -59,6 +59,7 @@
     <Compile Include="Services\Command\Commands.cs" />
     <Compile Include="Services\Command\ICommand.cs" />
     <Compile Include="Services\IModelLoadService.cs" />
+    <Compile Include="Services\Intersection.cs" />
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\IRule.cs" />

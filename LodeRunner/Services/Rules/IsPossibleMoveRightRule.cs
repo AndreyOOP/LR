@@ -2,17 +2,22 @@
 {
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
+    using static LodeRunner.Services.Intersection;
 
     public class IsPossibleMoveRightRule : RuleBase
-    {   
+    {
+        Intersection intersection;
+
         public IsPossibleMoveRightRule(Model model) : base (model)
         {
+            intersection = new Intersection(model);
         }
 
         public override bool Check()
         {
             if((player.X >= Const.WindowXSize - Const.BlockSize) ||
-               (RightLineCheck())
+               intersection.Line<Brick>(Direction.Right, Side.Out, Operation.Or) ||
+               intersection.Line<Stone>(Direction.Right, Side.Out, Operation.Or)
               )
             {
                 player.ActivatePlayerStand();
@@ -20,23 +25,6 @@
             }
 
             return true;
-        }
-
-        private bool RightLineCheck()
-        {
-            int x1 = player.X+20;
-            int y1 = player.Y;
-
-            int x2 = player.X + 20;
-            int y2 = player.Y + 19;
-
-            int x1B = (x1 / 20);
-            int y1B = (y1 / 20);
-
-            int x2B = (x2 / 20);
-            int y2B = (y2 / 20);
-
-            return model.Get(x1B, y1B) is Brick || model.Get(x2B, y2B) is Brick;
         }
     }
 }
