@@ -119,5 +119,86 @@ namespace LodeRunner.Model.Tests
 
             Assert.AreEqual(bricks, model.Get<Brick>());
         }
+
+        [TestMethod()]
+        public void AddSingleComponent()
+        {
+            var model = new Model();
+            model.Add(new Brick(0, 20));
+
+            Assert.AreEqual(true, model.field[0, 1] != null);
+            Assert.AreEqual(true, model.field[0, 0] == null);
+        }
+
+        [TestMethod()]
+        public void ExceptionTest()
+        {
+            var model = new Model();
+
+            try
+            {
+                model.Add(new Brick(-45, 20));
+            }
+            catch(ArgumentException ex)
+            {
+                Assert.AreEqual("BlockX could not be < 0. Now it is -2", ex.Message);
+            }
+        }
+
+        [TestMethod()]
+        public void ExceptionTest2()
+        {
+            var model = new Model();
+
+            try
+            {
+                model.Add(new Brick(440, 20));
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("BlockX could not be >= than maximum field width. It is 22 vs 20", ex.Message);
+            }
+        }
+
+        [TestMethod()]
+        public void ExceptionTestY()
+        {
+            var model = new Model();
+
+            try
+            {
+                model.Add(new Brick(0, -20));
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("BlockY could not be < 0. Now it is -1", ex.Message);
+            }
+        }
+
+        [TestMethod()]
+        public void ExceptionTestY2()
+        {
+            var model = new Model();
+
+            try
+            {
+                model.Add(new Brick(40, 800));
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("BlockY could not be >= than maximum field width. It is 40 vs 30", ex.Message);
+            }
+        }
+
+        [TestMethod()]
+        public void GetSingleComponent()
+        {
+            var model = new Model();
+            model.Add(new Brick(0, 20));
+
+            Assert.AreEqual(typeof(Brick), model.Get(0, 1).GetType());
+        }
+
+        
     }
 }
