@@ -55,18 +55,21 @@
     <Compile Include="Model\SingleComponents\Rail.cs" />
     <Compile Include="Model\SingleComponents\Stairs.cs" />
     <Compile Include="Model\SingleComponents\Stone.cs" />
-    <Compile Include="Services\Command\CommandA.cs" />
-    <Compile Include="Services\Command\BaseClass\CommandBase.cs" />
-    <Compile Include="Services\Command\CommandD.cs" />
-    <Compile Include="Services\Command\CommandNull.cs" />
-    <Compile Include="Services\Command\BaseClass\Commands.cs" />
-    <Compile Include="Services\Command\BaseClass\ICommand.cs" />
+    <Compile Include="Services\Command\Command.cs" />
+    <Compile Include="Services\Command\Commands.cs" />
+    <Compile Include="Services\Command\ICommand.cs" />
     <Compile Include="Services\IModelLoadService.cs" />
+    <Compile Include="Services\Intersection.cs" />
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\IRule.cs" />
-    <Compile Include="Services\Rules\IsInFieldLeftRule.cs" />
-    <Compile Include="Services\Rules\IsInFieldRightRule.cs" />
+    <Compile Include="Services\Rules\IsFallRule.cs" />
+    <Compile Include="Services\Rules\IsPossibleMoveLeftRule.cs" />
+    <Compile Include="Services\Rules\IsPossibleMoveRightRule.cs" />
+    <Compile Include="Services\Rules\MoveLeftRule.cs" />
+    <Compile Include="Services\Rules\MoveRightRule.cs" />
+    <Compile Include="Services\Rules\MoveUpRule.cs" />
+    <Compile Include="Services\Rules\NoInputRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
@@ -76,7 +79,6 @@
     <Compile Include="Model\Interfaces\IComponentsCollection.cs" />
     <Compile Include="Model\Interfaces\IModel.cs" />
     <Compile Include="Model\Model.cs" />
-    <Compile Include="Model\ComponentCollection\ComponentsCollection.cs" />
     <Compile Include="Model\SingleComponents\SingleComponentBase.cs" />
     <Compile Include="Model\SingleComponents\Water.cs" />
     <Compile Include="Program.cs" />
@@ -114,6 +116,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Gold.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\FallAnimation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Player\PlayerAnimationUp.png">

@@ -9,6 +9,22 @@ namespace LodeRunner.Model.ModelComponents
         public int X { get; set; }
         public int Y { get; set; }
 
+        public int BlockX
+        {
+            get
+            {
+                return X / Const.BlockSize;
+            }
+        }
+
+        public int BlockY
+        {
+            get
+            {
+                return Y / Const.BlockSize;
+            }
+        }
+
         public SingleComponentBase()
         {
         }

@@ -3,6 +3,7 @@
     using LodeRunner.Model;
     using LodeRunner.Services;
     using LodeRunner.Services.Command;
+    using LodeRunner.Services.Rules;
     using System.Timers;
 
     public class Controller
@@ -11,7 +12,7 @@
         public View View { get; private set; }
 
         private Timer timer;
-        public Commands commands;
+        public Commands commands = new Commands();
 
         public Controller(Model model, View view)
         {
@@ -22,11 +23,7 @@
 
         public void FrameUpdate(object sender, ElapsedEventArgs e)
         {
-            //execute default rules like fall, guards update
-
-            commands.GetActiveCommand().Execute(); //or some checks have to be done in the command?
-            //execute rules related to command - get treasure, wall, is possible to go up on stairs
-
+            commands.GetActiveCommand().Execute();
             View.Invalidate();
         }
 
@@ -42,9 +39,29 @@
 
         private void Initialization()
         {
-            commands = new Commands(Model);
-            commands.Add('a', new CommandA(Model));
-            commands.Add('d', new CommandD(Model));
+            commands.Add('0', new Command()
+            {
+                new IsNotFallRule(Model),
+                new NoInputRule(Model)
+            });
+            commands.Add('a', new Command()
+            {
+                new IsNotFallRule(Model),
+                new IsPossibleMoveLeftRule(Model),
+                new MoveLeftRule(Model)
+            });
+            commands.Add('d', new Command()
+            {
+                new IsNotFallRule(Model),
+                new IsPossibleMoveRightRule(Model),
+                new MoveRightRule(Model)
+            });
+            commands.Add('w', new Command()
+            {
+                new IsNotFallRule(Model),
+                // todo add isPossibleMoveUpRule    
+                new MoveUpRule(Model)
+            });
 
             timer = new Timer();
             timer.Elapsed += FrameUpdate;
