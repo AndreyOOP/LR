@@ -52,6 +52,7 @@
     <Compile Include="Model\Interfaces\IPlayer.cs" />
     <Compile Include="ConstantsEnums\Animations.cs" />
     <Compile Include="Model\SingleComponents\Brick.cs" />
+    <Compile Include="Model\SingleComponents\GameOver.cs" />
     <Compile Include="Model\SingleComponents\Gold.cs" />
     <Compile Include="Model\SingleComponents\Player.cs" />
     <Compile Include="Model\SingleComponents\Rail.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\Down\IsAbleMoveDown.cs" />
     <Compile Include="Services\Rules\Down\MoveDownRule.cs" />
+    <Compile Include="Services\Rules\General\InWaterRule.cs" />
     <Compile Include="Services\Rules\General\OnRailRuleRight.cs" />
     <Compile Include="Services\Rules\General\OnRailRuleLeft.cs" />
     <Compile Include="Services\Rules\General\OnRailRule.cs" />
@@ -125,7 +127,13 @@
     <Content Include="Resources\Brick\BrickGrowAnimation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\GameOver.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Gold.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Pause.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Player\FallAnimation.png">

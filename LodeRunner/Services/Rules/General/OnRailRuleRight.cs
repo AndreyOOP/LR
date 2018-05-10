@@ -14,10 +14,10 @@ namespace LodeRunner.Services.Rules.General
             if(intersection.Line<Rail>(Direction.Up, Side.In, Operation.And))
             {
                 player.SetAnimation(Animations.RailRight);
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
     }
 }

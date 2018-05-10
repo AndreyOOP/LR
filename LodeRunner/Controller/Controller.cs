@@ -15,6 +15,8 @@
         private Timer timer;
         public Commands commands = new Commands();
 
+        private Command defaultActions;
+
         public Controller(Model model, View view)
         {
             Model = model;
@@ -25,6 +27,9 @@
         public void FrameUpdate(object sender, ElapsedEventArgs e)
         {
             commands.GetActiveCommand().Execute();
+
+            defaultActions.Execute();
+
             View.Invalidate();
         }
 
@@ -40,25 +45,31 @@
 
         private void Initialization()
         {
+            defaultActions = new Command()
+            {
+                new InWaterRule(Model)
+            };
+
             commands.Add('0', new Command()
             {
                 new IsNotFallRule(Model),
                 new NoInputRule(Model),
                 new OnRailRule(Model)
+                
             });
             commands.Add('a', new Command()
             {
                 new IsNotFallRule(Model),
                 new IsAbleMoveLeftRule(Model),
                 new MoveLeftRule(Model),
-                new OnRailRuleLeft(Model)
+                new OnRailRuleLeft(Model),
             });
             commands.Add('d', new Command()
             {
                 new IsNotFallRule(Model),
                 new IsAbleMoveRightRule(Model),
                 new MoveRightRule(Model),
-                new OnRailRuleRight(Model)
+                new OnRailRuleRight(Model),
             });
             commands.Add('w', new Command()
             {
@@ -70,7 +81,7 @@
             {
                 new IsNotFallRule(Model),
                 new IsAbleMoveDownRule(Model),
-                new MoveDownRule(Model)
+                new MoveDownRule(Model),
             });
 
             timer = new Timer();

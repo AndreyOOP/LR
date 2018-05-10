@@ -27,7 +27,7 @@
             }
 
             player.SetImage(Textures.Stand);
-            return false;
+            return true;
         }
 
         private bool IsPlayerTopOrBottomOnSameStairs()
@@ -39,7 +39,7 @@
 
         private bool IsPlayerOnRail()
         {
-            return intersection.Line<Rail>(Direction.Down, Side.In, Operation.And);
+            return intersection.Line<Rail>(Direction.Down, Side.In, Operation.Or);
         }
 
         private bool IsBottomAboveDiffBlocks()
