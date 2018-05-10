@@ -47,8 +47,10 @@
   <ItemGroup>
     <Compile Include="Animation\AnimationImage.cs" />
     <Compile Include="Animation\IAnimationImage.cs" />
-    <Compile Include="Const.cs" />
+    <Compile Include="ConstantsEnums\Const.cs" />
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Model\Interfaces\IPlayer.cs" />
+    <Compile Include="ConstantsEnums\Animations.cs" />
     <Compile Include="Model\SingleComponents\Brick.cs" />
     <Compile Include="Model\SingleComponents\Gold.cs" />
     <Compile Include="Model\SingleComponents\Player.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Services\Command\Command.cs" />
     <Compile Include="Services\Command\Commands.cs" />
     <Compile Include="Services\Command\ICommand.cs" />
+    <Compile Include="ConstantsEnums\Direction.cs" />
     <Compile Include="Services\IModelLoadService.cs" />
     <Compile Include="Services\Intersection.cs" />
     <Compile Include="Services\IUserInput.cs" />
@@ -74,6 +77,7 @@
     <Compile Include="Services\Rules\Up\MoveUpRule.cs" />
     <Compile Include="Services\Rules\General\NoInputRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
+    <Compile Include="ConstantsEnums\Textures.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
     </Compile>

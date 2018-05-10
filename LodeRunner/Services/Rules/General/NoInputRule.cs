@@ -1,4 +1,6 @@
-﻿namespace LodeRunner.Services.Rules
+﻿using LodeRunner.Model.SingleComponents;
+
+namespace LodeRunner.Services.Rules
 {
     public class NoInputRule : RuleBase
     {
@@ -8,7 +10,7 @@
 
         public override bool Check()
         {
-            player.ActivatePlayerStand();
+            player.SetImage(Textures.Stand);
             return true;
         }
     }

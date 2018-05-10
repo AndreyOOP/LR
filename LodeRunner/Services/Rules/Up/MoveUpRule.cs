@@ -18,23 +18,23 @@ namespace LodeRunner.Services.Rules
               )
             {
                 player.Y -= 1;
-                player.ActivatePlayerUp();
+                player.SetAnimation(Animations.Up);
                 return true;
             }
             else if(intersection.Get(Corner.TopLeft) is Stairs) // need to add direction here to know how to react
             {
                 player.X -= 1;
-                player.ActivatePlayerUp();
+                player.SetAnimation(Animations.Up);
                 return true;
             }
             else if (intersection.Get(Corner.TopRight) is Stairs)
             {
                 player.X += 1;
-                player.ActivatePlayerUp();
+                player.SetAnimation(Animations.Up);
                 return true;
             }
 
-            player.ActivatePlayerStand();
+            player.SetImage(Textures.Stand);
             return false;
         }
     }

@@ -2,98 +2,60 @@
 using LodeRunner.Animation;
 using System.Drawing;
 using System;
+using LodeRunner.Model.Interfaces;
+using static LodeRunner.Services.Intersection;
 
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Player : SingleComponentBase
+    public class Player : SingleComponentBase, IPlayer
     {
-        public AnimationImage Animation { get; set; }
+        private AnimationImage animation;
         private Bitmap texture = new Bitmap(Const.PlayerStand);
-
-        private AnimationImage fallAnimation = new AnimationImage(Const.PlayerFallAnimation, Const.BlockSize, 200);
-        private AnimationImage upAnimation = new AnimationImage(Const.PlayerUpAnimation, Const.BlockSize, 200);
-        private AnimationImage rightAnimation = new AnimationImage(Const.PlayerRightAnimation, Const.BlockSize, 200);
-        private AnimationImage leftAnimation = new AnimationImage(Const.PlayerLeftAnimation, Const.BlockSize, 200);
-        private AnimationImage railLeftAnimation = new AnimationImage(Const.PlayerRailLeftAnimation, Const.BlockSize, 200);
-        private AnimationImage railRightAnimation = new AnimationImage(Const.PlayerRailRightAnimation, Const.BlockSize, 200);
-        private Bitmap stand = new Bitmap(Const.PlayerStand);
-        private Bitmap stairsDown = new Bitmap(Const.PlayerStairsDown);
-
-        public int GetX(int right)
-        {
-            return (X / Const.BlockSize + right) * Const.BlockSize;
-        }
-        public int GetY(int bottom)
-        {
-            return (Y / Const.BlockSize + bottom) * Const.BlockSize;
-        }
 
         public Player(int x, int y) : base(x, y)
         {
         }
 
-        public void ActivatePlayerStand()
+        public void SetAnimation(AnimationImage animation)
         {
-            Animation = null;
-            texture = stand;
+            this.animation = animation;
+            this.animation.Start();
         }
 
-        public void ActivatePlayerFall()
+        public void SetImage(Bitmap image)
         {
-            Animation = fallAnimation;
-            Animation.Start();
+            animation = null;
+            texture = image;
         }
 
-        public void ActivatePlayerUp()
+        public Direction GetDirection()
         {
-            Animation = upAnimation;
-            Animation.Start();
-        }
+            if(animation == Animations.Right)
+            {
+                return Direction.Right;
+            }
+            else if (animation == Animations.Left)
+            {
+                return Direction.Left;
+            }
 
-        public void ActivateLeftAnimation()
-        {
-            Animation = leftAnimation;
-            Animation.Start();
-        }
-
-        public void ActivateRightAnimation()
-        {
-            Animation = rightAnimation;
-            Animation.Start();
-        }
-
-        public void ActivateRailLeftAnimation()
-        {
-            Animation = railLeftAnimation;
-            Animation.Start();
-        }
-
-        public void ActivateRailRightAnimation()
-        {
-            Animation = railRightAnimation;
-            Animation.Start();
-        }
-
-        public void ActivatePlayerStairs()
-        {
-            Animation = null;
-            texture = stairsDown;
+            return Direction.None;
         }
 
         public override void Draw(Graphics g)
         {
-            if(Animation == null)
+            if(animation == null)
             {
                 g.DrawRectangle(Pens.Blue, new Rectangle(X, Y, Const.BlockSize-1, Const.BlockSize-1));
-                g.DrawLine(Pens.Black, X, Y, X + 1, Y + 1); //temp
+                g.DrawLine(Pens.Red, X, Y, X + 1, Y + 1);
                 g.DrawImage(texture, X, Y);
             }
             else
             {
                 g.DrawRectangle(Pens.Blue, new Rectangle(X, Y, Const.BlockSize-1, Const.BlockSize-1));
-                g.DrawLine(Pens.Black, X, Y, X + 1, Y + 1); //temp
-                g.DrawImage(Animation.GetCurrentFrame(), X, Y);
+                g.DrawLine(Pens.Red, X, Y, X + 1, Y + 1);
+                g.DrawImage(animation.GetCurrentFrame(), X, Y);
             }
         }
     }

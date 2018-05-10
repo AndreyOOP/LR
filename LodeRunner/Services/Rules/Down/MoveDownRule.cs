@@ -18,23 +18,23 @@
               )
             {
                 player.Y += 1;
-                player.ActivatePlayerStairs();
+                player.SetImage(Textures.StairsDown);
                 return true;
             }
             else if(intersection.Get(Corner.BottomLeft, Direction.Down) is Stairs) // need to add direction here to know how to react
             {
                 player.X -= 1;
-                player.ActivatePlayerStairs();
+                player.SetImage(Textures.StairsDown);
                 return true;
             }
             else if (intersection.Get(Corner.BottomRight, Direction.Down) is Stairs)
             {
                 player.X += 1;
-                player.ActivatePlayerStairs();
+                player.SetImage(Textures.StairsDown);
                 return true;
             }
 
-            player.ActivatePlayerStand();
+            player.SetImage(Textures.Stand);
             return false;
         }
     }

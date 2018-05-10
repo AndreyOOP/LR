@@ -17,7 +17,7 @@
                intersection.Line<Stone>(Direction.Right, Side.Out, Operation.Or)
               )
             {
-                player.ActivatePlayerStand();
+                player.SetImage(Textures.Stand);
                 return false;
             }
 
