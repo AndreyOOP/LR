@@ -12,7 +12,7 @@
 
         public override bool Check()
         {
-            if((player.X > Const.WindowWidth - Const.BlockSize - 1) ||
+            if ((player.X > Const.WindowWidth - Const.BlockSize - 1) ||
                intersection.Line<Brick>(Direction.Right, Side.Out, Operation.Or) ||
                intersection.Line<Stone>(Direction.Right, Side.Out, Operation.Or)
               )

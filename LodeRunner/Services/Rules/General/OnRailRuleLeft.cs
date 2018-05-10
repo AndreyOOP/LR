@@ -11,13 +11,13 @@ namespace LodeRunner.Services.Rules.General
 
         public override bool Check()
         {
-            if(intersection.Line<Rail>(Direction.Up, Side.In, Operation.And))
+            if (intersection.Line<Rail>(Direction.Up, Side.In, Operation.And))
             {
                 player.SetAnimation(Animations.RailLeft);
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
     }
 }

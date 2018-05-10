@@ -11,7 +11,7 @@ namespace LodeRunner.Services.Rules
 
         public override bool Check()
         {
-            if(IsPlayerTopOrBottomOnSameStairs())
+            if (IsPlayerTopOrBottomOnSameStairs())
             {
                 player.Y -= 1;
                 player.SetAnimation(Animations.Up);

@@ -9,17 +9,23 @@ namespace LodeRunner.Model
     [Serializable]
     public class Model : IModel, IDrawable
     {
-        public bool IsPaused { get; set; }
+        public bool IsGameOver { get; set; }
 
         public Player Player { get; set; }
 
         private SortedDictionary<ComponentType, IDrawable> dictionary;
+        private SingleComponentBase message;
 
         public SingleComponentBase[,] field = new SingleComponentBase[Const.BlockWidth, Const.BlockHeigth];
 
         public Model()
         {
             dictionary = new SortedDictionary<ComponentType, IDrawable>();
+        }
+
+        public void SetMessage(SingleComponentBase message)
+        {
+            this.message = message;
         }
 
         public void Add<T>(T component) where T : SingleComponentBase
@@ -111,6 +117,8 @@ namespace LodeRunner.Model
             }
 
             Player?.Draw(g);
+
+            message?.Draw(g);
         }
     }
 }

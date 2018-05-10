@@ -12,12 +12,12 @@
 
         public override bool Check()
         {
-            if (IsInRail() || IsTopStairs())
+            if (IsInRail() || IsTopStairs() || IsInWater())
             {
                 return true;
             }
 
-            if (IsInGameWindow() && (IsBottomNullBlocks() || IsBelowRail() || IsBelowWater()))
+            if (IsInGameWindow() && (IsBottomNullBlocks() || IsBelowRail() || IsAbovewWater()))
             {
                 player.Y += 1;
                 player.SetAnimation(Animations.Fall);
@@ -45,7 +45,7 @@
         private bool IsInRail()
         {
             var y = intersection.Get(Corner.TopLeft)?.Y ?? intersection.Get(Corner.TopRight)?.Y;
-            return player.Y == y;
+            return player.Y == y && intersection.Line<Rail>(Direction.Up, Side.In, Operation.Or);
         }
 
         private bool IsBelowRail()
@@ -53,9 +53,15 @@
             return intersection.Line<Rail>(Direction.Down, Side.Out, Operation.Or);
         }
 
-        private bool IsBelowWater()
+        private bool IsAbovewWater()
         {
             return intersection.Line<Water>(Direction.Down, Side.Out, Operation.Or);
+        }
+
+        private bool IsInWater()
+        {
+            var y = intersection.Get(Corner.TopLeft)?.Y ?? intersection.Get(Corner.TopRight)?.Y;
+            return player.Y == y && intersection.Line<Water>(Direction.Up, Side.In, Operation.Or);
         }
     }
 }
