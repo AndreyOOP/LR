@@ -11,38 +11,39 @@ namespace LodeRunner.Services.Rules
 
         public override bool Check()
         {
-            if(
-                (intersection.Line<Stairs>(Direction.Up, Side.In, Operation.And) ||
-                intersection.Line<Stairs>(Direction.Down, Side.In, Operation.And)) &&
-                intersection.Get(Corner.TopLeft) == intersection.Get(Corner.TopRight)
-              )
+            if(IsPlayerTopOrBottomOnSameStairs())
             {
                 player.Y -= 1;
                 player.SetAnimation(Animations.Up);
                 player.Direction = Direction.None;
                 return true;
             }
-            else if(
-                intersection.Get(Corner.TopLeft) != intersection.Get(Corner.TopRight) &&
-                intersection.Get(Corner.TopLeft) is Stairs &&
-                player.Direction == Direction.Left
-                )
+
+            if (IsTopAboveDiffBlocks() && IsAnyTopCornerOnStairs())
             {
-                player.X -= 1;
-                return true;
-            }
-            else if (
-                intersection.Get(Corner.TopLeft) != intersection.Get(Corner.TopRight) &&
-                intersection.Get(Corner.TopRight) is Stairs &&
-                player.Direction == Direction.Right
-                )
-            {
-                player.X += 1;
+                player.X += (player.Direction == Direction.Left) ? -1 : 1;
                 return true;
             }
 
             player.SetImage(Textures.Stand);
             return false;
+        }
+
+        private bool IsPlayerTopOrBottomOnSameStairs()
+        {
+            return (intersection.Line<Stairs>(Direction.Up, Side.In, Operation.And) ||
+                    intersection.Line<Stairs>(Direction.Down, Side.In, Operation.And)) &&
+                    intersection.Get(Corner.TopLeft) == intersection.Get(Corner.TopRight);
+        }
+
+        private bool IsTopAboveDiffBlocks()
+        {
+            return intersection.Get(Corner.TopLeft) != intersection.Get(Corner.TopRight);
+        }
+
+        private bool IsAnyTopCornerOnStairs()
+        {
+            return intersection.Line<Stairs>(Direction.Up, Side.In, Operation.Or);
         }
     }
 }
