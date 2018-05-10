@@ -10,6 +10,7 @@ namespace LodeRunner.Model.SingleComponents
     [Serializable]
     public class Player : SingleComponentBase, IPlayer
     {
+        private Direction direction;
         private AnimationImage animation;
         private Bitmap texture = new Bitmap(Const.PlayerStand);
 
@@ -31,15 +32,14 @@ namespace LodeRunner.Model.SingleComponents
 
         public Direction GetDirection()
         {
-            if(animation == Animations.Right)
-            {
-                return Direction.Right;
-            }
-            else if (animation == Animations.Left)
+            if(animation == Animations.Left)
             {
                 return Direction.Left;
             }
-
+            else if (animation == Animations.Right)
+            {
+                return Direction.Right;
+            }
             return Direction.None;
         }
 

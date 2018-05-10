@@ -11,5 +11,7 @@ namespace LodeRunner.Model.Interfaces
         void SetImage(Bitmap image);
 
         Direction GetDirection();
+
+        //void SetDirection(Direction direction);
     }
 }
