@@ -1,0 +1,28 @@
+﻿namespace LodeRunner.Services.Rules
+{
+    using LodeRunner.Model;
+    using LodeRunner.Model.SingleComponents;
+    using static LodeRunner.Services.Intersection;
+
+    public class IsAbleMoveUp : RuleBase
+    {
+        public IsAbleMoveUp(Model model) : base(model)
+        {
+        }
+
+        public override bool Check()
+        {
+            if(
+                player.Y <= 0 ||
+                intersection.Line<Brick>(Direction.Up, Side.Out, Operation.Or) ||
+                intersection.Line<Stone>(Direction.Up, Side.Out, Operation.Or)
+              )
+            {
+                player.ActivatePlayerStand();
+                return false;
+            }
+
+            return true;
+        }
+    }
+}

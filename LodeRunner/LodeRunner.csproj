@@ -63,13 +63,14 @@
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\IRule.cs" />
-    <Compile Include="Services\Rules\IsFallRule.cs" />
-    <Compile Include="Services\Rules\IsPossibleMoveLeftRule.cs" />
-    <Compile Include="Services\Rules\IsPossibleMoveRightRule.cs" />
-    <Compile Include="Services\Rules\MoveLeftRule.cs" />
-    <Compile Include="Services\Rules\MoveRightRule.cs" />
-    <Compile Include="Services\Rules\MoveUpRule.cs" />
-    <Compile Include="Services\Rules\NoInputRule.cs" />
+    <Compile Include="Services\Rules\Up\IsAbleMoveUp.cs" />
+    <Compile Include="Services\Rules\General\IsFallRule.cs" />
+    <Compile Include="Services\Rules\Left\IsAbleMoveLeftRule.cs" />
+    <Compile Include="Services\Rules\Right\IsAbleMoveRightRule.cs" />
+    <Compile Include="Services\Rules\Left\MoveLeftRule.cs" />
+    <Compile Include="Services\Rules\Right\MoveRightRule.cs" />
+    <Compile Include="Services\Rules\Up\MoveUpRule.cs" />
+    <Compile Include="Services\Rules\General\NoInputRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>

@@ -7,45 +7,45 @@
     using LodeRunner.Services.Rules;
 
     [TestClass]
-    public class IsPossibleMoveLeftTest
+    public class IsAbleMoveRightTest
     {
         private Model model;
         private Player player;
-        private IsPossibleMoveLeftRule rule;
+        private IsAbleMoveRightRule rule;
 
         // Model setup:
-        // blank|player
-        // stone|blank
-        // stone|blank
+        // player|blank
+        // blank |brick
+        // blank |brick
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\IsPossibleMoveLeft.lev");
+            model = new ModelLoadService().Load(@"TestModels\IsPossibleMoveRight.lev");
             player = model.Player;
-            rule = new IsPossibleMoveLeftRule(model);
+            rule = new IsAbleMoveRightRule(model);
         }
 
         [TestMethod]
-        public void CannotMoveLeftTest()
+        public void PossibleMoveRightTest()
         {
-            int[] list = { 1, 10, 20, 40, 45, 59 };
-
-            foreach (int y in list)
-            {
-                player.Y = y;
-                Assert.AreEqual(false, rule.Check(), $"Fail on player.Y = {y}");
-            }
-        }
-
-        [TestMethod]
-        public void CanMoveLeftTest()
-        {
-            int[] list = { 0, 60, 70 };
+            int[] list = { 0, 60, 61 };
 
             foreach (int y in list)
             {
                 player.Y = y;
                 Assert.AreEqual(true, rule.Check(), $"Fail on player.Y = {y}");
+            }
+        }
+
+        [TestMethod]
+        public void NotPossibleMoveRightTest()
+        {
+            int[] list = { 1, 10, 19, 20, 30, 59 };
+
+            foreach (int y in list)
+            {
+                player.Y = y;
+                Assert.AreEqual(false, rule.Check(), $"Fail on player.Y = {y}");
             }
         }
     }

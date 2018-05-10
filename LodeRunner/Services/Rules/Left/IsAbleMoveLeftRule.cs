@@ -4,13 +4,10 @@
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
-    public class IsPossibleMoveLeftRule : RuleBase
+    public class IsAbleMoveLeftRule : RuleBase
     {
-        Intersection intersection;
-
-        public IsPossibleMoveLeftRule(Model model) : base (model)
+        public IsAbleMoveLeftRule(Model model) : base (model)
         {
-            intersection = new Intersection(model);
         }
 
         public override bool Check()

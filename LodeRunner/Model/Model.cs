@@ -105,7 +105,7 @@ namespace LodeRunner.Model
 
         public void Draw(Graphics g)
         {
-            foreach(var component in field)
+            foreach (var component in field)
             {
                 component?.Draw(g);
             }
