@@ -4,20 +4,18 @@
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
-    public class IsPossibleMoveLeftRule : RuleBase
+    public class IsAbleMoveDownRule : RuleBase
     {
-        Intersection intersection;
-
-        public IsPossibleMoveLeftRule(Model model) : base (model)
+        public IsAbleMoveDownRule(Model model) : base(model)
         {
-            intersection = new Intersection(model);
         }
 
         public override bool Check()
         {
-            if (player.X == 0 ||
-                intersection.Line<Brick>(Direction.Left, Side.Out, Operation.Or) ||
-                intersection.Line<Stone>(Direction.Left, Side.Out, Operation.Or)
+            if(
+                player.Y > Const.WindowHeigth - Const.BlockSize - 1 ||
+                intersection.Line<Brick>(Direction.Down, Side.Out, Operation.And) ||
+                intersection.Line<Stone>(Direction.Down, Side.Out, Operation.And)
               )
             {
                 player.ActivatePlayerStand();

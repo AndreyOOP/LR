@@ -5,11 +5,8 @@ namespace LodeRunner.Services.Rules
 {
     public class MoveUpRule : RuleBase
     {
-        private Intersection intersection;
-
         public MoveUpRule(Model.Model model) : base(model)
         {
-            intersection = new Intersection(model);
         }
 
         public override bool Check()

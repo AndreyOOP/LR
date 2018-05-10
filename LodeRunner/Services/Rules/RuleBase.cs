@@ -7,11 +7,13 @@
     {
         protected Model model;
         protected Player player;
+        protected Intersection intersection;
 
         public RuleBase(Model model)
         {
             this.model = model;
             player = model.Player;
+            intersection = new Intersection(model);
         }
 
         public abstract bool Check();

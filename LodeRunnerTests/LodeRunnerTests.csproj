@@ -75,9 +75,11 @@
     </Compile>
     <Compile Include="Reflection.cs" />
     <Compile Include="Services\ModelLoadServiceTests.cs" />
+    <Compile Include="Services\Rules\IsAbleMoveDownTest.cs" />
+    <Compile Include="Services\Rules\IsAbleMoveUpTests.cs" />
     <Compile Include="Services\Rules\IsFallRuleTests.cs" />
-    <Compile Include="Services\Rules\IsPossibleMoveRightTest.cs" />
-    <Compile Include="Services\Rules\IsPossibleMoveLeftTest.cs" />
+    <Compile Include="Services\Rules\IsAbleMoveRightTest.cs" />
+    <Compile Include="Services\Rules\IsAbleMoveLeftTest.cs" />
     <Compile Include="Services\Rules\MoveUpRuleTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +88,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestModels\FallBetweenBricks.lev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestModels\IsAbleMoveDown.lev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestModels\IsAbleMoveUp.lev">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestModels\IsPossibleMoveLeft.lev">

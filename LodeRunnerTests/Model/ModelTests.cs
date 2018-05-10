@@ -185,7 +185,7 @@ namespace LodeRunner.Model.Tests
             }
             catch (ArgumentException ex)
             {
-                Assert.AreEqual("BlockY could not be >= than maximum field width. It is 40 vs 30", ex.Message);
+                Assert.AreEqual("BlockY could not be >= than maximum field heigth. It is 40 vs 30", ex.Message);
             }
         }
 
