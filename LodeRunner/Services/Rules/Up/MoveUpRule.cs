@@ -12,25 +12,32 @@ namespace LodeRunner.Services.Rules
         public override bool Check()
         {
             if(
-                intersection.Line<Stairs>(Direction.Up, Side.In, Operation.And) ||
-                intersection.Line<Stairs>(Direction.Down, Side.In, Operation.And)
-                // todo add same level
+                (intersection.Line<Stairs>(Direction.Up, Side.In, Operation.And) ||
+                intersection.Line<Stairs>(Direction.Down, Side.In, Operation.And)) &&
+                intersection.Get(Corner.TopLeft) == intersection.Get(Corner.TopRight)
               )
             {
                 player.Y -= 1;
                 player.SetAnimation(Animations.Up);
+                player.Direction = Direction.None;
                 return true;
             }
-            else if(intersection.Get(Corner.TopLeft) is Stairs) // need to add direction here to know how to react
+            else if(
+                intersection.Get(Corner.TopLeft) != intersection.Get(Corner.TopRight) &&
+                intersection.Get(Corner.TopLeft) is Stairs &&
+                player.Direction == Direction.Left
+                )
             {
                 player.X -= 1;
-                player.SetAnimation(Animations.Up);
                 return true;
             }
-            else if (intersection.Get(Corner.TopRight) is Stairs)
+            else if (
+                intersection.Get(Corner.TopLeft) != intersection.Get(Corner.TopRight) &&
+                intersection.Get(Corner.TopRight) is Stairs &&
+                player.Direction == Direction.Right
+                )
             {
                 player.X += 1;
-                player.SetAnimation(Animations.Up);
                 return true;
             }
 

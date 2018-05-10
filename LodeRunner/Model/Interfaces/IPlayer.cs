@@ -9,9 +9,5 @@ namespace LodeRunner.Model.Interfaces
         void SetAnimation(AnimationImage animation);
 
         void SetImage(Bitmap image);
-
-        Direction GetDirection();
-
-        //void SetDirection(Direction direction);
     }
 }
