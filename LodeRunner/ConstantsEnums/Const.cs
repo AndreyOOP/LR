@@ -29,9 +29,10 @@
         public static readonly int WindowHeigth = (BlockHeigth) * BlockSize;
         public static readonly string WindowName = "Loderunner v0";
 
-        public static readonly int FrameUpdatePeriod = 5;
-        
+        public static readonly int FrameUpdatePeriod = 10;
+        public static readonly int BrickGrowPeriod = 5000;
 
-        
+
+
     }
 }

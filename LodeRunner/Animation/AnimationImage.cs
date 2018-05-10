@@ -10,6 +10,7 @@ namespace LodeRunner.Animation
     [Serializable]
     public class AnimationImage : IAnimationImage
     {
+        public bool Finished { get; set; } = false;
         private int speed;
         protected int      currentFrame;
         protected Bitmap[] frames;
@@ -33,6 +34,8 @@ namespace LodeRunner.Animation
 
         public void Start()
         {
+            Finished = false;
+
             if(timer == null)
             {
                 timer = InitializeTimer(speed);
@@ -91,6 +94,7 @@ namespace LodeRunner.Animation
         {
             if (++currentFrame >= frames.Length)
             {
+                Finished = true;
                 currentFrame = 0;
             }
         }

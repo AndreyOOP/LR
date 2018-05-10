@@ -102,6 +102,10 @@
                 new NoInputRule(Model),
                 new OnRailRule(Model)
             });
+            commands.Add('q', new Command()
+            {
+                new BurnRule(Model)
+            });
 
             keyInput = 'p';
         }
