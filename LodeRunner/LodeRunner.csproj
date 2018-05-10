@@ -62,6 +62,7 @@
     <Compile Include="Services\Intersection.cs" />
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
+    <Compile Include="Services\Rules\Down\IsAbleMoveDown.cs" />
     <Compile Include="Services\Rules\IRule.cs" />
     <Compile Include="Services\Rules\Up\IsAbleMoveUp.cs" />
     <Compile Include="Services\Rules\General\IsFallRule.cs" />

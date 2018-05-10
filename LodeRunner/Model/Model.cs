@@ -39,9 +39,9 @@ namespace LodeRunner.Model
                 throw new ArgumentException($"{nameof(component.BlockY)} could not be < 0. Now it is {component.BlockY}");
             }
 
-            if (component.BlockY >= Const.BlockWidth)
+            if (component.BlockY >= Const.BlockHeigth)
             {
-                throw new ArgumentException($"{nameof(component.BlockY)} could not be >= than maximum field width. It is {component.BlockY} vs {Const.BlockHeigth}");
+                throw new ArgumentException($"{nameof(component.BlockY)} could not be >= than maximum field heigth. It is {component.BlockY} vs {Const.BlockHeigth}");
             }
 
             if(component.GetType() == typeof(Player))

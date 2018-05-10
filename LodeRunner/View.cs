@@ -4,16 +4,18 @@ using System.Windows.Forms;
 
 namespace LodeRunner
 {
-    public partial class View : Form
+    public class View : Form
     {
         public Controller controller { get; set; }
 
         public View()
         {
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(Const.WindowXSize, Const.WindowYSize);
+            ClientSize = new Size(Const.WindowWidth, Const.WindowHeigth);
             Text = Const.WindowName;
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
 
             //communication with controller
             KeyPress += OnKeyPress;

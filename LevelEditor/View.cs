@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace LevelEditor
 {
-    public partial class Editor : Form
+    public class Editor : Form
     {
         private Model model;
         private char selectedObject;
@@ -18,9 +18,11 @@ namespace LevelEditor
         public Editor()
         {
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(Const.WindowXSize, Const.WindowYSize);
+            ClientSize = new Size(Const.WindowWidth, Const.WindowHeigth);
             Text = "Editor";
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
 
             MouseClick += OnMouseClick;
             MouseMove += OnMouseMove;
