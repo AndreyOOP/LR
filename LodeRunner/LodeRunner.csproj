@@ -67,6 +67,9 @@
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\Down\IsAbleMoveDown.cs" />
     <Compile Include="Services\Rules\Down\MoveDownRule.cs" />
+    <Compile Include="Services\Rules\General\OnRailRuleRight.cs" />
+    <Compile Include="Services\Rules\General\OnRailRuleLeft.cs" />
+    <Compile Include="Services\Rules\General\OnRailRule.cs" />
     <Compile Include="Services\Rules\IRule.cs" />
     <Compile Include="Services\Rules\Up\IsAbleMoveUp.cs" />
     <Compile Include="Services\Rules\General\IsFallRule.cs" />
