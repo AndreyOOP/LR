@@ -12,7 +12,7 @@
 
         public override bool Check()
         {
-            if(IsPlayerTopOrBottomOnSameStairs())
+            if(IsPlayerTopOrBottomOnSameStairs() || IsPlayerOnRail())
             {
                 player.Y += 1;
                 player.SetImage(Textures.StairsDown);
@@ -35,6 +35,11 @@
             return (intersection.Line<Stairs>(Direction.Up, Side.In, Operation.And) ||
                     intersection.Line<Stairs>(Direction.Down, Side.Out, Operation.And)) &&
                     intersection.Get(Corner.BottomLeft) == intersection.Get(Corner.BottomRight);
+        }
+
+        private bool IsPlayerOnRail()
+        {
+            return intersection.Line<Rail>(Direction.Down, Side.In, Operation.And);
         }
 
         private bool IsBottomAboveDiffBlocks()
