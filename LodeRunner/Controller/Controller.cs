@@ -59,8 +59,14 @@
             commands.Add('w', new Command()
             {
                 new IsNotFallRule(Model),
-                new IsAbleMoveUp(Model),    
+                new IsAbleMoveUp(Model),
                 new MoveUpRule(Model)
+            });
+            commands.Add('s', new Command()
+            {
+                new IsNotFallRule(Model),
+                new IsAbleMoveDownRule(Model),
+                new MoveDownRule(Model)
             });
 
             timer = new Timer();

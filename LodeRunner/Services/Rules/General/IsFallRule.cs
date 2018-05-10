@@ -12,7 +12,8 @@
         public override bool Check()
         {
             if(player.Y < Const.WindowHeigth - Const.BlockSize - 1 &&
-               intersection.Line(Direction.Down, Side.Out, Operation.And)
+               intersection.Line(Direction.Down, Side.Out, Operation.And) &&
+               intersection.Line(Direction.Up, Side.In, Operation.And)
                )
             {
                 player.Y += 1;

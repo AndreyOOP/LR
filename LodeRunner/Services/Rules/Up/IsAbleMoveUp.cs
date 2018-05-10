@@ -14,8 +14,8 @@
         {
             if(
                 player.Y <= 0 ||
-                intersection.Line<Brick>(Direction.Up, Side.Out, Operation.Or) ||
-                intersection.Line<Stone>(Direction.Up, Side.Out, Operation.Or)
+                intersection.Line<Brick>(Direction.Up, Side.Out, Operation.And) ||
+                intersection.Line<Stone>(Direction.Up, Side.Out, Operation.And)
               )
             {
                 player.ActivatePlayerStand();

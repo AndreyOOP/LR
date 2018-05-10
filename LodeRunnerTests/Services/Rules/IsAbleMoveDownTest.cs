@@ -7,25 +7,25 @@
     using LodeRunner.Services.Rules;
 
     [TestClass]
-    public class IsAbleMoveUpTests
+    public class IsAbleMoveDownTests
     {
         private Model model;
         private Player player;
-        private IsAbleMoveUp rule;
+        private IsAbleMoveDownRule rule;
 
         // Model:
-        // brick|space |stone
         // space|player|space
+        // stone|space |brick
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\IsAbleMoveUp.lev");
+            model = new ModelLoadService().Load(@"TestModels\IsAbleMoveDown.lev");
             player = model.Player;
-            rule = new IsAbleMoveUp(model);
+            rule = new IsAbleMoveDownRule(model);
         }
 
         [TestMethod]
-        public void IsAbleMoveUpTest()
+        public void IsAbleMoveDownTest()
         {
             int[] list = { 20, 60 };
 
@@ -37,9 +37,9 @@
         }
 
         [TestMethod]
-        public void IsNotAbleMoveUpTest()
+        public void IsNotAbleMoveDownTest()
         {
-            int[] list = { 0, 40 };
+            int[] list = { 0, 40};
 
             foreach (int x in list)
             {
@@ -49,9 +49,9 @@
         }
 
         [TestMethod]
-        public void IsNotAbleMoveUpOutOfFieldTest()
+        public void IsNotAbleMoveDownOutOfFieldTest()
         {
-            player.Y = 0;
+            player.Y += 20;
             Assert.IsFalse(rule.Check());
         }
     }
