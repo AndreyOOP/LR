@@ -1,4 +1,7 @@
-﻿namespace LodeRunner.Services.Rules
+﻿using LodeRunner.Model.SingleComponents;
+using static LodeRunner.Services.Intersection;
+
+namespace LodeRunner.Services.Rules
 {
     public class MoveRightRule : RuleBase
     {
@@ -9,7 +12,8 @@
         public override bool Check()
         {
             player.X += 1;
-            player.ActivateRightAnimation();
+            player.SetAnimation(Animations.Right);
+            player.Direction = Direction.Right;
             return true;
         }
     }

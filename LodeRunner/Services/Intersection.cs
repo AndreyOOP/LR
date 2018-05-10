@@ -4,13 +4,12 @@
     using LodeRunner.Model.ModelComponents;
     using LodeRunner.Model.SingleComponents;
 
-    public class Intersection
+    public partial class Intersection
     {
         private Model model;
         private Player player;
 
         public enum Corner { TopLeft, TopRight, BottomLeft, BottomRight }
-        public enum Direction { Left, Right, Up, Down, None }
         public enum Operation { Or, And }
         public enum Side { In, Out }
 

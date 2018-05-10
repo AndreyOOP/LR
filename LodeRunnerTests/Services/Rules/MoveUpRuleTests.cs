@@ -5,6 +5,7 @@
     using LodeRunner.Model.SingleComponents;
     using LodeRunner.Services;
     using LodeRunner.Services.Rules;
+    using static LodeRunner.Services.Intersection;
 
     [TestClass()]
     public class MoveUpRuleTests
@@ -19,7 +20,7 @@
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\MoveUp.lev");
+            model = new ModelLoadService().Load(@"TestModels\MoveUp.lev"); //as well move to enum ?
             player = model.Player;
             rule = new MoveUpRule(model);
         }
@@ -34,6 +35,7 @@
         public void CheckTest1()
         {
             player.X = 19;
+            player.Direction = Direction.Left;
 
             Assert.IsTrue(rule.Check());
             Assert.AreEqual(18, player.X);
@@ -54,6 +56,7 @@
         public void CheckTest4()
         {
             player.X = 21;
+            player.Direction = Direction.Right;
 
             Assert.IsTrue(rule.Check());
             Assert.AreEqual(22, player.X);
@@ -74,6 +77,7 @@
         public void CheckTest6()
         {
             player.X = 41;
+            player.Direction = Direction.Left;
 
             Assert.IsTrue(rule.Check());
             Assert.AreEqual(40, player.X);

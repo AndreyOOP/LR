@@ -1,6 +1,7 @@
 ﻿namespace LodeRunner.Services.Rules
 {
     using LodeRunner.Model;
+    using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
     public class IsNotFallRule : RuleBase
@@ -17,7 +18,7 @@
                )
             {
                 player.Y += 1;
-                player.ActivatePlayerFall();
+                player.SetAnimation(Animations.Fall);
                 return false;
             }
 

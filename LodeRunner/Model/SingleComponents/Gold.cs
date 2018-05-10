@@ -7,7 +7,7 @@ namespace LodeRunner.Model.SingleComponents
     [Serializable]
     public class Gold : SingleComponentBase
     {
-        private static Bitmap texture = new Bitmap(Const.GoldTexture);
+        private static Bitmap texture = Textures.Gold;
 
         public Gold(int x, int y) : base(x, y)
         {
