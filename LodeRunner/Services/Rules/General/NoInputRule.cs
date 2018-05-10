@@ -1,6 +1,4 @@
-﻿using LodeRunner.Model.SingleComponents;
-
-namespace LodeRunner.Services.Rules
+﻿namespace LodeRunner.Services.Rules
 {
     public class NoInputRule : RuleBase
     {

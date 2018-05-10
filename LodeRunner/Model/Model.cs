@@ -9,7 +9,7 @@ namespace LodeRunner.Model
     [Serializable]
     public class Model : IModel, IDrawable
     {
-        public bool IsPaused { get; set; }
+        public bool IsGameOver { get; set; }
 
         public Player Player { get; set; }
 

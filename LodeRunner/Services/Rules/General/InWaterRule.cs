@@ -12,15 +12,19 @@
 
         public override bool Check()
         {
-            if (intersection.Line<Water>(Direction.Up, Side.In, Operation.Or))
+            if (IsTopOnWater())
             {
                 model.SetMessage(new GameOver((Const.WindowWidth-200)/2, 100));
-                //stop game
-                //player.SetImage(Textures.Gold);
-                return true;
+                model.IsGameOver = true;
+                return false;
             }
 
-            return false;
+            return true;
+        }
+
+        private bool IsTopOnWater()
+        {
+            return intersection.Line<Water>(Direction.Up, Side.In, Operation.Or);
         }
     }
 }
