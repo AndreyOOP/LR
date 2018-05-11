@@ -13,8 +13,7 @@
         {
             controller.Model = new ModelLoadService().Load(@"C:\Users\Anik\Desktop\manualT.lev");
             controller.Initialization();
-            model.UnFreeze();
-            //controller.Commands.AllowAll();
+            model.Unfreeze();
             return false;
         }
     }

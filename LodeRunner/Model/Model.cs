@@ -5,9 +5,10 @@
     using LodeRunner.Model.ModelComponents;
     using LodeRunner.Model.SingleComponents;
     using System.Linq;
+    using LodeRunner.Model.Interfaces;
 
     [Serializable]
-    public partial class Model : IModel, IDrawable
+    public partial class Model : IModel, IDrawable, IFreeze
     {
         private SingleComponentBase[,] field = new SingleComponentBase[Const.BlockWidth, Const.BlockHeigth];
 
@@ -59,23 +60,23 @@
 
         public void Freeze()
         {
-            Player.animation?.Stop();
-            Water.Image.Stop();
+            Player.Freeze();
+            field.OfType<Water>().First()?.Freeze();
 
-            foreach (var brick in field.OfType<Brick>().Where(brick => brick.animation != null))
+            foreach (var brick in field.OfType<Brick>())
             {
-                brick.animation.Stop();
+                brick.Freeze();
             }
         }
 
-        public void UnFreeze()
+        public void Unfreeze()
         {
-            Player.animation?.Start();
-            Water.Image.Start();
+            Player.Unfreeze();
+            field.OfType<Water>().First()?.Unfreeze();
 
-            foreach (var brick in field.OfType<Brick>().Where(brick => brick.animation != null))
+            foreach (var brick in field.OfType<Brick>())
             {
-                brick.animation.Start();
+                brick.Unfreeze();
             }
         }
 

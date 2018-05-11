@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LodeRunner.Model.Interfaces;
+using System;
 using System.Drawing;
 
 // using System.Timers instead of System.Windows.Forms
@@ -8,7 +9,7 @@ using System.Timers;
 namespace LodeRunner.Animation
 {
     [Serializable]
-    public class AnimationImage : IAnimationImage
+    public class AnimationImage : IAnimationImage, IFreeze
     {
         public bool Finished { get; set; } = false;
         private int speed;
@@ -34,7 +35,7 @@ namespace LodeRunner.Animation
 
         public void Start()
         {
-            Finished = false;
+            //Finished = false;
 
             if(timer == null)
             {
@@ -111,6 +112,16 @@ namespace LodeRunner.Animation
             }
 
             return frames;
+        }
+
+        public void Freeze() // todo timer reinitializez, so after 5 sec all bricks grow again; so some state have to be saved and timer recreated
+        {
+            timer?.Stop();
+        }
+
+        public void Unfreeze()
+        {
+            timer?.Start();
         }
     }
 }

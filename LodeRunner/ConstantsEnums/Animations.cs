@@ -1,5 +1,4 @@
 ﻿using LodeRunner.Animation;
-using System.Drawing;
 
 namespace LodeRunner.Model.SingleComponents
 {
@@ -13,7 +12,6 @@ namespace LodeRunner.Model.SingleComponents
         public static AnimationImage RailRight { get; } = new AnimationImage(Const.PlayerRailRightAnimation, Const.BlockSize, 200);
         public static AnimationImage Burn { get; }      = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, 200);
         public static AnimationImage Grow { get; }      = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, 200);
-
-
+        public static AnimationImage Water { get; }     = new AnimationImage(Const.WaterTexture, 20, 200);
     }
 }

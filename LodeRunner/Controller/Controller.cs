@@ -5,13 +5,10 @@
     using LodeRunner.Services.Command;
     using LodeRunner.Services.Rules;
     using LodeRunner.Services.Rules.General;
-    using System.Collections.Generic;
     using System.Timers;
-    using static LodeRunner.Model.Model;
 
     public class Controller
     {
-        //private char keyInput;
         private Timer timer;
         public Commands Commands { get; set; } = new Commands();
 
@@ -33,50 +30,19 @@
 
         public void SetKeyInput(char key)
         {
-            //keyInput = key;
             Commands.SetUserInput(key);
         }
 
         public void GameStateUpdate(object sender, ElapsedEventArgs e)
         {
-            // **********
-            //is next level
-
-            //is level reload
-
-            //is Game over
-
-            //is pause
-
-            //proceed active user command
-
-            //proceed default action
-
-            //update frame
-            // **********
-
-            //if(keyInput == 'n')
-            //{
-            //    Model = new ModelLoadService().Load(@"C:\Users\Anik\Desktop\manualT.lev");
-            //    Initialization();
-            //    View.Invalidate();
-            //    return;
-            //}
-
-            //if (Model.State == GameState.GameOver || keyInput == 'p')
-            //{
-            //    return;
-            //}
-
             Commands.ExecuteSelectedCommandAndDefault();
 
             View.Invalidate();
         }
 
-        //receive to input controller only ?
         public void Initialization()
         {
-            Commands.AllowedChars = Const.AllowedInput;// new HashSet<char>() { 'a', 'd', 'w', 's', 'q', ' ', 'n', 'p' };
+            Commands.AllowedChars = Const.AllowedInput;
 
             Commands.General = new Command()
             {

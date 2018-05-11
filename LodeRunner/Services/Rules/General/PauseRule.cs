@@ -16,14 +16,14 @@ namespace LodeRunner.Services.Rules.General
             if (IsPaused)
             {
                 IsPaused = false;
-                model.UnFreeze();
-                controller.Commands.AllowedChars = Const.AllowedInput;// new HashSet<char>() { 'a', 'd', 'w', 's', 'q', ' ', 'n', 'p' }; //todo move to enums
+                model.Unfreeze();
+                controller.Commands.AllowedChars = Const.AllowedInput;
             }
             else
             {
                 IsPaused = true;
                 model.Freeze();
-                controller.Commands.AllowedChars = Const.PauseInput;// new HashSet<char>() { 'n', 'p' }; ////todo move to enums
+                controller.Commands.AllowedChars = Const.PauseInput;
             }
 
             return false;

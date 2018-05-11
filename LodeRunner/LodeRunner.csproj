@@ -50,6 +50,7 @@
     <Compile Include="ConstantsEnums\Const.cs" />
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="ConstantsEnums\GameState.cs" />
+    <Compile Include="Model\Interfaces\IFreeze.cs" />
     <Compile Include="Model\Interfaces\IPlayer.cs" />
     <Compile Include="ConstantsEnums\Animations.cs" />
     <Compile Include="Model\Components\Brick.cs" />

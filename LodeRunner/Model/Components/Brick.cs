@@ -1,4 +1,5 @@
 ﻿using LodeRunner.Animation;
+using LodeRunner.Model.Interfaces;
 using LodeRunner.Model.ModelComponents;
 using System;
 using System.Drawing;
@@ -7,10 +8,10 @@ using System.Timers;
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Brick : SingleComponentBase
+    public class Brick : SingleComponentBase, IFreeze
     {
         public bool IsTransparent { get; set; } = false;
-        public AnimationImage animation { get; set; }
+        private AnimationImage animation { get; set; }
         private AnimationImage burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, 200);
         private AnimationImage grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, 200);
         private static Bitmap brick = Textures.Brick;
@@ -69,6 +70,18 @@ namespace LodeRunner.Model.SingleComponents
                 burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, 200);
                 grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, 200);
             }
+        }
+
+        public void Freeze()
+        {
+            animation?.Freeze();
+            timer?.Stop();
+        }
+
+        public void Unfreeze()
+        {
+            animation?.Unfreeze();
+            timer?.Start();
         }
     }
 }

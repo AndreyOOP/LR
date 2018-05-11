@@ -8,10 +8,10 @@ using static LodeRunner.Services.Intersection;
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Player : SingleComponentBase, IPlayer
+    public class Player : SingleComponentBase, IPlayer, IFreeze
     {
         public Direction Direction { get; set; }
-        public AnimationImage animation { get; set; }
+        private AnimationImage animation { get; set; }
         private Bitmap texture = new Bitmap(Const.PlayerStand);
 
         public Player(int x, int y) : base(x, y)
@@ -44,6 +44,16 @@ namespace LodeRunner.Model.SingleComponents
                 g.DrawLine(Pens.Red, X, Y, X + 1, Y + 1);
                 g.DrawImage(animation.GetCurrentFrame(), X, Y);
             }
+        }
+
+        public void Freeze()
+        {
+            animation?.Stop();
+        }
+
+        public void Unfreeze()
+        {
+            animation?.Start();
         }
     }
 }
