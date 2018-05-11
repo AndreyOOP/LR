@@ -1,4 +1,6 @@
-﻿namespace LodeRunner
+﻿using System.Collections.Generic;
+
+namespace LodeRunner
 {
     public class Const
     {
@@ -29,9 +31,12 @@
         public static readonly int WindowHeigth = (BlockHeigth) * BlockSize;
         public static readonly string WindowName = "Loderunner v0";
 
-        public static readonly int FrameUpdatePeriod = 5;
-        
+        public static readonly int FrameUpdatePeriod = 10;
+        public static readonly int BrickGrowPeriod = 5000;
 
-        
+        public static readonly HashSet<char> AllowedInput = new HashSet<char>() { 'a', 'd', 'w', 's', 'q', 'e', ' ', 'n', 'p' };
+        public static readonly HashSet<char> PauseInput = new HashSet<char>() { 'n', 'p' };
+        public static readonly HashSet<char> GameOverInput = new HashSet<char>() { 'n' };
+
     }
 }

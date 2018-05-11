@@ -1,11 +1,12 @@
-﻿using LodeRunner.Model.SingleComponents;
+﻿using LodeRunner.Control;
+using LodeRunner.Model.SingleComponents;
 using static LodeRunner.Services.Intersection;
 
 namespace LodeRunner.Services.Rules.General
 {
     public class OnRailRuleLeft : RuleBase
     {
-        public OnRailRuleLeft(Model.Model model) : base(model)
+        public OnRailRuleLeft(Controller controller) : base(controller)
         {
         }
 

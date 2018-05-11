@@ -1,21 +1,24 @@
 ﻿namespace LodeRunner.Services.Rules.General
 {
+    using LodeRunner.Control;
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
     public class InWaterRule : RuleBase
     {
-        public InWaterRule(Model model) : base(model)
+        public InWaterRule(Controller controller) : base(controller)
         {
         }
 
         public override bool Check()
         {
-            if (IsTopOnWater())
+            if (IsTopOnWater() || IsTopInBrick())
             {
-                model.SetMessage(new GameOver((Const.WindowWidth-200)/2, 100));
-                model.IsGameOver = true;
+                model.Message = new GameOver((Const.WindowWidth-200)/2, 100);
+                model.Freeze();
+                controller.Commands.AllowedChars = Const.GameOverInput;
+
                 return false;
             }
 
@@ -25,6 +28,22 @@
         private bool IsTopOnWater()
         {
             return intersection.Line<Water>(Direction.Up, Side.In, Operation.Or);
+        }
+
+        private bool IsTopInBrick()
+        {
+            var element = intersection.Get(Corner.TopLeft);
+
+            if(element is Brick)
+            {
+                if (((Brick)element).IsVisible)
+                {
+                    model.Player.SetImage(Textures.StairsDown); //todo change to ? nothing ? In Brick ?
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -9,47 +9,18 @@
 
     public class Controller
     {
-        public Model Model { private get; set; }
-        public View View { get; private set; }
-
         private Timer timer;
-        public Commands commands = new Commands();
+        public Commands Commands { get; set; } = new Commands();
 
-        private char keyInput;
-
-        private Command defaultActions;
-
+        public Model Model { get; set; }
+        public View View { get; set; }
+        
         public Controller(Model model, View view)
         {
             Model = model;
             View = view;
             Initialization();
-
-            timer = new Timer();
-            timer.Elapsed += FrameUpdate;
-            timer.Interval = Const.FrameUpdatePeriod;
-            timer.Enabled = true;
-        }
-
-        public void FrameUpdate(object sender, ElapsedEventArgs e)
-        {
-            if(keyInput == 'n')
-            {
-                Model = new ModelLoadService().Load(@"C:\Users\Anik\Desktop\manualT.lev");
-                Initialization();
-                View.Invalidate();
-                return;
-            }
-
-            if (Model.IsGameOver || keyInput == 'p')
-            {
-                return;
-            }
-
-            commands.GetActiveCommand().Execute();
-            defaultActions.Execute();
-
-            View.Invalidate();
+            InitializeTimer();
         }
 
         public Model GetModelForDraw()
@@ -59,51 +30,87 @@
 
         public void SetKeyInput(char key)
         {
-            keyInput = key;
-            commands.SetUserInput(key);
+            Commands.SetUserInput(key);
         }
 
-        private void Initialization()
+        public void GameStateUpdate(object sender, ElapsedEventArgs e)
         {
-            defaultActions = new Command()
+            Commands.ExecuteSelectedCommandAndDefault();
+
+            View.Invalidate();
+        }
+
+        public void Initialization()
+        {
+            Commands.AllowedChars = Const.AllowedInput;
+
+            Commands.General = new Command()
             {
-                new InWaterRule(Model)
+                new GoldRule(this),
+                new InWaterRule(this),
+                new WinRule(this)
             };
 
-            commands.Add('a', new Command()
+            Commands.Add('a', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveLeftRule(Model),
-                new MoveLeftRule(Model),
-                new OnRailRuleLeft(Model),
+                new IsNotFallRule(this),
+                new IsAbleMoveLeftRule(this),
+                new MoveLeftRule(this),
+                new OnRailRuleLeft(this),
             });
-            commands.Add('d', new Command()
+            Commands.Add('d', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveRightRule(Model),
-                new MoveRightRule(Model),
-                new OnRailRuleRight(Model),
+                new IsNotFallRule(this),
+                new IsAbleMoveRightRule(this),
+                new MoveRightRule(this),
+                new OnRailRuleRight(this),
             });
-            commands.Add('w', new Command()
+            Commands.Add('w', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveUp(Model),
-                new MoveUpRule(Model)
+                new IsNotFallRule(this),
+                new IsAbleMoveUp(this),
+                new MoveUpRule(this)
             });
-            commands.Add('s', new Command()
+            Commands.Add('s', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveDownRule(Model),
-                new MoveDownRule(Model),
+                new IsNotFallRule(this),
+                new IsAbleMoveDownRule(this),
+                new MoveDownRule(this),
             });
-            commands.Add(' ', new Command()
+            Commands.Add(' ', new Command()
             {
-                new IsNotFallRule(Model),
-                new NoInputRule(Model),
-                new OnRailRule(Model)
+                new IsNotFallRule(this),
+                new NoInputRule(this),
+                new OnRailRule(this)
+            });
+            Commands.Add('q', new Command(false)
+            {
+                new IsNotFallRule(this),
+                new LeftBurnRule(this)
+            });
+            Commands.Add('e', new Command(false)
+            {
+                new IsNotFallRule(this),
+                new RightBurnRule(this)
+            });
+            Commands.Add('n', new Command(false)
+            {
+                new NewGameRule(this)
+            });
+            Commands.Add('p', new Command(false)
+            {
+                new PauseRule(this)
             });
 
-            keyInput = 'p';
+            Commands.SetUserInput('0');
+        }
+
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Elapsed += GameStateUpdate;
+            timer.Interval = Const.FrameUpdatePeriod;
+            timer.Enabled = true;
         }
     }
 }

@@ -5,10 +5,12 @@
     using LodeRunner.Model;
     using LodeRunner.Services.Rules;
     using LodeRunner.Services;
+    using LodeRunner.Control;
 
     [TestClass()]
     public class IsFallRuleTests
     {
+        private Controller controller;
         private Model model;
         private Player player;
         private IsNotFallRule rule;
@@ -21,7 +23,8 @@
         {
             model = new ModelLoadService().Load(@"TestModels\FallBetweenBricks.lev");
             player = model.Player;
-            rule = new IsNotFallRule(model);
+            controller = new Controller(model, new LodeRunner.View());
+            rule = new IsNotFallRule(controller);
         }
 
         [TestMethod]

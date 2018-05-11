@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using LodeRunner.Model.ModelComponents;
 
 namespace LodeRunner.Model
 {
     public interface IModel
     {
-        void Add<T>(ComponentType type, T component) where T : IDrawable;
+        SingleComponentBase Get(int blockX, int blockY, bool absolute = false);
 
-        void Remove(ComponentType type);
-
-        IEnumerable<IDrawable> GetAll();
-
-        T Get<T>(ComponentType type) where T : IDrawable;
+        void Remove(int blockX, int blockY, bool absolute = false);
     }
 }

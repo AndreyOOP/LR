@@ -1,203 +1,95 @@
-﻿using LodeRunner.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using LodeRunnerTests.Model;
-using LodeRunner.Model.ModelComponents;
+﻿using System;
+using LodeRunner.Model;
 using LodeRunner.Model.SingleComponents;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace LodeRunner.Model.Tests
+[TestClass]
+public class ModelTests
 {
-    [TestClass()]
-    public class ModelTests
+    private Model model;
+
+    [TestInitialize]
+    public void SetupTest()
     {
-        private TestComponent component;
-        private Model model;
+        model = new Model();
+    }
 
-        [TestInitialize]
-        public void SetupTest()
+    [TestMethod]
+    public void RemoveTest()
+    {
+        model.Add(new Brick(0, 20));
+        Assert.AreEqual(typeof(Brick), model.Get(0, 1).GetType());
+
+        model.Remove(0, 20, true);
+        Assert.IsNull(model.Get(0, 1));
+    }
+
+    [TestMethod]
+    public void AddSingleComponent()
+    {
+        model.Add(new Brick(0, 20));
+
+        Assert.AreEqual(true, model.Get(0, 1) != null);
+        Assert.AreEqual(true, model.Get(0, 0) == null);
+    }
+
+    [TestMethod]
+    public void ExceptionTest()
+    {
+        try
         {
-            model = new Model();
-            component = new TestComponent();
+            model.Add(new Brick(-45, 20));
         }
-
-        [TestMethod()]
-        public void InitialStateTest()
+        catch (ArgumentException ex)
         {
-            Assert.AreEqual(0, GetDictionary(model).Values.Count);
+            Assert.AreEqual("BlockX could not be < 0. Now it is -2", ex.Message);
         }
+    }
 
-        [TestMethod()]
-        public void AddTest()
+    [TestMethod]
+    public void ExceptionTest2()
+    {
+        try
         {
-            model.Add(ComponentType.Background, component);
-            //model.Add(ComponentType.Brick, collection);
-
-            Assert.AreEqual(1, GetDictionary(model).Values.Count);
+            model.Add(new Brick(440, 20));
         }
-
-        [TestMethod]
-        public void AddSameKey()
+        catch (ArgumentException ex)
         {
-            Assert.ThrowsException<ArgumentException>(() =>
-           {
-               model.Add(ComponentType.Background, new TestComponent());
-               model.Add(ComponentType.Background, new TestComponent());
-           });
+            Assert.AreEqual("BlockX could not be >= than maximum field width. It is 22 vs 20", ex.Message);
         }
+    }
 
-        //[TestMethod, Ignore]
-        //public void GetTest()
-        //{
-        //    model.Add(ComponentType.Background, component);
-        //    model.Add(ComponentType.Brick, collection);
-
-        //    Assert.AreEqual(collection, model.Get<ComponentsCollection<TestComponent>>(ComponentType.Brick));
-        //}
-
-        [TestMethod]
-        public void GetAllTest() // todo is it necessary to have get all ? - only for draw but it is possible to do inside class
+    [TestMethod]
+    public void ExceptionTestY()
+    {
+        try
         {
-            model.Add(ComponentType.Background, new TestComponent());
-            //model.Add(ComponentType.Brick, new ComponentsCollection<TestComponent>());
-
-            Assert.AreEqual(1, model.GetAll().Count()); // todo return type, convert to list ?
+            model.Add(new Brick(0, -20));
         }
-
-        [TestMethod]
-        public void RemoveTest()
+        catch (ArgumentException ex)
         {
-            model.Add(ComponentType.Background, component);
-            Assert.AreEqual(1, GetDictionary(model).Values.Count);
-            //model.Add(ComponentType.Brick, collection);
-            model.Remove(ComponentType.Background);
-
-            Assert.AreEqual(0, GetDictionary(model).Values.Count);
+            Assert.AreEqual("BlockY could not be < 0. Now it is -1", ex.Message);
         }
+    }
 
-        //[TestMethod]
-        //public void ReturnedSequenceTest()
-        //{
-        //    // despite the adding sequence return result has sequence of player > guard > brick > background
-        //    // it is match with sequence in ComponentType
-        //    // todo looks bad because we depend on inner model structure which is SortedDictionary
-        //    // as well it looks too much complexity with model inner structure & ComponentType
-        //    model.Remove(ComponentType.Stone);
-        //    model.Remove(ComponentType.Water);
-
-        //    model.Add(ComponentType.Brick, new TestComponent("3"));
-        //    model.Add(ComponentType.Background, new TestComponent("4"));
-        //    model.Add(ComponentType.Guard, new TestComponent("2"));
-        //    model.Add(ComponentType.Player, new TestComponent("1"));
-
-        //    var actual = "";
-        //    GetDictionary(model).Values.Cast<TestComponent>()
-        //                               .Select(component => actual += component.Label)
-        //                               .ToList();
-
-        //    Assert.AreEqual("1234", actual);
-        //}
-
-        private SortedDictionary<ComponentType, IDrawable> GetDictionary(object obj)
+    [TestMethod]
+    public void ExceptionTestY2()
+    {
+        try
         {
-            FieldInfo fi = obj.GetType().GetField("dictionary", BindingFlags.Instance | BindingFlags.NonPublic);
-
-            return (SortedDictionary<ComponentType, IDrawable>)fi.GetValue(obj);
+            model.Add(new Brick(40, 800));
         }
-
-        //[TestMethod()]
-        //public void GetComponentTest()
-        //{
-        //    var bricks = new ComponentsCollection<Brick>();
-        //    bricks.Add(new Brick(0, 0));
-        //    bricks.Add(new Brick(0, 10));
-
-        //    model.Add(ComponentType.Brick, bricks);
-
-        //    Assert.AreEqual(bricks, model.Get<Brick>());
-        //}
-
-        [TestMethod()]
-        public void AddSingleComponent()
+        catch (ArgumentException ex)
         {
-            var model = new Model();
-            model.Add(new Brick(0, 20));
-
-            Assert.AreEqual(true, model.field[0, 1] != null);
-            Assert.AreEqual(true, model.field[0, 0] == null);
+            Assert.AreEqual("BlockY could not be >= than maximum field heigth. It is 40 vs 30", ex.Message);
         }
+    }
 
-        [TestMethod()]
-        public void ExceptionTest()
-        {
-            var model = new Model();
+    [TestMethod]
+    public void GetSingleComponent()
+    {
+        model.Add(new Brick(0, 20));
 
-            try
-            {
-                model.Add(new Brick(-45, 20));
-            }
-            catch(ArgumentException ex)
-            {
-                Assert.AreEqual("BlockX could not be < 0. Now it is -2", ex.Message);
-            }
-        }
-
-        [TestMethod()]
-        public void ExceptionTest2()
-        {
-            var model = new Model();
-
-            try
-            {
-                model.Add(new Brick(440, 20));
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("BlockX could not be >= than maximum field width. It is 22 vs 20", ex.Message);
-            }
-        }
-
-        [TestMethod()]
-        public void ExceptionTestY()
-        {
-            var model = new Model();
-
-            try
-            {
-                model.Add(new Brick(0, -20));
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("BlockY could not be < 0. Now it is -1", ex.Message);
-            }
-        }
-
-        [TestMethod()]
-        public void ExceptionTestY2()
-        {
-            var model = new Model();
-
-            try
-            {
-                model.Add(new Brick(40, 800));
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("BlockY could not be >= than maximum field heigth. It is 40 vs 30", ex.Message);
-            }
-        }
-
-        [TestMethod()]
-        public void GetSingleComponent()
-        {
-            var model = new Model();
-            model.Add(new Brick(0, 20));
-
-            Assert.AreEqual(typeof(Brick), model.Get(0, 1).GetType());
-        }
-
-        
+        Assert.AreEqual(typeof(Brick), model.Get(0, 1).GetType());
     }
 }
