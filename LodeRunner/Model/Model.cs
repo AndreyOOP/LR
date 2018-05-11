@@ -61,7 +61,10 @@
         public void Freeze()
         {
             Player.Freeze();
-            field.OfType<Water>().First()?.Freeze();
+
+            //field.OfType<Water>().First()?.Freeze();
+            var w = new Water(0, 0);
+            w.Freeze();
 
             foreach (var brick in field.OfType<Brick>())
             {
@@ -72,7 +75,10 @@
         public void Unfreeze()
         {
             Player.Unfreeze();
-            field.OfType<Water>().First()?.Unfreeze();
+
+            //field.OfType<Water>()?.First().Unfreeze();
+            var w = new Water(0, 0);
+            w.Freeze();
 
             foreach (var brick in field.OfType<Brick>())
             {

@@ -33,19 +33,20 @@ namespace LodeRunner.Animation
             frames = SplitImageOnFrames(animationImage, frameLength);
         }
 
+        public event EventHandler AnimationComplete;
+
         public void Start()
         {
-            //Finished = false;
-
             if(timer == null)
             {
                 timer = InitializeTimer(speed);
             }
 
-            if (!timer.Enabled)
-            {
-                timer.Start();
-            }
+            timer.Start();
+            //if (!timer.Enabled)
+            //{
+            //    timer.Start();
+            //}
         }
 
         public void Stop()
@@ -55,6 +56,7 @@ namespace LodeRunner.Animation
 
         public void Reset()
         {
+            Finished = false;
             currentFrame = 0;
         }
 
@@ -96,6 +98,10 @@ namespace LodeRunner.Animation
             if (++currentFrame >= frames.Length)
             {
                 Finished = true;
+
+                if(AnimationComplete != null)
+                    AnimationComplete(this, EventArgs.Empty);
+
                 currentFrame = 0;
             }
         }

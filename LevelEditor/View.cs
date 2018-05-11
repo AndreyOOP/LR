@@ -173,8 +173,7 @@ namespace LevelEditor
                         break;
 
                     case '7':
-                        model.Player = null;
-                        model.Add(new Player(x, y));
+                        model.Player = new Player(x, y);
                         break;
                 }
             }

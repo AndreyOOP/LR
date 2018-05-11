@@ -12,10 +12,17 @@
 
         public override bool Check()
         {
+            // todo logic which have to be burned
             var x = intersection.Get(Corner.BottomLeft, Direction.Down);
+
             if (x is Brick)
             {
-                ((Brick)x).Burn();
+                var brick = (Brick)x;
+
+                if (brick.IsVisible)
+                {
+                    brick.Burn();
+                }
             }
 
             return true;
