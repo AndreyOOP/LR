@@ -32,8 +32,8 @@ namespace LodeRunner.Model.SingleComponents
         private void OnGrowAnimationFinished(object sender, EventArgs e)
         {
             IsVisible = true;
-            burn.Freeze();
-            grow.Freeze();
+            burn.Stop();
+            grow.Stop();
         }
 
         public void Burn()
@@ -48,8 +48,6 @@ namespace LodeRunner.Model.SingleComponents
         {
             IsTransparent = false;
             SetAnimation(grow);
-            //timer.Stop();
-            
         }
 
         private void SetAnimation(AnimationImage animation)
@@ -64,11 +62,12 @@ namespace LodeRunner.Model.SingleComponents
             if(IsVisible)
             {
                 g.DrawImage(brick, X, Y);
+                return;
             }
-            else
+
+            if (!animation.Finished)
             {
-                if(!animation.Finished) //add to animation image...
-                    g.DrawImage(animation.GetCurrentFrame(), X, Y);
+                g.DrawImage(animation.GetCurrentFrame(), X, Y);
             }
         }
 

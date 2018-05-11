@@ -12,6 +12,11 @@
 
         public override bool Check()
         {
+            if (IsAbleMoveInTransparentBrick())
+            {
+                return true;
+            }
+
             if (player.X == 0 ||
                 intersection.Line<Brick>(Direction.Left, Side.Out, Operation.Or) ||
                 intersection.Line<Stone>(Direction.Left, Side.Out, Operation.Or)
@@ -22,6 +27,18 @@
             }
 
             return true;
+        }
+
+        private bool IsAbleMoveInTransparentBrick()
+        {
+            var el = intersection.Get(Corner.TopLeft, Direction.Left);
+
+            if(el is Brick)
+            {
+                return ((Brick)el).IsTransparent;
+            }
+
+            return false;
         }
     }
 }

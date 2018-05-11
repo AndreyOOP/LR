@@ -43,10 +43,6 @@ namespace LodeRunner.Animation
             }
 
             timer.Start();
-            //if (!timer.Enabled)
-            //{
-            //    timer.Start();
-            //}
         }
 
         public void Stop()
@@ -98,11 +94,8 @@ namespace LodeRunner.Animation
             if (++currentFrame >= frames.Length)
             {
                 Finished = true;
-
-                if(AnimationComplete != null)
-                    AnimationComplete(this, EventArgs.Empty);
-
                 currentFrame = 0;
+                AnimationComplete?.Invoke(this, EventArgs.Empty);
             }
         }
 

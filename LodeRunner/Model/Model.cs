@@ -62,11 +62,13 @@
         {
             Player.Freeze();
 
-            //field.OfType<Water>().First()?.Freeze();
-            var w = new Water(0, 0);
-            w.Freeze();
+            foreach(var water in field.OfType<Water>())
+            {
+                water.Freeze();
+                break;
+            }
 
-            foreach (var brick in field.OfType<Brick>())
+            foreach (var brick in field.OfType<Brick>().Where(b => !b.IsVisible))
             {
                 brick.Freeze();
             }
@@ -76,11 +78,13 @@
         {
             Player.Unfreeze();
 
-            //field.OfType<Water>()?.First().Unfreeze();
-            var w = new Water(0, 0);
-            w.Freeze();
+            foreach (var water in field.OfType<Water>())
+            {
+                water.Unfreeze();
+                break;
+            }
 
-            foreach (var brick in field.OfType<Brick>())
+            foreach (var brick in field.OfType<Brick>().Where(b => !b.IsVisible))
             {
                 brick.Unfreeze();
             }

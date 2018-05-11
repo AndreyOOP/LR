@@ -18,7 +18,7 @@
                 return true;
             }
 
-            if (IsInGameWindow() && (IsBottomNullBlocks() || IsBelowRail() || IsAbovewWater()))
+            if (IsInGameWindow() && (IsBottomNullBlocks() || IsBelowRail() || IsAbovewWater() || IsBelowTransperantBrick()))
             {
                 player.Y += 1;
                 player.SetAnimation(Animations.Fall);
@@ -26,6 +26,19 @@
             }
 
             return true;
+        }
+
+        private bool IsBelowTransperantBrick()
+        {
+            var element1 = intersection.Get(Corner.BottomRight, Direction.Down);
+            var element2 = intersection.Get(Corner.BottomLeft, Direction.Down);
+
+            if (element1 is Brick && element2 is Brick)
+            {
+                return ((Brick)element1).IsTransparent && ((Brick)element2).IsTransparent;
+            }
+
+            return false;
         }
 
         private bool IsInGameWindow()
