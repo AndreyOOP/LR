@@ -18,7 +18,7 @@
                 return true;
             }
 
-            if (IsInGameWindow() && (IsBottomNullBlocks() || IsBelowRail() || IsAbovewWater() || IsBelowTransperantBrick()))
+            if (IsInGameWindow() && (IsBottomNullBlocks() || IsBelowRail() || IsAbovewWater() || IsBelowTransperantBrick() || IsBelowGold()))
             {
                 player.Y += 1;
                 player.SetAnimation(Animations.Fall);
@@ -69,13 +69,18 @@
 
         private bool IsAbovewWater()
         {
-            return intersection.Line<Water>(Direction.Down, Side.Out, Operation.Or);
+            return intersection.Line<Water>(Direction.Down, Side.Out, Operation.And);
         }
 
         private bool IsInWater()
         {
             var y = intersection.Get(Corner.TopLeft)?.Y ?? intersection.Get(Corner.TopRight)?.Y;
             return player.Y == y && intersection.Line<Water>(Direction.Up, Side.In, Operation.Or);
+        }
+
+        private bool IsBelowGold()
+        {
+            return intersection.Line<Gold>(Direction.Down, Side.Out, Operation.Or);
         }
     }
 }

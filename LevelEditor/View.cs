@@ -170,6 +170,7 @@ namespace LevelEditor
 
                     case '6':
                         model.Add(new Gold(x, y));
+                        model.MaxScore++;
                         break;
 
                     case '7':

@@ -70,7 +70,10 @@
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\Down\IsAbleMoveDown.cs" />
     <Compile Include="Services\Rules\Down\MoveDownRule.cs" />
-    <Compile Include="Services\Rules\General\BurnRule.cs" />
+    <Compile Include="Services\Rules\General\WinRule.cs" />
+    <Compile Include="Services\Rules\General\GoldRule.cs" />
+    <Compile Include="Services\Rules\General\RightBurnRule.cs" />
+    <Compile Include="Services\Rules\General\LeftBurnRule.cs" />
     <Compile Include="Services\Rules\General\InWaterRule.cs" />
     <Compile Include="Services\Rules\General\NewGameRule.cs" />
     <Compile Include="Services\Rules\General\OnRailRuleRight.cs" />

@@ -46,7 +46,9 @@
 
             Commands.General = new Command()
             {
-                new InWaterRule(this)
+                new GoldRule(this),
+                new InWaterRule(this),
+                new WinRule(this)
             };
 
             Commands.Add('a', new Command()
@@ -83,7 +85,13 @@
             });
             Commands.Add('q', new Command(false)
             {
-                new BurnRule(this)
+                new IsNotFallRule(this),
+                new LeftBurnRule(this)
+            });
+            Commands.Add('e', new Command(false)
+            {
+                new IsNotFallRule(this),
+                new RightBurnRule(this)
             });
             Commands.Add('n', new Command(false)
             {

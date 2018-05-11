@@ -16,8 +16,16 @@
 
         public Player Player { get; set; }
 
+        public int MaxScore { get; set; }
+        public int Score { get; set; }
+
         public SingleComponentBase Message { get; set; }
         
+        public Model()
+        {
+            //MaxScore = field.OfType<Gold>().Count();
+        }
+
         public void Add<T>(T component) where T : SingleComponentBase
         {
             CheckInput(component);
