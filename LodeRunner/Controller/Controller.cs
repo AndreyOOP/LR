@@ -6,50 +6,24 @@
     using LodeRunner.Services.Rules;
     using LodeRunner.Services.Rules.General;
     using System.Timers;
+    using static LodeRunner.Model.Model;
 
     public class Controller
     {
+        private char keyInput;
+        private Command defaultActions;
+        private Timer timer;
+        private Commands commands = new Commands();
+
         public Model Model { private get; set; }
         public View View { get; private set; }
-
-        private Timer timer;
-        public Commands commands = new Commands();
-
-        private char keyInput;
-
-        private Command defaultActions;
-
+        
         public Controller(Model model, View view)
         {
             Model = model;
             View = view;
             Initialization();
-
-            timer = new Timer();
-            timer.Elapsed += FrameUpdate;
-            timer.Interval = Const.FrameUpdatePeriod;
-            timer.Enabled = true;
-        }
-
-        public void FrameUpdate(object sender, ElapsedEventArgs e)
-        {
-            if(keyInput == 'n')
-            {
-                Model = new ModelLoadService().Load(@"C:\Users\Anik\Desktop\manualT.lev");
-                Initialization();
-                View.Invalidate();
-                return;
-            }
-
-            if (Model.IsGameOver || keyInput == 'p')
-            {
-                return;
-            }
-
-            commands.GetActiveCommand().Execute();
-            defaultActions.Execute();
-
-            View.Invalidate();
+            InitializeTimer();
         }
 
         public Model GetModelForDraw()
@@ -61,6 +35,41 @@
         {
             keyInput = key;
             commands.SetUserInput(key);
+        }
+
+        public void GameStateUpdate(object sender, ElapsedEventArgs e)
+        {
+            //is next level
+
+            //is level reload
+
+            //is Game over
+
+            //is pause
+
+            //proceed active user command
+
+            //proceed default action
+
+            //update frame
+
+            if(keyInput == 'n')
+            {
+                Model = new ModelLoadService().Load(@"C:\Users\Anik\Desktop\manualT.lev");
+                Initialization();
+                View.Invalidate();
+                return;
+            }
+
+            if (Model.State == GameState.GameOver || keyInput == 'p')
+            {
+                return;
+            }
+
+            commands.GetActiveCommand().Execute();
+            defaultActions.Execute();
+
+            View.Invalidate();
         }
 
         private void Initialization()
@@ -102,12 +111,20 @@
                 new NoInputRule(Model),
                 new OnRailRule(Model)
             });
-            commands.Add('q', new Command()
+            commands.Add('q', new Command(false)
             {
                 new BurnRule(Model)
             });
 
             keyInput = 'p';
+        }
+
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Elapsed += GameStateUpdate;
+            timer.Interval = Const.FrameUpdatePeriod;
+            timer.Enabled = true;
         }
     }
 }

@@ -6,10 +6,13 @@
 
     public class Command : ICommand, IEnumerable<IRule>
     {
+        private bool isContinious;
+
         public List<IRule> Rules { get; set; } = new List<IRule>();
 
-        public Command()
+        public Command(bool isContinious = true)
         {
+            this.isContinious = isContinious;
         }
         
         public void Add(IRule rule)
@@ -28,11 +31,16 @@
             }
         }
 
+        public bool IsContinious()
+        {
+            return isContinious;
+        }
+
         public IEnumerator<IRule> GetEnumerator()
         {
-            foreach (var x in Rules)
+            foreach (var rule in Rules)
             {
-                yield return x;
+                yield return rule;
             }
         }
 

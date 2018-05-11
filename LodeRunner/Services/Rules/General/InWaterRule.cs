@@ -2,6 +2,7 @@
 {
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
+    using static LodeRunner.Model.Model;
     using static LodeRunner.Services.Intersection;
 
     public class InWaterRule : RuleBase
@@ -14,8 +15,8 @@
         {
             if (IsTopOnWater())
             {
-                model.SetMessage(new GameOver((Const.WindowWidth-200)/2, 100));
-                model.IsGameOver = true;
+                model.Message = new GameOver((Const.WindowWidth-200)/2, 100);
+                model.State = GameState.GameOver;
                 return false;
             }
 

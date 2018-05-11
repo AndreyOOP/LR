@@ -49,15 +49,16 @@
     <Compile Include="Animation\IAnimationImage.cs" />
     <Compile Include="ConstantsEnums\Const.cs" />
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="ConstantsEnums\GameState.cs" />
     <Compile Include="Model\Interfaces\IPlayer.cs" />
     <Compile Include="ConstantsEnums\Animations.cs" />
-    <Compile Include="Model\SingleComponents\Brick.cs" />
-    <Compile Include="Model\SingleComponents\GameOver.cs" />
-    <Compile Include="Model\SingleComponents\Gold.cs" />
-    <Compile Include="Model\SingleComponents\Player.cs" />
-    <Compile Include="Model\SingleComponents\Rail.cs" />
-    <Compile Include="Model\SingleComponents\Stairs.cs" />
-    <Compile Include="Model\SingleComponents\Stone.cs" />
+    <Compile Include="Model\Components\Brick.cs" />
+    <Compile Include="Model\Components\GameOver.cs" />
+    <Compile Include="Model\Components\Gold.cs" />
+    <Compile Include="Model\Components\Player.cs" />
+    <Compile Include="Model\Components\Rail.cs" />
+    <Compile Include="Model\Components\Stairs.cs" />
+    <Compile Include="Model\Components\Stone.cs" />
     <Compile Include="Services\Command\Command.cs" />
     <Compile Include="Services\Command\Commands.cs" />
     <Compile Include="Services\Command\ICommand.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Services\ModelLoadService.cs" />
     <Compile Include="Services\Rules\Down\IsAbleMoveDown.cs" />
     <Compile Include="Services\Rules\Down\MoveDownRule.cs" />
-    <Compile Include="Services\Rules\General\Class1.cs" />
+    <Compile Include="Services\Rules\General\BurnRule.cs" />
     <Compile Include="Services\Rules\General\InWaterRule.cs" />
     <Compile Include="Services\Rules\General\OnRailRuleRight.cs" />
     <Compile Include="Services\Rules\General\OnRailRuleLeft.cs" />
@@ -88,12 +89,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\Interfaces\IDrawable.cs" />
-    <Compile Include="Model\ComponentType.cs" />
-    <Compile Include="Model\Interfaces\IComponentsCollection.cs" />
     <Compile Include="Model\Interfaces\IModel.cs" />
     <Compile Include="Model\Model.cs" />
-    <Compile Include="Model\SingleComponents\SingleComponentBase.cs" />
-    <Compile Include="Model\SingleComponents\Water.cs" />
+    <Compile Include="Model\Interfaces\SingleComponentBase.cs" />
+    <Compile Include="Model\Components\Water.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

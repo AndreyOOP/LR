@@ -1,6 +1,5 @@
 ﻿using LodeRunner.Animation;
 using System.Drawing;
-using static LodeRunner.Services.Intersection;
 
 namespace LodeRunner.Model.Interfaces
 {

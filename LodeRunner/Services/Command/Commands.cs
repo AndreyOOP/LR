@@ -14,13 +14,19 @@ namespace LodeRunner.Services
 
         public ICommand GetActiveCommand()
         {
-            var comm = dictionary.ContainsKey(activeCommandKey) ? dictionary[activeCommandKey] : null;
-            if(activeCommandKey == 'q')
+            if (dictionary.ContainsKey(activeCommandKey))
             {
-                activeCommandKey = ' ';
+                var command = dictionary[activeCommandKey];
+
+                if (!command.IsContinious())
+                {
+                    activeCommandKey = ' ';                    
+                }
+
+                return command;
             }
 
-            return comm;
+            return null;
         }
 
         public void SetUserInput(char key)
@@ -29,11 +35,6 @@ namespace LodeRunner.Services
             {
                 activeCommandKey = key;
             }
-        }
-
-        public char GetUserInput()
-        {
-            return activeCommandKey;
         }
     }
 }
