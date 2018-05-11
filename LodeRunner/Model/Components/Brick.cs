@@ -10,7 +10,7 @@ namespace LodeRunner.Model.SingleComponents
     public class Brick : SingleComponentBase
     {
         public bool IsTransparent { get; set; } = false;
-        private AnimationImage animation;
+        public AnimationImage animation { get; set; }
         private AnimationImage burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, 200);
         private AnimationImage grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, 200);
         private static Bitmap brick = Textures.Brick;

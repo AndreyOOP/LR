@@ -7,34 +7,35 @@ namespace LodeRunner.Services
         private char activeCommandKey;
         private Dictionary<char, ICommand> dictionary = new Dictionary<char, ICommand>();
 
+        public HashSet<char> AllowedChars { get; set; } = new HashSet<char>();
+
+        public ICommand General { get; set; }
+
         public void Add(char key, ICommand command)
         {
             dictionary[key] = command;
         }
 
-        public ICommand GetActiveCommand()
+        public void ExecuteSelectedCommandAndDefault()
         {
-            if (dictionary.ContainsKey(activeCommandKey))
+            if (AllowedChars.Contains(activeCommandKey))
             {
                 var command = dictionary[activeCommandKey];
 
                 if (!command.IsContinious())
                 {
-                    activeCommandKey = ' ';                    
+                    activeCommandKey = ' ';
                 }
 
-                return command;
-            }
+                command.Execute();
 
-            return null;
+                General.Execute();
+            }
         }
 
         public void SetUserInput(char key)
         {
-            if (dictionary.ContainsKey(key))
-            {
-                activeCommandKey = key;
-            }
+            activeCommandKey = key;
         }
     }
 }

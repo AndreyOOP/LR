@@ -8,6 +8,6 @@
 
         void SetUserInput(char key);
 
-        ICommand GetActiveCommand();
+        void ExecuteSelectedCommandAndDefault();
     }
 }

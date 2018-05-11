@@ -11,7 +11,7 @@ namespace LodeRunner.Model.SingleComponents
     public class Player : SingleComponentBase, IPlayer
     {
         public Direction Direction { get; set; }
-        private AnimationImage animation;
+        public AnimationImage animation { get; set; }
         private Bitmap texture = new Bitmap(Const.PlayerStand);
 
         public Player(int x, int y) : base(x, y)

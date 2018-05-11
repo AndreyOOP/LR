@@ -4,6 +4,7 @@
     using System.Drawing;
     using LodeRunner.Model.ModelComponents;
     using LodeRunner.Model.SingleComponents;
+    using System.Linq;
 
     [Serializable]
     public partial class Model : IModel, IDrawable
@@ -54,6 +55,28 @@
 
             Player?.Draw(g);
             Message?.Draw(g);
+        }
+
+        public void Freeze()
+        {
+            Player.animation?.Stop();
+            Water.Image.Stop();
+
+            foreach (var brick in field.OfType<Brick>().Where(brick => brick.animation != null))
+            {
+                brick.animation.Stop();
+            }
+        }
+
+        public void UnFreeze()
+        {
+            Player.animation?.Start();
+            Water.Image.Start();
+
+            foreach (var brick in field.OfType<Brick>().Where(brick => brick.animation != null))
+            {
+                brick.animation.Start();
+            }
         }
 
         private void CheckInput<T>(T component) where T : SingleComponentBase

@@ -5,18 +5,18 @@
     using LodeRunner.Services.Command;
     using LodeRunner.Services.Rules;
     using LodeRunner.Services.Rules.General;
+    using System.Collections.Generic;
     using System.Timers;
     using static LodeRunner.Model.Model;
 
     public class Controller
     {
-        private char keyInput;
-        private Command defaultActions;
+        //private char keyInput;
         private Timer timer;
-        private Commands commands = new Commands();
+        public Commands Commands { get; set; } = new Commands();
 
-        public Model Model { private get; set; }
-        public View View { get; private set; }
+        public Model Model { get; set; }
+        public View View { get; set; }
         
         public Controller(Model model, View view)
         {
@@ -33,12 +33,13 @@
 
         public void SetKeyInput(char key)
         {
-            keyInput = key;
-            commands.SetUserInput(key);
+            //keyInput = key;
+            Commands.SetUserInput(key);
         }
 
         public void GameStateUpdate(object sender, ElapsedEventArgs e)
         {
+            // **********
             //is next level
 
             //is level reload
@@ -52,71 +53,82 @@
             //proceed default action
 
             //update frame
+            // **********
 
-            if(keyInput == 'n')
-            {
-                Model = new ModelLoadService().Load(@"C:\Users\Anik\Desktop\manualT.lev");
-                Initialization();
-                View.Invalidate();
-                return;
-            }
+            //if(keyInput == 'n')
+            //{
+            //    Model = new ModelLoadService().Load(@"C:\Users\Anik\Desktop\manualT.lev");
+            //    Initialization();
+            //    View.Invalidate();
+            //    return;
+            //}
 
-            if (Model.State == GameState.GameOver || keyInput == 'p')
-            {
-                return;
-            }
+            //if (Model.State == GameState.GameOver || keyInput == 'p')
+            //{
+            //    return;
+            //}
 
-            commands.GetActiveCommand().Execute();
-            defaultActions.Execute();
+            Commands.ExecuteSelectedCommandAndDefault();
 
             View.Invalidate();
         }
 
-        private void Initialization()
+        //receive to input controller only ?
+        public void Initialization()
         {
-            defaultActions = new Command()
+            Commands.AllowedChars = Const.AllowedInput;// new HashSet<char>() { 'a', 'd', 'w', 's', 'q', ' ', 'n', 'p' };
+
+            Commands.General = new Command()
             {
-                new InWaterRule(Model)
+                new InWaterRule(Model, this)
             };
 
-            commands.Add('a', new Command()
+            Commands.Add('a', new Command()
             {
                 new IsNotFallRule(Model),
                 new IsAbleMoveLeftRule(Model),
                 new MoveLeftRule(Model),
                 new OnRailRuleLeft(Model),
             });
-            commands.Add('d', new Command()
+            Commands.Add('d', new Command()
             {
                 new IsNotFallRule(Model),
                 new IsAbleMoveRightRule(Model),
                 new MoveRightRule(Model),
                 new OnRailRuleRight(Model),
             });
-            commands.Add('w', new Command()
+            Commands.Add('w', new Command()
             {
                 new IsNotFallRule(Model),
                 new IsAbleMoveUp(Model),
                 new MoveUpRule(Model)
             });
-            commands.Add('s', new Command()
+            Commands.Add('s', new Command()
             {
                 new IsNotFallRule(Model),
                 new IsAbleMoveDownRule(Model),
                 new MoveDownRule(Model),
             });
-            commands.Add(' ', new Command()
+            Commands.Add(' ', new Command()
             {
                 new IsNotFallRule(Model),
                 new NoInputRule(Model),
                 new OnRailRule(Model)
             });
-            commands.Add('q', new Command(false)
+            Commands.Add('q', new Command(false)
             {
                 new BurnRule(Model)
             });
+            Commands.Add('n', new Command(false)
+            {
+                new NewGameRule(Model, this)
+            });
+            Commands.Add('p', new Command(false)
+            {
+                new PauseRule(Model, this)
+            });
 
-            keyInput = 'p';
+            Commands.SetUserInput('0');
         }
 
         private void InitializeTimer()
