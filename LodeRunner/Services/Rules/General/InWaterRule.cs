@@ -9,11 +9,7 @@
 
     public class InWaterRule : RuleBase
     {
-        public InWaterRule(Model model) : base(model)
-        {
-        }
-
-        public InWaterRule(Model model, Controller controller) : base(model, controller)
+        public InWaterRule(Controller controller) : base(controller)
         {
         }
 

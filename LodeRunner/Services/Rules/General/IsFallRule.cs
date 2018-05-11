@@ -1,12 +1,13 @@
 ﻿namespace LodeRunner.Services.Rules
 {
+    using LodeRunner.Control;
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
     public class IsNotFallRule : RuleBase
     {
-        public IsNotFallRule(Model model) : base(model)
+        public IsNotFallRule(Controller controller) : base(controller)
         {
         }
 

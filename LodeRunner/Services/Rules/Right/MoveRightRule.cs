@@ -1,11 +1,12 @@
-﻿using LodeRunner.Model.SingleComponents;
+﻿using LodeRunner.Control;
+using LodeRunner.Model.SingleComponents;
 using static LodeRunner.Services.Intersection;
 
 namespace LodeRunner.Services.Rules
 {
     public class MoveRightRule : RuleBase
     {
-        public MoveRightRule(Model.Model model) : base(model)
+        public MoveRightRule(Controller controller) : base(controller)
         {
         }
 

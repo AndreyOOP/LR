@@ -1,8 +1,10 @@
-﻿namespace LodeRunner.Services.Rules
+﻿using LodeRunner.Control;
+
+namespace LodeRunner.Services.Rules
 {
     public class NoInputRule : RuleBase
     {
-        public NoInputRule(Model.Model model) : base(model)
+        public NoInputRule(Controller controller) : base(controller)
         {
         }
 

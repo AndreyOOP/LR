@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using LodeRunner.Control;
+﻿using LodeRunner.Control;
 
 namespace LodeRunner.Services.Rules.General
 {
@@ -7,7 +6,7 @@ namespace LodeRunner.Services.Rules.General
     {
         private bool IsPaused = false;
 
-        public PauseRule(Model.Model model, Controller controller) : base(model, controller)
+        public PauseRule(Controller controller) : base(controller)
         {
         }
 

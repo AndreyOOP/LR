@@ -1,12 +1,12 @@
 ﻿namespace LodeRunner.Services.Rules.General
 {
-    using LodeRunner.Model;
+    using LodeRunner.Control;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
     public class BurnRule : RuleBase
     {
-        public BurnRule(Model model) : base(model)
+        public BurnRule(Controller controller) : base(controller)
         {
         }
 

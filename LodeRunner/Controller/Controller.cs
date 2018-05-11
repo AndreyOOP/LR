@@ -46,52 +46,52 @@
 
             Commands.General = new Command()
             {
-                new InWaterRule(Model, this)
+                new InWaterRule(this)
             };
 
             Commands.Add('a', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveLeftRule(Model),
-                new MoveLeftRule(Model),
-                new OnRailRuleLeft(Model),
+                new IsNotFallRule(this),
+                new IsAbleMoveLeftRule(this),
+                new MoveLeftRule(this),
+                new OnRailRuleLeft(this),
             });
             Commands.Add('d', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveRightRule(Model),
-                new MoveRightRule(Model),
-                new OnRailRuleRight(Model),
+                new IsNotFallRule(this),
+                new IsAbleMoveRightRule(this),
+                new MoveRightRule(this),
+                new OnRailRuleRight(this),
             });
             Commands.Add('w', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveUp(Model),
-                new MoveUpRule(Model)
+                new IsNotFallRule(this),
+                new IsAbleMoveUp(this),
+                new MoveUpRule(this)
             });
             Commands.Add('s', new Command()
             {
-                new IsNotFallRule(Model),
-                new IsAbleMoveDownRule(Model),
-                new MoveDownRule(Model),
+                new IsNotFallRule(this),
+                new IsAbleMoveDownRule(this),
+                new MoveDownRule(this),
             });
             Commands.Add(' ', new Command()
             {
-                new IsNotFallRule(Model),
-                new NoInputRule(Model),
-                new OnRailRule(Model)
+                new IsNotFallRule(this),
+                new NoInputRule(this),
+                new OnRailRule(this)
             });
             Commands.Add('q', new Command(false)
             {
-                new BurnRule(Model)
+                new BurnRule(this)
             });
             Commands.Add('n', new Command(false)
             {
-                new NewGameRule(Model, this)
+                new NewGameRule(this)
             });
             Commands.Add('p', new Command(false)
             {
-                new PauseRule(Model, this)
+                new PauseRule(this)
             });
 
             Commands.SetUserInput('0');

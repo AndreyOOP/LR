@@ -5,10 +5,12 @@
     using LodeRunner.Model.SingleComponents;
     using LodeRunner.Services;
     using LodeRunner.Services.Rules;
+    using LodeRunner.Control;
 
     [TestClass]
     public class IsAbleMoveLeftTest
     {
+        private Controller controller;
         private Model model;
         private Player player;
         private IsAbleMoveLeftRule rule;
@@ -22,7 +24,8 @@
         {
             model = new ModelLoadService().Load(@"TestModels\IsPossibleMoveLeft.lev");
             player = model.Player;
-            rule = new IsAbleMoveLeftRule(model);
+            controller = new Controller(model, new LodeRunner.View());
+            rule = new IsAbleMoveLeftRule(controller);
         }
 
         [TestMethod]

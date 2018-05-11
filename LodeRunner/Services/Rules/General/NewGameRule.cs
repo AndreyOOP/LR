@@ -1,11 +1,10 @@
 ﻿namespace LodeRunner.Services.Rules.General
 {
     using LodeRunner.Control;
-    using LodeRunner.Model;
 
     public class NewGameRule : RuleBase
     {
-        public NewGameRule(Model model, Controller controller) : base(model, controller)
+        public NewGameRule(Controller controller) : base(controller)
         {
         }
 

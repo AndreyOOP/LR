@@ -6,10 +6,12 @@
     using LodeRunner.Services;
     using LodeRunner.Services.Rules;
     using static LodeRunner.Services.Intersection;
+    using LodeRunner.Control;
 
     [TestClass()]
     public class MoveUpRuleTests
     {
+        private Controller controller;
         private Model model;
         private Player player;
         private MoveUpRule rule;
@@ -22,7 +24,8 @@
         {
             model = new ModelLoadService().Load(@"TestModels\MoveUp.lev"); //as well move to enum ?
             player = model.Player;
-            rule = new MoveUpRule(model);
+            controller = new Controller(model, new LodeRunner.View());
+            rule = new MoveUpRule(controller);
         }
 
         [TestMethod()]

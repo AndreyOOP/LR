@@ -1,12 +1,12 @@
 ﻿namespace LodeRunner.Services.Rules
 {
-    using LodeRunner.Model;
+    using LodeRunner.Control;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
     public class MoveDownRule : RuleBase
     {
-        public MoveDownRule(Model model) : base(model)
+        public MoveDownRule(Controller controller) : base(controller)
         {
         }
 

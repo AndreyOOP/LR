@@ -11,17 +11,20 @@
         protected Intersection intersection; //todo move out of class
         protected Controller controller;
 
-        public RuleBase(Model model)
+        public RuleBase(Controller controller)
         {
-            this.model = model;
+            this.controller = controller;
+            model = controller.Model;
             player = model.Player;
             intersection = new Intersection(model);
         }
 
-        public RuleBase(Model model, Controller controller) : this(model)
-        {
-            this.controller = controller;
-        }
+        //public RuleBase(Model model)
+        //{
+        //    this.model = model;
+        //    player = model.Player;
+        //    intersection = new Intersection(model);
+        //}
 
         public abstract bool Check();
     }
