@@ -76,7 +76,7 @@
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => !b.IsVisible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.state == BrickState.NotVisible))
             {
                 brick.Freeze();
             }
@@ -92,7 +92,7 @@
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => !b.IsVisible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.state == BrickState.NotVisible))
             {
                 brick.Unfreeze();
             }
