@@ -12,66 +12,70 @@ namespace LodeRunner.Model.SingleComponents
     {
         [NonSerialized]
         private Timer timer;
-        private AnimationImage animation { get; set; }
         private AnimationImage burn;
         private AnimationImage grow;
         private static Bitmap brick = Textures.Brick;
 
-        public bool IsVisible = true;
-
-        public bool IsTransparent { get; set; } = false;
+        public BrickState state { get; set; }
 
         public Brick(int x, int y) : base (x, y)
         {
             burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, 200);
             grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, 200);
 
+            burn.AnimationComplete += OnBurnAnimationFinished;
             grow.AnimationComplete += OnGrowAnimationFinished;
-        }
 
-        private void OnGrowAnimationFinished(object sender, EventArgs e)
-        {
-            IsVisible = true;
-            burn.Stop();
-            grow.Stop();
+            state = BrickState.Visible;
         }
 
         public void Burn()
         {
-            IsTransparent = true;
-            IsVisible = false;
-            TimerStart();
-            SetAnimation(burn);
+            state = BrickState.Burn;
+            burn.Start();
+        }
+
+        private void OnBurnAnimationFinished(object sender, EventArgs e)
+        {
+            state = BrickState.NotVisible;
+            burn.Stop();
+            ToGrowTimerStart();
         }
 
         private void Grow(object sender, ElapsedEventArgs e)
         {
-            IsTransparent = false;
-            SetAnimation(grow);
+            state = BrickState.Grow;
+            grow.Start();
         }
 
-        private void SetAnimation(AnimationImage animation)
+        private void OnGrowAnimationFinished(object sender, EventArgs e)
         {
-            this.animation = animation;
-            this.animation.Reset();
-            this.animation.Start();
+            state = BrickState.Visible;
+            grow.Stop();
         }
 
         public override void Draw(Graphics g)
         {
-            if(IsVisible)
+            switch (state)
             {
-                g.DrawImage(brick, X, Y);
-                return;
-            }
+                case BrickState.Burn:
+                    g.DrawImage(burn.GetCurrentFrame(), X, Y);
+                    break;
 
-            if (!animation.Finished)
-            {
-                g.DrawImage(animation.GetCurrentFrame(), X, Y);
+                case BrickState.NotVisible:
+                    break;
+
+                case BrickState.Grow:
+                    g.DrawImage(grow.GetCurrentFrame(), X, Y);
+                    break;
+
+                case BrickState.Visible:
+                    g.DrawImage(brick, X, Y);
+                    break;
             }
         }
 
-        private void TimerStart()
+        private void ToGrowTimerStart()
         {
             if(timer == null)
             {
@@ -86,13 +90,13 @@ namespace LodeRunner.Model.SingleComponents
 
         public void Freeze()
         {
-            animation?.Freeze();
+            //animation?.Freeze();
             timer?.Stop();
         }
 
         public void Unfreeze()
         {
-            animation?.Unfreeze();
+            //animation?.Unfreeze();
             timer?.Start();
         }
     }

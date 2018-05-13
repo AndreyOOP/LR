@@ -36,7 +36,8 @@
 
             if (el is Brick)
             {
-                return ((Brick)el).IsTransparent;
+                var brick = (Brick)el;
+                return brick.state == BrickState.Burn || brick.state == BrickState.NotVisible;
             }
 
             return false;

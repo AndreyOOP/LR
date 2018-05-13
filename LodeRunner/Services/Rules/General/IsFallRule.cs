@@ -35,7 +35,9 @@
 
             if (element1 is Brick && element2 is Brick)
             {
-                return ((Brick)element1).IsTransparent && ((Brick)element2).IsTransparent;
+                var brick1 = (Brick)element1;
+                var brick2 = (Brick)element2;
+                return (brick1.state == BrickState.Burn || brick1.state == BrickState.NotVisible) && (brick2.state == BrickState.Burn || brick2.state == BrickState.NotVisible);
             }
 
             return false;

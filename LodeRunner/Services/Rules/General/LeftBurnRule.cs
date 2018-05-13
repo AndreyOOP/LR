@@ -23,7 +23,7 @@
             {
                 var brick = (Brick)burn;
 
-                if (brick.IsVisible)
+                if (brick.state == BrickState.Visible)
                 {
                     brick.Burn();
                 }
@@ -33,7 +33,7 @@
             {
                 var brick = (Brick)burn;
 
-                if (brick.IsVisible && !((Brick)aboveBurn).IsVisible)
+                if (brick.state == BrickState.Visible && ((Brick)aboveBurn).state == BrickState.NotVisible)
                 {
                     brick.Burn();
                 }
