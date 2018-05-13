@@ -1,6 +1,7 @@
 ﻿using LodeRunner.Animation;
 using LodeRunner.Model.Interfaces;
 using LodeRunner.Model.ModelComponents;
+using LodeRunner.Services.Timer;
 using System;
 using System.Drawing;
 using System.Timers;
@@ -20,8 +21,8 @@ namespace LodeRunner.Model.SingleComponents
 
         public Brick(int x, int y) : base (x, y)
         {
-            burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, 200);
-            grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, 200);
+            burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
+            grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
 
             burn.AnimationComplete += OnBurnAnimationFinished;
             grow.AnimationComplete += OnGrowAnimationFinished;
@@ -90,12 +91,16 @@ namespace LodeRunner.Model.SingleComponents
 
         public void Freeze()
         {
+            burn.Freeze();
+            grow.Freeze();
             //animation?.Freeze();
             timer?.Stop();
         }
 
         public void Unfreeze()
         {
+            burn.Unfreeze();
+            grow.Unfreeze();
             //animation?.Unfreeze();
             timer?.Start();
         }

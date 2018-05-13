@@ -2,14 +2,15 @@
 using System.Drawing;
 using System.Timers;
 using LodeRunner.Animation;
+using LodeRunner.Services.Timer;
 
 namespace LodeRunnerTests.Animation
 {
     public class AnimationImageTestClass : AnimationImage
     {
-        public AnimationImageTestClass(Bitmap animationImage, int frameLength, int speed) : base(animationImage, frameLength, speed)
+        public AnimationImageTestClass(string animationImagePath, int frameLength, ITimer timer) : base(animationImagePath, frameLength, timer)
         {
-            timer.Elapsed += IncreaseTicksCounter;
+            timer.SetEventHandler(IncreaseTicksCounter);
         }
 
         public int TicksCounter { get; set; }
@@ -30,11 +31,11 @@ namespace LodeRunnerTests.Animation
             }
         }
 
-        public Timer Timer
+        public ITimer Timer
         {
             get
             {
-                return timer;
+                return myTimer;
             }
         }
 

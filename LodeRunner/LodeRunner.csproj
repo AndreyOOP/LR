@@ -92,6 +92,8 @@
     <Compile Include="Services\Rules\General\NoInputRule.cs" />
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="ConstantsEnums\Textures.cs" />
+    <Compile Include="Services\Timer\ITimer.cs" />
+    <Compile Include="Services\Timer\MyTimer.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
     </Compile>

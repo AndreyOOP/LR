@@ -29,12 +29,12 @@ namespace LodeRunner.Model
 
         public void Freeze()
         {
-            animation.Stop();
+            animation.Freeze();
         }
 
         public void Unfreeze()
         {
-            animation.Start();
+            animation.Unfreeze();
         }
     }
 }
