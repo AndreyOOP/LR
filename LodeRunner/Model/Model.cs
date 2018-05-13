@@ -8,7 +8,7 @@
     using LodeRunner.Model.Interfaces;
 
     [Serializable]
-    public partial class Model : IModel, IDrawable, IFreeze
+    public partial class Model : IModel, IDrawable, IPause
     {
         private SingleComponentBase[,] field = new SingleComponentBase[Const.BlockWidth, Const.BlockHeigth];
 
@@ -76,7 +76,7 @@
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => b.state == BrickState.NotVisible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
             {
                 brick.Freeze();
             }
@@ -92,7 +92,7 @@
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => b.state == BrickState.NotVisible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
             {
                 brick.Unfreeze();
             }

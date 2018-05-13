@@ -1,58 +1,43 @@
 ﻿using LodeRunner.Model.Interfaces;
+using LodeRunner.Services.Timer;
 using System;
 using System.Drawing;
-
-// using System.Timers instead of System.Windows.Forms
-// Windows.Forms will work only if executed from the same thread - https://stackoverflow.com/questions/13412145/timer-wont-tick
-using System.Timers;
+using System.Runtime.Serialization;
 
 namespace LodeRunner.Animation
 {
     [Serializable]
-    public class AnimationImage : IAnimationImage, IFreeze
+    public class AnimationImage : IAnimationImage, IPause
     {
-        public bool Finished { get; set; } = false;
-        private int speed;
-        protected int      currentFrame;
+        protected int currentFrame;
         protected Bitmap[] frames;
+        protected ITimer myTimer;
 
-        [NonSerialized]
-        protected Timer    timer;
-
-        public AnimationImage(string animationImage, int frameLength, int speed) : this (new Bitmap(animationImage), frameLength, speed)
+        public AnimationImage(string animationImagePath, int frameLength, ITimer myTimer)
         {
-        }
-
-        public AnimationImage(Bitmap animationImage, int frameLength, int speed)
-        {
-            ArgumentsCheck(animationImage, frameLength, speed);
-
-            timer = InitializeTimer(speed);
-            this.speed = speed;
+            var animationImage = new Bitmap(animationImagePath);
+            ArgumentsCheck(animationImage, frameLength);
 
             frames = SplitImageOnFrames(animationImage, frameLength);
+
+            this.myTimer = myTimer;
+            myTimer.SetEventHandler(TimerTick);
         }
 
         public event EventHandler AnimationComplete;
 
         public void Start()
         {
-            if(timer == null)
-            {
-                timer = InitializeTimer(speed);
-            }
-
-            timer.Start();
+            myTimer.Start();
         }
 
         public void Stop()
         {
-            timer.Stop();
+            myTimer.Stop();
         }
 
         public void Reset()
         {
-            Finished = false;
             currentFrame = 0;
         }
 
@@ -61,7 +46,17 @@ namespace LodeRunner.Animation
             return frames[currentFrame];
         }
 
-        private void ArgumentsCheck(Bitmap animationImage, int frameLength, int speed)
+        public void Freeze()
+        {
+            myTimer.Stop();
+        }
+
+        public void Unfreeze()
+        {
+            myTimer.Resume();
+        }
+
+        private void ArgumentsCheck(Bitmap animationImage, int frameLength)
         {
             if (frameLength < 1)
             {
@@ -71,31 +66,6 @@ namespace LodeRunner.Animation
             if (animationImage.Size.Width < frameLength)
             {
                 throw new ArgumentException($"Width of {nameof(animationImage)} has to be longer than {nameof(frameLength)}");
-            }
-
-            if (speed < 1)
-            {
-                throw new ArgumentException($"{nameof(speed)} has to be >= 1");
-            }
-        }
-
-        public Timer InitializeTimer(int speed)
-        {
-            timer = new Timer();
-            timer.Enabled  = false;
-            timer.Interval = speed;
-            timer.Elapsed += TimerTick;
-
-            return timer;
-        }
-
-        private void TimerTick(object sender, EventArgs e)
-        {
-            if (++currentFrame >= frames.Length)
-            {
-                Finished = true;
-                currentFrame = 0;
-                AnimationComplete?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -113,14 +83,13 @@ namespace LodeRunner.Animation
             return frames;
         }
 
-        public void Freeze() // todo timer reinitializez, so after 5 sec all bricks grow again; so some state have to be saved and timer recreated
+        private void TimerTick(object sender, EventArgs e)
         {
-            timer?.Stop();
-        }
-
-        public void Unfreeze()
-        {
-            timer?.Start();
+            if (++currentFrame >= frames.Length)
+            {
+                currentFrame = 0;
+                AnimationComplete?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }
