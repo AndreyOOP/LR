@@ -1,27 +1,30 @@
-﻿using LodeRunner.Model.ModelComponents;
-using LodeRunner.Animation;
-using System.Drawing;
-using System;
-using LodeRunner.Model.Interfaces;
-using static LodeRunner.Services.Intersection;
-
-namespace LodeRunner.Model.SingleComponents
+﻿namespace LodeRunner.Model.SingleComponents
 {
+    using LodeRunner.Model.ModelComponents;
+    using LodeRunner.Animation;
+    using System.Drawing;
+    using System;
+    using LodeRunner.Model.Interfaces;
+    using static LodeRunner.Services.Intersection;
+
     [Serializable]
     public class Player : SingleComponentBase, IPlayer, IPause
     {
         public Direction Direction { get; set; }
-        private AnimationImage animation { get; set; }
+        private Animation animation { get; set; }
         private Bitmap texture = new Bitmap(Const.PlayerStand);
 
         public Player(int x, int y) : base(x, y)
         {
         }
 
-        public void SetAnimation(AnimationImage animation)
+        public void SetAnimation(Animation animation)
         {
-            this.animation = animation;
-            this.animation.Start();
+            if(this.animation != animation)
+            {
+                this.animation = animation;
+                this.animation.Start();
+            }
         }
 
         public void SetImage(Bitmap image)
@@ -46,12 +49,12 @@ namespace LodeRunner.Model.SingleComponents
             }
         }
 
-        public void Freeze()
+        public void Pause()
         {
-            animation?.Stop();
+            animation?.Pause();
         }
 
-        public void Unfreeze()
+        public void Continue()
         {
             animation?.Start();
         }

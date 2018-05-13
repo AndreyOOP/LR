@@ -5,7 +5,7 @@ namespace LodeRunner.Model.Interfaces
 {
     public interface IPlayer
     {
-        void SetAnimation(AnimationImage animation);
+        void SetAnimation(Animation.Animation animation);
 
         void SetImage(Bitmap image);
     }

@@ -66,35 +66,35 @@
             Message?.Draw(g);
         }
 
-        public void Freeze()
+        public void Pause()
         {
-            Player.Freeze();
+            Player.Pause();
 
             foreach(var water in field.OfType<Water>())
             {
-                water.Freeze();
+                water.Pause();
                 break;
             }
 
             foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
             {
-                brick.Freeze();
+                brick.Pause();
             }
         }
 
-        public void Unfreeze()
+        public void Continue()
         {
-            Player.Unfreeze();
+            Player.Continue();
 
             foreach (var water in field.OfType<Water>())
             {
-                water.Unfreeze();
+                water.Continue();
                 break;
             }
 
             foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
             {
-                brick.Unfreeze();
+                brick.Continue();
             }
         }
 

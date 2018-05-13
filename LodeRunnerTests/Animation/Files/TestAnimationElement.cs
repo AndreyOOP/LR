@@ -1,12 +1,12 @@
-﻿using System.Drawing;
-using LodeRunner.Animation;
-using LodeRunner.Model.ModelComponents;
-
-namespace LodeRunnerTests.Animation
+﻿namespace LodeRunnerTests.Animation
 {
+    using System.Drawing;
+    using LodeRunner.Animation;
+    using LodeRunner.Model.ModelComponents;
+
     public class TestAnimationElement : SingleComponentBase
     {
-        public AnimationImage Animation { get; set; }
+        public Animation Animation { get; set; }
 
         public TestAnimationElement()
         {

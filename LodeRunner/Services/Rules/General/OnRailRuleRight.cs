@@ -17,6 +17,10 @@ namespace LodeRunner.Services.Rules.General
                 player.SetAnimation(Animations.RailRight);
                 return false;
             }
+            else
+            {
+                player.SetAnimation(Animations.Right);
+            }
 
             return true;
         }

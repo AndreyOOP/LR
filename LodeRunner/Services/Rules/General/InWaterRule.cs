@@ -16,7 +16,7 @@
             if (IsTopOnWater() || IsTopInBrick())
             {
                 model.Message = new GameOver((Const.WindowWidth-200)/2, 100);
-                model.Freeze();
+                model.Pause();
                 controller.Commands.AllowedChars = Const.GameOverInput;
 
                 return false;

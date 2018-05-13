@@ -22,6 +22,7 @@
             {
                 player.Y += 1;
                 player.SetAnimation(Animations.Fall);
+                
                 return false;
             }
 

@@ -15,13 +15,13 @@ namespace LodeRunner.Services.Rules.General
             if (IsPaused)
             {
                 IsPaused = false;
-                model.Unfreeze();
+                model.Continue();
                 controller.Commands.AllowedChars = Const.AllowedInput;
             }
             else
             {
                 IsPaused = true;
-                model.Freeze();
+                model.Pause();
                 controller.Commands.AllowedChars = Const.PauseInput;
             }
 

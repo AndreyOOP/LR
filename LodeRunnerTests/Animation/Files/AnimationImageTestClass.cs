@@ -1,12 +1,11 @@
-﻿using System;
-using System.Drawing;
-using System.Timers;
-using LodeRunner.Animation;
-using LodeRunner.Services.Timer;
-
-namespace LodeRunnerTests.Animation
+﻿namespace AnimationTests
 {
-    public class AnimationImageTestClass : AnimationImage
+    using System;
+    using System.Drawing;
+    using LodeRunner.Animation;
+    using LodeRunner.Services.Timer;
+
+    public class AnimationImageTestClass : Animation
     {
         public AnimationImageTestClass(string animationImagePath, int frameLength, ITimer timer) : base(animationImagePath, frameLength, timer)
         {

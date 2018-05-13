@@ -45,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation\AnimationImage.cs" />
-    <Compile Include="Animation\IAnimationImage.cs" />
+    <Compile Include="Animation\Animation.cs" />
+    <Compile Include="Animation\IAnimation.cs" />
     <Compile Include="ConstantsEnums\Const.cs" />
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="ConstantsEnums\GameState.cs" />
@@ -94,7 +94,6 @@
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="ConstantsEnums\Textures.cs" />
     <Compile Include="Services\Timer\ITimer.cs" />
-    <Compile Include="Services\Timer\MyTimer2.cs" />
     <Compile Include="Services\Timer\MyTimer.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>

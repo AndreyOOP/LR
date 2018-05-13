@@ -13,7 +13,7 @@ namespace LodeRunner.Services.Rules.General
         {
             if(model.MaxScore == model.Score)
             {
-                model.Freeze();
+                model.Pause();
                 model.Message = new GameOver(10, 10);
                 controller.Commands.AllowedChars = Const.PauseInput;
             }

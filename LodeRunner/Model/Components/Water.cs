@@ -1,21 +1,21 @@
-﻿using LodeRunner.Animation;
-using LodeRunner.Model.Interfaces;
-using LodeRunner.Model.ModelComponents;
-using LodeRunner.Model.SingleComponents;
-using System;
-using System.Drawing;
-
-namespace LodeRunner.Model
+﻿namespace LodeRunner.Model
 {
+    using LodeRunner.Animation;
+    using LodeRunner.Model.Interfaces;
+    using LodeRunner.Model.ModelComponents;
+    using LodeRunner.Model.SingleComponents;
+    using System;
+    using System.Drawing;
+
     [Serializable]
     public class Water : SingleComponentBase, IPause
     {
-        private static AnimationImage animation { get; set; } 
+        private static Animation animation { get; set; } 
 
         static Water()
         {
             animation = Animations.Water;
-            animation.Start();
+            //animation.Start();
         }
 
         public Water(int x, int y) : base(x, y)
@@ -27,14 +27,14 @@ namespace LodeRunner.Model
             g.DrawImage(animation.GetCurrentFrame(), X, Y);
         }
 
-        public void Freeze()
+        public void Pause()
         {
-            animation.Freeze();
+            animation.Pause();
         }
 
-        public void Unfreeze()
+        public void Continue()
         {
-            animation.Unfreeze();
+            animation.Continue();
         }
     }
 }

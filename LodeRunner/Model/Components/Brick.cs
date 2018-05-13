@@ -13,8 +13,8 @@ namespace LodeRunner.Model.SingleComponents
     public class Brick : SingleComponentBase, IPause
     {
         private ITimer timer;
-        private AnimationImage burn;
-        private AnimationImage grow;
+        private Animation.Animation burn;
+        private Animation.Animation grow;
         private static Bitmap brick = Textures.Brick;
 
         public BrickState state { get; set; }
@@ -27,8 +27,8 @@ namespace LodeRunner.Model.SingleComponents
 
         public Brick(int x, int y) : base (x, y)
         {
-            burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
-            grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
+            burn = new Animation.Animation(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
+            grow = new Animation.Animation(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
 
             burn.AnimationComplete += OnBurnAnimationFinished;
             grow.AnimationComplete += OnGrowAnimationFinished;
@@ -45,7 +45,7 @@ namespace LodeRunner.Model.SingleComponents
         private void OnBurnAnimationFinished(object sender, EventArgs e)
         {
             state = BrickState.NotVisible;
-            burn.Stop();
+            burn.Pause();
             timer.Start();
         }
 
@@ -59,7 +59,7 @@ namespace LodeRunner.Model.SingleComponents
         private void OnGrowAnimationFinished(object sender, EventArgs e)
         {
             state = BrickState.Visible;
-            grow.Stop();
+            grow.Pause();
         }
 
         public override void Draw(Graphics g)
@@ -83,25 +83,25 @@ namespace LodeRunner.Model.SingleComponents
             }
         }
 
-        public void Freeze()
+        public void Pause()
         {
-            burn.Freeze();
-            grow.Freeze();
+            burn.Pause();
+            grow.Pause();
             timer.Stop();
         }
 
-        public void Unfreeze()
+        public void Continue()
         {
-            burn.Unfreeze();
-            grow.Unfreeze();
-            timer.Start();
+            burn.Start();
+            grow.Start();
+            timer.Resume();
         }
 
         [OnDeserialized]
         private void OnDeserialization(StreamingContext context)
         {
-            burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
-            grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
+            burn = new Animation.Animation(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
+            grow = new Animation.Animation(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
 
             burn.AnimationComplete += OnBurnAnimationFinished;
             grow.AnimationComplete += OnGrowAnimationFinished;

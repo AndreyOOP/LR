@@ -63,6 +63,7 @@
     <Compile Include="Animation\Files\AnimationImageTestClass.cs" />
     <Compile Include="Animation\AnimationImageTests.cs" />
     <Compile Include="Animation\Files\TestAnimationElement.cs" />
+    <Compile Include="Animation\TimerMock.cs" />
     <Compile Include="Controller\ControllerTests.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\SingleComponents\PlayerTests.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Services\Rules\IsAbleMoveRightTest.cs" />
     <Compile Include="Services\Rules\IsAbleMoveLeftTest.cs" />
     <Compile Include="Services\Rules\MoveUpRuleTests.cs" />
+    <Compile Include="Timer\MyTimerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
