@@ -4,20 +4,26 @@ using LodeRunner.Model.ModelComponents;
 using LodeRunner.Services.Timer;
 using System;
 using System.Drawing;
+using System.Runtime.Serialization;
 using System.Timers;
 
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Brick : SingleComponentBase, IFreeze
+    public class Brick : SingleComponentBase, IPause
     {
-        [NonSerialized]
-        private Timer timer;
+        private ITimer timer;
         private AnimationImage burn;
         private AnimationImage grow;
         private static Bitmap brick = Textures.Brick;
 
         public BrickState state { get; set; }
+
+        public Brick(int x, int y, ITimer timer) : this (x, y)
+        {
+            this.timer = timer;
+            timer.SetEventHandler(Grow);
+        }
 
         public Brick(int x, int y) : base (x, y)
         {
@@ -40,13 +46,14 @@ namespace LodeRunner.Model.SingleComponents
         {
             state = BrickState.NotVisible;
             burn.Stop();
-            ToGrowTimerStart();
+            timer.Start();
         }
 
         private void Grow(object sender, ElapsedEventArgs e)
         {
             state = BrickState.Grow;
             grow.Start();
+            timer.Stop();
         }
 
         private void OnGrowAnimationFinished(object sender, EventArgs e)
@@ -76,33 +83,30 @@ namespace LodeRunner.Model.SingleComponents
             }
         }
 
-        private void ToGrowTimerStart()
-        {
-            if(timer == null)
-            {
-                timer = new Timer();
-                timer.Interval = Const.BrickGrowPeriod;
-                timer.Elapsed += Grow;
-                timer.AutoReset = false;
-            }
-
-            timer.Start();
-        }
-
         public void Freeze()
         {
             burn.Freeze();
             grow.Freeze();
-            //animation?.Freeze();
-            timer?.Stop();
+            timer.Stop();
         }
 
         public void Unfreeze()
         {
             burn.Unfreeze();
             grow.Unfreeze();
-            //animation?.Unfreeze();
-            timer?.Start();
+            timer.Start();
+        }
+
+        [OnDeserialized]
+        private void OnDeserialization(StreamingContext context)
+        {
+            burn = new AnimationImage(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
+            grow = new AnimationImage(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
+
+            burn.AnimationComplete += OnBurnAnimationFinished;
+            grow.AnimationComplete += OnGrowAnimationFinished;
+
+            state = BrickState.Visible;
         }
     }
 }

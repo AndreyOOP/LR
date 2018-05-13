@@ -8,7 +8,7 @@ using System.Drawing;
 namespace LodeRunner.Model
 {
     [Serializable]
-    public class Water : SingleComponentBase, IFreeze
+    public class Water : SingleComponentBase, IPause
     {
         private static AnimationImage animation { get; set; } 
 

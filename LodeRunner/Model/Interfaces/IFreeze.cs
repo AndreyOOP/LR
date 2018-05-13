@@ -1,6 +1,6 @@
 ﻿namespace LodeRunner.Model.Interfaces
 {
-    public interface IFreeze
+    public interface IPause
     {
         void Freeze();
 

@@ -2,6 +2,7 @@
 using LodeRunner.Model;
 using LodeRunner.Model.SingleComponents;
 using LodeRunner.Services;
+using LodeRunner.Services.Timer;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -157,7 +158,7 @@ namespace LevelEditor
                         break;
 
                     case '3':
-                        model.Add(new Brick(x, y));
+                        model.Add(new Brick(x, y, new MyTimer(Const.BrickGrowPeriod)));
                         break;
 
                     case '4':

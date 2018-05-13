@@ -2,11 +2,12 @@
 using LodeRunner.Services.Timer;
 using System;
 using System.Drawing;
+using System.Runtime.Serialization;
 
 namespace LodeRunner.Animation
 {
     [Serializable]
-    public class AnimationImage : IAnimationImage, IFreeze
+    public class AnimationImage : IAnimationImage, IPause
     {
         protected int currentFrame;
         protected Bitmap[] frames;

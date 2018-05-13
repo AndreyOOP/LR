@@ -69,6 +69,7 @@
     <Compile Include="Services\Intersection.cs" />
     <Compile Include="Services\IUserInput.cs" />
     <Compile Include="Services\ModelLoadService.cs" />
+    <Compile Include="Services\ModelLoadServiceArray.cs" />
     <Compile Include="Services\Rules\Down\IsAbleMoveDown.cs" />
     <Compile Include="Services\Rules\Down\MoveDownRule.cs" />
     <Compile Include="Services\Rules\General\WinRule.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="ConstantsEnums\Textures.cs" />
     <Compile Include="Services\Timer\ITimer.cs" />
+    <Compile Include="Services\Timer\MyTimer2.cs" />
     <Compile Include="Services\Timer\MyTimer.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>

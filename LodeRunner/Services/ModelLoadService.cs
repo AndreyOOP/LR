@@ -18,7 +18,7 @@
 
         public void Save(string path, Model model)
         {
-            using(FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, model);
             }
