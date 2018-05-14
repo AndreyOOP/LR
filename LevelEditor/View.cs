@@ -150,7 +150,7 @@ namespace LevelEditor
                 switch (selectedObject)
                 {
                     case '1':
-                        model.Add(new Stone(x, y));
+                        model.Add(new Stone(x, y, Textures.Stone));
                         break;
 
                     case '2':

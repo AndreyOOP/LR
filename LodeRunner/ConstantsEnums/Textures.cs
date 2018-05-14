@@ -9,5 +9,6 @@ namespace LodeRunner
         public static Bitmap Gold { get; }       = new Bitmap(@"Resources\Gold.png");
         public static Bitmap GameOver { get; }   = new Bitmap(@"Resources\GameOver.png");
         public static Bitmap Brick { get; }      = new Bitmap(Const.BrickTexture);
+        public static Bitmap Stone { get; }      = new Bitmap(Const.StoneTexture);
     }
 }

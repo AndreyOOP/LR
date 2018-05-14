@@ -6,7 +6,7 @@ namespace LodeRunner.Model.ModelComponents
     [Serializable]
     public abstract class StaticComponent : IDrawable
     {
-        private Bitmap texture;
+        protected Bitmap texture;
 
         public StaticComponent(int x = 0, int y = 0, Bitmap texture = null)
         {
