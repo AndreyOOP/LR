@@ -1,40 +1,16 @@
 ﻿namespace LodeRunner.Model
 {
     using LodeRunner.Animation;
-    using LodeRunner.Model.Interfaces;
-    using LodeRunner.Model.ModelComponents;
-    using LodeRunner.Model.SingleComponents;
+    using LodeRunner.Model.DynamicComponents;
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
 
     [Serializable]
-    public class Water : StaticComponent, IPause
+    public class Water : DynamicComponent<WaterState>
     {
-        private static Animation animation { get; set; } 
-
-        static Water()
+        public Water(int x, int y, Dictionary<WaterState, Animation> dynamicStates, Dictionary<WaterState, Image> staticStates, WaterState state) : base(x, y, dynamicStates, staticStates, state)
         {
-            animation = Animations.Water;
-            //animation.Start();
-        }
-
-        public Water(int x, int y) : base(x, y)
-        {
-        }
-
-        public override void Draw(Graphics g)
-        {
-            g.DrawImage(animation.GetCurrentFrame(), X, Y);
-        }
-
-        public void Pause()
-        {
-            animation.Pause();
-        }
-
-        public void Continue()
-        {
-            animation.Continue();
         }
     }
 }

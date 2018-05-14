@@ -1,8 +1,11 @@
 ﻿using LodeRunner;
+using LodeRunner.Animation;
 using LodeRunner.Model;
+using LodeRunner.Model.DynamicComponents;
 using LodeRunner.Model.SingleComponents;
 using LodeRunner.Services;
 using LodeRunner.Services.Timer;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -154,7 +157,9 @@ namespace LevelEditor
                         break;
 
                     case '2':
-                        model.Add(new Water(x, y));
+                        var d = new Dictionary<WaterState, Animation>();
+                        d.Add(WaterState.Animated, Animations.Water);
+                        model.Add(new Water(x, y, d, null, WaterState.Animated));
                         break;
 
                     case '3':

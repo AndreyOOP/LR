@@ -1,4 +1,7 @@
 ﻿namespace LodeRunner.Model.SingleComponents
 {
-    public enum BrickState { Burn, NotVisible, Grow, Visible}
+    public enum BrickState
+    {
+        Burn, NotVisible, Grow, Visible
+    }
 }
