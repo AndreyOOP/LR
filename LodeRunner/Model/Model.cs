@@ -10,7 +10,7 @@
     [Serializable]
     public partial class Model : IModel, IDrawable, IPause
     {
-        private SingleComponentBase[,] field = new SingleComponentBase[Const.BlockWidth, Const.BlockHeigth];
+        private StaticComponent[,] field = new StaticComponent[Const.BlockWidth, Const.BlockHeigth];
 
         public GameState State { get; set; } = GameState.InGame;
 
@@ -19,21 +19,21 @@
         public int MaxScore { get; set; }
         public int Score { get; set; }
 
-        public SingleComponentBase Message { get; set; }
+        public StaticComponent Message { get; set; }
         
         public Model()
         {
             //MaxScore = field.OfType<Gold>().Count();
         }
 
-        public void Add<T>(T component) where T : SingleComponentBase
+        public void Add<T>(T component) where T : StaticComponent
         {
             CheckInput(component);
 
             field[component.BlockX, component.BlockY] = component;
         }
         
-        public SingleComponentBase Get(int blockX, int blockY, bool absolute = false)
+        public StaticComponent Get(int blockX, int blockY, bool absolute = false)
         {
             if (absolute)
             {
@@ -98,7 +98,7 @@
             }
         }
 
-        private void CheckInput<T>(T component) where T : SingleComponentBase
+        private void CheckInput<T>(T component) where T : StaticComponent
         {
             if (component.BlockX < 0)
             {

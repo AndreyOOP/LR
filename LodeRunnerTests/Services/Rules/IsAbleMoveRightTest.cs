@@ -22,7 +22,12 @@
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\IsPossibleMoveRight.lev");
+            model = new Model();
+            model.Add(new Brick(20, 20));
+            model.Add(new Brick(20, 40));
+            model.Player = new Player(0, 0);
+
+
             player = model.Player;
             controller = new Controller(model, new LodeRunner.View());
             rule = new IsAbleMoveRightRule(controller);

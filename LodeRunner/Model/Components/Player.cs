@@ -8,7 +8,7 @@
     using static LodeRunner.Services.Intersection;
 
     [Serializable]
-    public class Player : SingleComponentBase, IPlayer, IPause
+    public class Player : StaticComponent, IPlayer, IPause
     {
         public Direction Direction { get; set; }
         private Animation animation { get; set; }

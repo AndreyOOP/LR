@@ -21,7 +21,11 @@
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\FallBetweenBricks.lev");
+            model = new Model();
+            model.Add(new Brick(0, 20));
+            model.Add(new Brick(40, 20));
+            model.Player = new Player(20, 0);
+
             player = model.Player;
             controller = new Controller(model, new LodeRunner.View());
             rule = new IsNotFallRule(controller);

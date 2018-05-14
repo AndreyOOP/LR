@@ -5,7 +5,7 @@ using System.Drawing;
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Stairs : SingleComponentBase
+    public class Stairs : StaticComponent
     {
         private static Bitmap texture = new Bitmap(Const.StairsTexture);
 

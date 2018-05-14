@@ -5,7 +5,7 @@ using System.Drawing;
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Rail : SingleComponentBase
+    public class Rail : StaticComponent
     {
         private static Bitmap texture = new Bitmap(Const.RailTexture);
 

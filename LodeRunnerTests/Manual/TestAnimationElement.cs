@@ -4,7 +4,7 @@
     using LodeRunner.Animation;
     using LodeRunner.Model.ModelComponents;
 
-    public class TestAnimationElement : SingleComponentBase
+    public class TestAnimationElement : StaticComponent
     {
         public Animation Animation { get; set; }
 

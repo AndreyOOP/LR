@@ -2,7 +2,6 @@
 using LodeRunner.Services.Timer;
 using System;
 using System.Drawing;
-using System.Runtime.Serialization;
 
 namespace LodeRunner.Animation
 {

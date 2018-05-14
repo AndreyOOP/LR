@@ -8,7 +8,7 @@
     using System.Drawing;
 
     [Serializable]
-    public class Water : SingleComponentBase, IPause
+    public class Water : StaticComponent, IPause
     {
         private static Animation animation { get; set; } 
 

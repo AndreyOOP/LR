@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace LodeRunnerTests.Model
 {
-    public class TestComponent : SingleComponentBase
+    public class TestComponent : StaticComponent
     {
         public string Label { get; set; }
 

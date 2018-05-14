@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace LodeRunner.Model.SingleComponents
 {
-    public class GameOver : SingleComponentBase
+    public class GameOver : StaticComponent
     {
         private Bitmap texture = Textures.GameOver;
 

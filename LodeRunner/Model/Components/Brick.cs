@@ -10,7 +10,7 @@ using System.Timers;
 namespace LodeRunner.Model.SingleComponents
 {
     [Serializable]
-    public class Brick : SingleComponentBase, IPause
+    public class Brick : StaticComponent, IPause
     {
         private ITimer timer;
         private Animation.Animation burn;

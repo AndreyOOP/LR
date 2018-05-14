@@ -22,7 +22,14 @@
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\MoveUp.lev"); //as well move to enum ?
+            model = new Model();
+
+            model.Add(new Stairs(0, 0));
+            model.Add(new Stairs(40, 0));
+            model.Add(new Stairs(0, 20));
+            model.Add(new Stairs(40, 20));
+            model.Player = new Player(20, 20);
+
             player = model.Player;
             controller = new Controller(model, new LodeRunner.View());
             rule = new MoveUpRule(controller);
