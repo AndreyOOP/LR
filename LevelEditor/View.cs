@@ -162,15 +162,15 @@ namespace LevelEditor
                         break;
 
                     case '4':
-                        model.Add(new Stairs(x, y));
+                        model.Add(new Stairs(x, y, Textures.Stairs));
                         break;
 
                     case '5':
-                        model.Add(new Rail(x, y));
+                        model.Add(new Rail(x, y, Textures.Rail));
                         break;
 
                     case '6':
-                        model.Add(new Gold(x, y));
+                        model.Add(new Gold(x, y, Textures.Gold));
                         model.MaxScore++;
                         break;
 

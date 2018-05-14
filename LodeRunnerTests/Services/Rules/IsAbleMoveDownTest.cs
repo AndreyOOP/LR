@@ -23,7 +23,7 @@
         public void Setup()
         {
             model = new Model();
-            model.Add(new Stone(0, 20));
+            model.Add(new Stone(0, 20, Textures.Stone));
             model.Add(new Brick(40, 20));
             model.Player = new Player(20, 0);
 

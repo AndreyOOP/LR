@@ -6,6 +6,7 @@
     using LodeRunner.Services;
     using LodeRunner.Services.Rules;
     using LodeRunner.Control;
+    using LodeRunner;
 
     [TestClass]
     public class IsAbleMoveLeftTest
@@ -23,8 +24,8 @@
         public void Setup()
         {
             model = new Model();
-            model.Add(new Stone(0, 20));
-            model.Add(new Stone(0, 40));
+            model.Add(new Stone(0, 20, Textures.Stone));
+            model.Add(new Stone(0, 40, Textures.Stone));
             model.Player = new Player(20, 0);
 
 

@@ -7,9 +7,7 @@ namespace LodeRunner.Model.SingleComponents
     [Serializable]
     public class Stairs : StaticComponent
     {
-        private static Bitmap texture = new Bitmap(Const.StairsTexture);
-
-        public Stairs(int x, int y) : base(x, y)
+        public Stairs(int x, int y,Bitmap texture) : base(x, y, texture)
         {
         }
 

@@ -29,11 +29,15 @@ public class ManualTests
     }
 
     [TestMethod]
-    public void StoneDisplay()
+    public void StaticComponentsDisplay()
     {
         var visualizer = new ElementVisualizaer();
 
         visualizer.Add(new Stone(0, 0, Textures.Stone));
+        visualizer.Add(new Stairs(20, 0, Textures.Stairs));
+        visualizer.Add(new Gold(40, 0, Textures.Gold));
+        visualizer.Add(new Rail(60, 0, Textures.Rail));
+        visualizer.Add(new GameOver(0, 40, Textures.GameOver));
         visualizer.Start();
     }
 }

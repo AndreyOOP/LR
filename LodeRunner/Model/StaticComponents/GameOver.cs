@@ -1,15 +1,11 @@
-﻿using LodeRunner.Model.ModelComponents;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-
-namespace LodeRunner.Model.SingleComponents
+﻿namespace LodeRunner.Model.SingleComponents
 {
+    using System.Drawing;
+    using LodeRunner.Model.ModelComponents;
+
     public class GameOver : StaticComponent
     {
-        private Bitmap texture = Textures.GameOver;
-
-        public GameOver(int x, int y) : base(x, y)
+        public GameOver(int x, int y, Bitmap texture) : base(x, y, texture)
         {
         }
 

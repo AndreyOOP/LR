@@ -1,15 +1,13 @@
-﻿using LodeRunner.Model.ModelComponents;
-using System;
-using System.Drawing;
-
-namespace LodeRunner.Model.SingleComponents
+﻿namespace LodeRunner.Model.SingleComponents
 {
+    using System;
+    using System.Drawing;
+    using LodeRunner.Model.ModelComponents;
+
     [Serializable]
     public class Rail : StaticComponent
     {
-        private static Bitmap texture = new Bitmap(Const.RailTexture);
-
-        public Rail(int x, int y) : base(x, y)
+        public Rail(int x, int y, Bitmap texture) : base(x, y, texture)
         {
         }
 

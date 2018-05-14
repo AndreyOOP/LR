@@ -7,6 +7,7 @@
     using LodeRunner.Services.Rules;
     using static LodeRunner.Services.Intersection;
     using LodeRunner.Control;
+    using LodeRunner;
 
     [TestClass()]
     public class MoveUpRuleTests
@@ -24,10 +25,10 @@
         {
             model = new Model();
 
-            model.Add(new Stairs(0, 0));
-            model.Add(new Stairs(40, 0));
-            model.Add(new Stairs(0, 20));
-            model.Add(new Stairs(40, 20));
+            model.Add(new Stairs(0, 0, Textures.Stairs));
+            model.Add(new Stairs(40, 0, Textures.Stairs));
+            model.Add(new Stairs(0, 20, Textures.Stairs));
+            model.Add(new Stairs(40, 20, Textures.Stairs));
             model.Player = new Player(20, 20);
 
             player = model.Player;
