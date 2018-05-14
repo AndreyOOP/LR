@@ -1,33 +1,32 @@
-﻿using LodeRunner.Services.Timer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-
-namespace LodeRunnerTests.Animation
+﻿namespace LodeRunnerTests.Animation
 {
+    using System.Timers;
+    using LodeRunner.Services.Timer;
+
     public class TimerMock : ITimer
     {
-        public MockTimerState State;
-        public ElapsedEventHandler handler;
-
-        public enum MockTimerState { Start, Stop, Resumed}
-
-        public TimerMock(int interval)
+        public TimerMock()
         {
-            
+            State = MockTimerState.Stop;
         }
+
+        public enum MockTimerState
+        {
+            Start, Stop, Resumed
+        }
+
+        public MockTimerState State { get; set; }
+
+        public ElapsedEventHandler Handler { get; set; }
 
         public void Resume()
         {
-            throw new NotImplementedException();
+            State = MockTimerState.Resumed;
         }
 
         public void SetEventHandler(ElapsedEventHandler handler)
         {
-            this.handler = handler;
+            Handler = handler;
         }
 
         public void Start()
@@ -37,12 +36,12 @@ namespace LodeRunnerTests.Animation
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            State = MockTimerState.Stop;
         }
 
-        public void NextFrame()
+        public void NextTick()
         {
-            handler(null, null);
+            Handler(null, null);
         }
     }
 }

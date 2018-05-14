@@ -60,11 +60,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Animation\Files\AnimationImageTestClass.cs" />
     <Compile Include="Animation\AnimationImageTests.cs" />
-    <Compile Include="Animation\Files\TestAnimationElement.cs" />
+    <Compile Include="Manual\TestAnimationElement.cs" />
     <Compile Include="Animation\TimerMock.cs" />
     <Compile Include="Controller\ControllerTests.cs" />
+    <Compile Include="Manual\ManualTests.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\SingleComponents\PlayerTests.cs" />
     <Compile Include="Model\SingleComponents\StoneTests.cs" />
@@ -116,7 +116,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Animation\Files\AnimatedTestImage.png">
+    <Content Include="Animation\AnimatedTestImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -29,6 +29,7 @@ namespace LodeRunner.Animation
         public void Start()
         {
             myTimer.Start();
+            currentFrame = 0;
         }
 
         public void Pause()
@@ -53,7 +54,7 @@ namespace LodeRunner.Animation
                 throw new ArgumentException($"{nameof(frameLength)} has to be >= 1");
             }
 
-            if (animationImage.Size.Width < frameLength)
+            if (animationImage.Size.Height < frameLength)
             {
                 throw new ArgumentException($"Width of {nameof(animationImage)} has to be longer than {nameof(frameLength)}");
             }

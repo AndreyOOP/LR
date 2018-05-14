@@ -14,18 +14,18 @@ namespace SingleComponents
         [TestMethod, Ignore]
         public void TestMethod1()
         {
-            var tm = new TimerMock(200);
+            var tm = new TimerMock();
 
             var br = new Brick(0, 0);
 
             var prop = br.GetType().GetField("burn", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            prop.SetValue(br, new Animation(Const.BrickBurnAnimation, Const.BlockSize, new TimerMock(200)));
+            prop.SetValue(br, new Animation(Const.BrickBurnAnimation, Const.BlockSize, new TimerMock()));
 
             br.Burn();
-            tm.NextFrame();
-            tm.NextFrame();
-            tm.NextFrame();
-            tm.NextFrame();
+            tm.NextTick();
+            tm.NextTick();
+            tm.NextTick();
+            tm.NextTick();
         }
     }
 }
