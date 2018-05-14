@@ -25,6 +25,7 @@ namespace LodeRunner.Model.SingleComponents
             timer.SetEventHandler(Grow);
         }
 
+        //todo animation have to be passed outside
         public Brick(int x, int y) : base (x, y)
         {
             burn = new Animation.Animation(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
@@ -83,18 +84,21 @@ namespace LodeRunner.Model.SingleComponents
             }
         }
 
-        public void Pause()
+        public void Pause() //in fact paused & started have to be only one item...
         {
             burn.Pause();
             grow.Pause();
             timer.Stop();
         }
 
-        public void Continue()
+        public void Continue() //!!!
         {
-            burn.Start();
-            grow.Start();
-            timer.Resume();
+            switch (state)
+            {
+                case BrickState.Burn: burn.Continue(); break;
+                case BrickState.Grow: grow.Continue(); break;
+                case BrickState.NotVisible: timer.Resume(); break;
+            }
         }
 
         [OnDeserialized]

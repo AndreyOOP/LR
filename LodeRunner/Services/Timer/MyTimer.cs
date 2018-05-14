@@ -32,6 +32,7 @@
             timer.Interval = interval;
             timer.Start();
             stopwatch.Restart();
+            resumeInt = 0;
         }
 
         public void Stop()

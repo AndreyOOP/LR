@@ -68,6 +68,7 @@
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\SingleComponents\PlayerTests.cs" />
     <Compile Include="Model\SingleComponents\StoneTests.cs" />
+    <Compile Include="Model\SingleComponents\BrickTests.cs" />
     <Compile Include="Model\SingleComponents\WaterTests.cs" />
     <Compile Include="Model\TestComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
