@@ -1,4 +1,5 @@
 ﻿using LodeRunner.Control;
+using LodeRunner.Model.DynamicComponents;
 using LodeRunner.Model.SingleComponents;
 using static LodeRunner.Services.Intersection;
 
@@ -15,18 +16,17 @@ namespace LodeRunner.Services.Rules
             if (IsPlayerTopOrBottomOnSameStairs())
             {
                 player.Y -= 1;
-                player.SetAnimation(Animations.Up);
-                player.Direction = Direction.None;
+                player.State = PlayerState.RunUp;
                 return true;
             }
 
             if (IsTopAboveDiffBlocks() && IsAnyTopCornerOnStairs())
             {
-                player.X += (player.Direction == Direction.Left) ? -1 : 1;
+                player.X += (player.State == PlayerState.RunLeft) ? -1 : 1;
                 return true;
             }
 
-            player.SetImage(Textures.Stand);
+            player.State = PlayerState.Stay;
             return false;
         }
 

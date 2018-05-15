@@ -2,6 +2,7 @@
 {
     using LodeRunner.Control;
     using LodeRunner.Model;
+    using LodeRunner.Model.DynamicComponents;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
@@ -38,7 +39,7 @@
             {
                 if (((Brick)element).State == BrickState.Visible)
                 {
-                    model.Player.SetImage(Textures.StairsDown); //todo change to ? nothing ? In Brick ?
+                    model.Player.State = PlayerState.RunDown; //todo change to ? nothing ? In Brick ?
                     return true;
                 }
             }

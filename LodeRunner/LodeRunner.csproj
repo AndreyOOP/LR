@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Animation\Animation.cs" />
     <Compile Include="Animation\IAnimation.cs" />
+    <Compile Include="ConstantsEnums\PlayerState.cs" />
     <Compile Include="Services\BlockFactory.cs" />
     <Compile Include="ConstantsEnums\Const.cs" />
     <Compile Include="Controller\Controller.cs" />

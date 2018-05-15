@@ -59,7 +59,21 @@
 
         public Player GetPlayer(int x, int y)
         {
-            return new Player(x, y);
+            var player = new Player(x, y);
+
+            player.AddDynamicState(PlayerState.RunLeft, Animations.Left);
+            player.AddDynamicState(PlayerState.RailLeft, Animations.RailLeft);
+            player.AddDynamicState(PlayerState.RunRight, Animations.Right);
+            player.AddDynamicState(PlayerState.RailRight, Animations.RailRight);
+            player.AddDynamicState(PlayerState.RunUp, Animations.Up);
+            player.AddDynamicState(PlayerState.Fall, Animations.Fall);
+
+            player.AddStaticState(PlayerState.RunDown, Textures.StairsDown);
+            player.AddStaticState(PlayerState.Stay, Textures.Stand);
+
+            player.State = PlayerState.Stay;
+
+            return player;
         }
 
         public GameOver GetGameOver(int x, int y)

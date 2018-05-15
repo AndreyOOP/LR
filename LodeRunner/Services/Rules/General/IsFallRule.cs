@@ -2,6 +2,7 @@
 {
     using LodeRunner.Control;
     using LodeRunner.Model;
+    using LodeRunner.Model.DynamicComponents;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
@@ -21,7 +22,7 @@
             if (IsInGameWindow() && (IsBottomNullBlocks() || IsBelowRail() || IsAbovewWater() || IsBelowTransperantBrick() || IsBelowGold()))
             {
                 player.Y += 1;
-                player.SetAnimation(Animations.Fall);
+                player.State = PlayerState.Fall;
                 
                 return false;
             }

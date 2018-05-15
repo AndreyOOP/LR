@@ -1,4 +1,5 @@
 ﻿using LodeRunner.Control;
+using LodeRunner.Model.DynamicComponents;
 using LodeRunner.Model.SingleComponents;
 using static LodeRunner.Services.Intersection;
 
@@ -14,12 +15,12 @@ namespace LodeRunner.Services.Rules.General
         {
             if (intersection.Line<Rail>(Direction.Up, Side.In, Operation.And))
             {
-                player.SetAnimation(Animations.RailRight);
+                player.State = PlayerState.RailRight;
                 return false;
             }
             else
             {
-                player.SetAnimation(Animations.Right);
+                player.State = PlayerState.RunRight;
             }
 
             return true;

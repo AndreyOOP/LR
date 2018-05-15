@@ -3,11 +3,10 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using LodeRunner.Model;
     using LodeRunner.Model.SingleComponents;
-    using LodeRunner.Services;
     using LodeRunner.Services.Rules;
-    using static LodeRunner.Services.Intersection;
     using LodeRunner.Control;
     using LodeRunner;
+    using LodeRunner.Model.DynamicComponents;
 
     [TestClass()]
     public class MoveUpRuleTests
@@ -46,7 +45,7 @@
         public void CheckTest1()
         {
             player.X = 19;
-            player.Direction = Direction.Left;
+            player.State = PlayerState.RunLeft;
 
             Assert.IsTrue(rule.Check());
             Assert.AreEqual(18, player.X);
@@ -67,7 +66,7 @@
         public void CheckTest4()
         {
             player.X = 21;
-            player.Direction = Direction.Right;
+            player.State = PlayerState.RunRight;
 
             Assert.IsTrue(rule.Check());
             Assert.AreEqual(22, player.X);
@@ -88,7 +87,7 @@
         public void CheckTest6()
         {
             player.X = 41;
-            player.Direction = Direction.Left;
+            player.State = PlayerState.RunLeft;
 
             Assert.IsTrue(rule.Check());
             Assert.AreEqual(40, player.X);

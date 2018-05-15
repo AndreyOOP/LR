@@ -2,6 +2,7 @@
 {
     using LodeRunner.Control;
     using LodeRunner.Model;
+    using LodeRunner.Model.DynamicComponents;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
@@ -23,7 +24,7 @@
                intersection.Line<Stone>(Direction.Right, Side.Out, Operation.Or)
               )
             {
-                player.SetImage(Textures.Stand);
+                player.State = PlayerState.Stay;
                 return false;
             }
 

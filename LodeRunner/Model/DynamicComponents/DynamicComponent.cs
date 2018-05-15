@@ -30,6 +30,11 @@
 
             set
             {
+                if (state.Equals(value))
+                {
+                    return;
+                }
+                    
                 state = value;
 
                 foreach (var s in dynamicStates)

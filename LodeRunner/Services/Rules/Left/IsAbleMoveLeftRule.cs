@@ -1,6 +1,7 @@
 ﻿namespace LodeRunner.Services.Rules
 {
     using LodeRunner.Control;
+    using LodeRunner.Model.DynamicComponents;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
@@ -22,7 +23,7 @@
                 intersection.Line<Stone>(Direction.Left, Side.Out, Operation.Or)
               )
             {
-                player.SetImage(Textures.Stand);
+                player.State = PlayerState.Stay;
                 return false;
             }
 
