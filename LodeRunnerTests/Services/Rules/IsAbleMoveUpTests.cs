@@ -6,6 +6,7 @@
     using LodeRunner.Services;
     using LodeRunner.Services.Rules;
     using LodeRunner.Control;
+    using LodeRunner;
 
     [TestClass]
     public class IsAbleMoveUpTests
@@ -21,7 +22,11 @@
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\IsAbleMoveUp.lev");
+            model = new Model();
+            model.Add(new Brick(0, 0));
+            model.Add(new Stone(40, 0, Textures.Stone));
+            model.Player = new Player(20, 20);
+
             player = model.Player;
             controller = new Controller(model, new LodeRunner.View());
             rule = new IsAbleMoveUp(controller);

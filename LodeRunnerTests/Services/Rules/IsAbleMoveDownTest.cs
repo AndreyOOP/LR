@@ -6,6 +6,7 @@
     using LodeRunner.Services;
     using LodeRunner.Services.Rules;
     using LodeRunner.Control;
+    using LodeRunner;
 
     [TestClass]
     public class IsAbleMoveDownTests
@@ -21,7 +22,11 @@
         [TestInitialize]
         public void Setup()
         {
-            model = new ModelLoadService().Load(@"TestModels\IsAbleMoveDown.lev");
+            model = new Model();
+            model.Add(new Stone(0, 20, Textures.Stone));
+            model.Add(new Brick(40, 20));
+            model.Player = new Player(20, 0);
+
             player = model.Player;
             controller = new Controller(model, new LodeRunner.View());
             rule = new IsAbleMoveDownRule(controller);
@@ -54,7 +59,7 @@
         [TestMethod]
         public void IsNotAbleMoveDownOutOfFieldTest()
         {
-            player.Y += 20;
+            player.Y += 20 * Const.BlockHeigth;
             Assert.IsFalse(rule.Check());
         }
     }

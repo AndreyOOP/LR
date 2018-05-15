@@ -2,6 +2,7 @@
 {
     using LodeRunner.Control;
     using LodeRunner.Model;
+    using LodeRunner.Model.DynamicComponents;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
@@ -23,7 +24,7 @@
                intersection.Line<Stone>(Direction.Right, Side.Out, Operation.Or)
               )
             {
-                player.SetImage(Textures.Stand);
+                player.State = PlayerState.Stay;
                 return false;
             }
 
@@ -37,7 +38,7 @@
             if (el is Brick)
             {
                 var brick = (Brick)el;
-                return brick.state == BrickState.Burn || brick.state == BrickState.NotVisible;
+                return brick.State == BrickState.Burn || brick.State == BrickState.NotVisible;
             }
 
             return false;

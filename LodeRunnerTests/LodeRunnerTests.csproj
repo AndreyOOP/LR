@@ -60,15 +60,15 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Animation\Files\AnimationImageTestClass.cs" />
     <Compile Include="Animation\AnimationImageTests.cs" />
-    <Compile Include="Animation\Files\TestAnimationElement.cs" />
+    <Compile Include="Manual\TestAnimationElement.cs" />
+    <Compile Include="Animation\TimerMock.cs" />
     <Compile Include="Controller\ControllerTests.cs" />
+    <Compile Include="Manual\ManualTests.cs" />
+    <Compile Include="Model\DynamicComponents\AnimationMock.cs" />
+    <Compile Include="Model\DynamicComponents\DynamicComponentTest.cs" />
+    <Compile Include="Model\DynamicComponents\BrickTest.cs" />
     <Compile Include="Model\ModelTests.cs" />
-    <Compile Include="Model\SingleComponents\PlayerTests.cs" />
-    <Compile Include="Model\SingleComponents\StoneTests.cs" />
-    <Compile Include="Model\SingleComponents\WaterTests.cs" />
-    <Compile Include="Model\TestComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementVisualizaer.cs">
       <SubType>Form</SubType>
@@ -81,6 +81,7 @@
     <Compile Include="Services\Rules\IsAbleMoveRightTest.cs" />
     <Compile Include="Services\Rules\IsAbleMoveLeftTest.cs" />
     <Compile Include="Services\Rules\MoveUpRuleTests.cs" />
+    <Compile Include="Timer\MyTimerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -113,7 +114,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Animation\Files\AnimatedTestImage.png">
+    <Content Include="Animation\AnimatedTestImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

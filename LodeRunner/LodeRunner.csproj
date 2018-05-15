@@ -45,22 +45,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation\AnimationImage.cs" />
-    <Compile Include="Animation\IAnimationImage.cs" />
+    <Compile Include="Animation\Animation.cs" />
+    <Compile Include="Animation\IAnimation.cs" />
+    <Compile Include="ConstantsEnums\PlayerState.cs" />
+    <Compile Include="Services\BlockFactory.cs" />
     <Compile Include="ConstantsEnums\Const.cs" />
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="ConstantsEnums\GameState.cs" />
     <Compile Include="ConstantsEnums\BrickState.cs" />
-    <Compile Include="Model\Interfaces\IFreeze.cs" />
+    <Compile Include="ConstantsEnums\WaterState.cs" />
+    <Compile Include="Model\DynamicComponents\DynamicComponent.cs" />
+    <Compile Include="Model\Interfaces\IPause.cs" />
     <Compile Include="Model\Interfaces\IPlayer.cs" />
     <Compile Include="ConstantsEnums\Animations.cs" />
-    <Compile Include="Model\Components\Brick.cs" />
-    <Compile Include="Model\Components\GameOver.cs" />
-    <Compile Include="Model\Components\Gold.cs" />
-    <Compile Include="Model\Components\Player.cs" />
-    <Compile Include="Model\Components\Rail.cs" />
-    <Compile Include="Model\Components\Stairs.cs" />
-    <Compile Include="Model\Components\Stone.cs" />
+    <Compile Include="Model\DynamicComponents\Brick.cs" />
+    <Compile Include="Model\StaticComponents\GameOver.cs" />
+    <Compile Include="Model\StaticComponents\Gold.cs" />
+    <Compile Include="Model\DynamicComponents\Player.cs" />
+    <Compile Include="Model\StaticComponents\Rail.cs" />
+    <Compile Include="Model\StaticComponents\Stairs.cs" />
+    <Compile Include="Model\StaticComponents\Stone.cs" />
     <Compile Include="Services\Command\Command.cs" />
     <Compile Include="Services\Command\Commands.cs" />
     <Compile Include="Services\Command\ICommand.cs" />
@@ -94,7 +98,6 @@
     <Compile Include="Services\Rules\RuleBase.cs" />
     <Compile Include="ConstantsEnums\Textures.cs" />
     <Compile Include="Services\Timer\ITimer.cs" />
-    <Compile Include="Services\Timer\MyTimer2.cs" />
     <Compile Include="Services\Timer\MyTimer.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
@@ -102,8 +105,8 @@
     <Compile Include="Model\Interfaces\IDrawable.cs" />
     <Compile Include="Model\Interfaces\IModel.cs" />
     <Compile Include="Model\Model.cs" />
-    <Compile Include="Model\Interfaces\SingleComponentBase.cs" />
-    <Compile Include="Model\Components\Water.cs" />
+    <Compile Include="Model\Interfaces\StaticComponent.cs" />
+    <Compile Include="Model\DynamicComponents\Water.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

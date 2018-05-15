@@ -1,114 +1,130 @@
 ﻿using System;
 using System.Drawing;
-using LodeRunner.Services.Timer;
+using LodeRunner.Animation;
+using LodeRunnerTests;
 using LodeRunnerTests.Animation;
-using LodeRunnerTests.VisualTester;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static LodeRunnerTests.Animation.TimerMock;
 
-namespace LodeRunner.Animation.Tests
+[TestClass]
+public class AnimationImageTests
 {
-    [TestClass]
-    public class AnimationImageTests
+    private TimerMock timer;
+    private string path = @"Animation\AnimatedTestImage.png";
+    private int frameLength = 30;
+    private int frameQty = 5;
+    private Animation animation;
+
+    [TestInitialize]
+    public void Initialize()
     {
-        private AnimationImageTestClass animationImage;
+        timer = new TimerMock();
+        animation = new Animation(path, frameLength, timer);
+    }
 
-        [TestInitialize]
-        public void Initialize()
+    [TestMethod]
+    public void AnimationInitialization()
+    {
+        State.GetState(animation);
+
+        Assert.AreEqual(MockTimerState.Stop, State.Timer.State);
+        Assert.AreEqual(0, State.CurrentFrame);
+        Assert.AreEqual(5, State.Frames.Length);
+    }
+
+    [TestMethod]
+    public void IncorrectFrameLengthTest()
+    {
+        try
         {
-            animationImage = new AnimationImageTestClass(Const.BrickTexture, 2, new MyTimer(1));
+            new Animation(path, 0, new TimerMock());
+            Assert.Fail("No argument exception thrown");
+        }
+        catch (ArgumentException ex)
+        {
+            Assert.AreEqual("frameLength has to be >= 1", ex.Message);
+        }
+    }
+
+    [TestMethod]
+    public void IncorrectImageToFrameLengthRatioTest()
+    {
+        try
+        {
+            new Animation(path, frameQty * frameLength + 1, new TimerMock());
+            Assert.Fail("No argument exception thrown");
+        }
+        catch (ArgumentException ex)
+        {
+            Assert.AreEqual("Width of animationImage has to be longer than frameLength", ex.Message);
+        }
+    }
+
+    [TestMethod]
+    public void Start()
+    {
+        animation.Start();
+        State.GetState(animation);
+
+        Assert.AreEqual(MockTimerState.Start, State.Timer.State);
+        Assert.AreEqual(0, State.CurrentFrame);
+    }
+
+    [TestMethod]
+    public void Pause()
+    {
+        animation.Pause();
+        State.GetState(animation);
+
+        Assert.AreEqual(MockTimerState.Stop, State.Timer.State);
+    }
+
+    [TestMethod]
+    public void Continue()
+    {
+        animation.Continue();
+        State.GetState(animation);
+
+        Assert.AreEqual(MockTimerState.Resumed, State.Timer.State);
+    }
+
+    [TestMethod]
+    public void AnimationFramesSequence()
+    {
+        for (int i = 1; i < 5 * frameQty; i++)
+        {
+            timer.NextTick();
+            State.GetState(animation);
+
+            Assert.AreEqual(i % frameQty, State.CurrentFrame);
+        }
+    }
+
+    [TestMethod]
+    public void AnimationComplete()
+    {
+        int counter = 0;
+        animation.AnimationComplete += (sender, e) => counter++;
+
+        for (int i = 0; i < 5 * frameQty; i++)
+        {
+            timer.NextTick();
         }
 
-        //[TestMethod]
-        //public void StartTest()
-        //{
-        //    animationImage.Start();
-        //    Assert.IsTrue(animationImage.Timer.Enabled);
-        //}
+        Assert.AreEqual(5, counter);
+    }
 
-        //[TestMethod]
-        //public void StopTest()
-        //{
-        //    animationImage.Stop();
-        //    Assert.IsFalse(animationImage.Timer.Enabled);
-        //}
+    private class State
+    {
+        public static TimerMock Timer { get; set; }
+        public static int CurrentFrame { get; set; }
+        public static Bitmap[] Frames { get; set; }
 
-        [TestMethod]
-        public void ResetTest()
+        public static void GetState(Animation animation)
         {
-            AnimateTillFrame(5);
-            animationImage.Reset();
-            Assert.AreEqual(0, animationImage.CurrentFrame);
-        }
-
-        [TestMethod]
-        public void CurrentFrameTest()
-        {
-            //AnimateTillFrame(0);
-            //Assert.AreEqual(0, animationImage.CurrentFrame);
-
-            AnimateTillFrame(5);
-            Assert.AreEqual(5, animationImage.CurrentFrame);
-
-            AnimateTillFrame(10);
-            Assert.AreEqual(0, animationImage.CurrentFrame);
-
-            AnimateTillFrame(14);
-            Assert.AreEqual(4, animationImage.CurrentFrame);
-        }
-
-        [TestMethod, Ignore]
-        public void ManualAnimationDisplayTest()
-        {
-            ElementVisualizaer visualizer = new ElementVisualizaer();
-
-            var animatedBitmap = @"Animation\Files\AnimatedTestImage.png";
-            var animation1     = new AnimationImage(animatedBitmap, 30, new MyTimer(50));
-            var animation2     = new AnimationImage(animatedBitmap, 30, new MyTimer(50));
-
-            animation1.Start();
-            animation2.Start();
-            
-            visualizer.Add(new TestAnimationElement() { Animation = animation1, X = 0 , Y = 0});
-            visualizer.Add(new TestAnimationElement() { Animation = animation2, X = 30, Y = 0 });
-
-            visualizer.Start();
-        }
-
-        [TestMethod]
-        public void IncorrectFrameLengthTest()
-        {
-            try
-            {
-                new AnimationImageTestClass(Const.BrickTexture, 0, new MyTimer(1));
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("frameLength has to be >= 1", ex.Message);
-            }
-        }
-
-        [TestMethod]
-        public void IncorrectImageToFrameLengthRatioTest()
-        {
-            try
-            {
-                new AnimationImageTestClass(Const.BrickTexture, 15, new MyTimer(1));
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual($"Width of animationImage has to be longer than frameLength", ex.Message);
-            }
-        }
-
-        private void AnimateTillFrame(int qty)
-        {
-            animationImage.Start();
-
-            while (animationImage.TicksCounter != qty)
-            {
-            }
-
-            animationImage.Stop();
+            Timer = Reflection.GetPrivateField<TimerMock>(animation, "myTimer");
+            CurrentFrame = Reflection.GetPrivateField<int>(animation, "currentFrame");
+            Frames = Reflection.GetPrivateField<Bitmap[]>(animation, "frames");
         }
     }
 }

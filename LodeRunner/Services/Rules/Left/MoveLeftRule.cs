@@ -1,4 +1,5 @@
 ﻿using LodeRunner.Control;
+using LodeRunner.Model.DynamicComponents;
 using LodeRunner.Model.SingleComponents;
 using static LodeRunner.Services.Intersection;
 
@@ -13,8 +14,7 @@ namespace LodeRunner.Services.Rules
         public override bool Check()
         {
             player.X -= 1;
-            player.SetAnimation(Animations.Left);
-            player.Direction = Direction.Left;
+            player.State = PlayerState.RunLeft;
             return true;
         }
     }

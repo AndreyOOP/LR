@@ -2,8 +2,8 @@
 {
     public interface IPause
     {
-        void Freeze();
+        void Pause();
 
-        void Unfreeze();
+        void Continue();
     }
 }

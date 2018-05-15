@@ -4,9 +4,19 @@ using System.Drawing;
 namespace LodeRunner.Model.ModelComponents
 {
     [Serializable]
-    public abstract class SingleComponentBase : IDrawable
+    public abstract class StaticComponent : IDrawable
     {
+        protected Bitmap texture;
+
+        public StaticComponent(int x = 0, int y = 0, Bitmap texture = null)
+        {
+            X = x;
+            Y = y;
+            this.texture = texture;
+        }
+
         public int X { get; set; }
+
         public int Y { get; set; }
 
         public int BlockX
@@ -23,16 +33,6 @@ namespace LodeRunner.Model.ModelComponents
             {
                 return Y / Const.BlockSize;
             }
-        }
-
-        public SingleComponentBase()
-        {
-        }
-
-        public SingleComponentBase(int x, int y)
-        {
-            X = x;
-            Y = y;
         }
 
         public abstract void Draw(Graphics g);

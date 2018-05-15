@@ -2,13 +2,9 @@
 
 namespace LodeRunner.Animation
 {
-    public interface IAnimationImage
+    public interface IAnimation
     {
         void Start();
-
-        void Stop();
-
-        void Reset();
 
         Bitmap GetCurrentFrame();
     }

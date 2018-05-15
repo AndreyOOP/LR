@@ -19,7 +19,7 @@
             player = model.Player;
         }
 
-        public SingleComponentBase Get(Corner corner, Direction direction = Direction.None)
+        public StaticComponent Get(Corner corner, Direction direction = Direction.None)
         {
             int x = 0;
             int y = 0;
@@ -48,8 +48,8 @@
 
         public bool Line<T>(Direction direction, Side side, Operation operation)
         {
-            SingleComponentBase block1 = null;
-            SingleComponentBase block2 = null;
+            StaticComponent block1 = null;
+            StaticComponent block2 = null;
 
             switch (direction)
             {
@@ -88,8 +88,8 @@
 
         public bool Line(Direction direction, Side side, Operation operation)
         {
-            SingleComponentBase block1 = null;
-            SingleComponentBase block2 = null;
+            StaticComponent block1 = null;
+            StaticComponent block2 = null;
 
             switch (direction)
             {

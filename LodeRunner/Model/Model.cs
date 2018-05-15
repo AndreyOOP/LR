@@ -10,7 +10,7 @@
     [Serializable]
     public partial class Model : IModel, IDrawable, IPause
     {
-        private SingleComponentBase[,] field = new SingleComponentBase[Const.BlockWidth, Const.BlockHeigth];
+        private StaticComponent[,] field = new StaticComponent[Const.BlockWidth, Const.BlockHeigth];
 
         public GameState State { get; set; } = GameState.InGame;
 
@@ -19,21 +19,20 @@
         public int MaxScore { get; set; }
         public int Score { get; set; }
 
-        public SingleComponentBase Message { get; set; }
+        public StaticComponent Message { get; set; }
         
         public Model()
         {
-            //MaxScore = field.OfType<Gold>().Count();
         }
 
-        public void Add<T>(T component) where T : SingleComponentBase
+        public void Add<T>(T component) where T : StaticComponent
         {
             CheckInput(component);
 
             field[component.BlockX, component.BlockY] = component;
         }
         
-        public SingleComponentBase Get(int blockX, int blockY, bool absolute = false)
+        public StaticComponent Get(int blockX, int blockY, bool absolute = false)
         {
             if (absolute)
             {
@@ -66,39 +65,39 @@
             Message?.Draw(g);
         }
 
-        public void Freeze()
+        public void Pause()
         {
-            Player.Freeze();
+            Player.Pause();
 
             foreach(var water in field.OfType<Water>())
             {
-                water.Freeze();
+                water.Pause();
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.State != BrickState.Visible))
             {
-                brick.Freeze();
+                brick.Pause();
             }
         }
 
-        public void Unfreeze()
+        public void Continue()
         {
-            Player.Unfreeze();
+            Player.Continue();
 
             foreach (var water in field.OfType<Water>())
             {
-                water.Unfreeze();
+                water.Continue();
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.State != BrickState.Visible))
             {
-                brick.Unfreeze();
+                brick.Continue();
             }
         }
 
-        private void CheckInput<T>(T component) where T : SingleComponentBase
+        private void CheckInput<T>(T component) where T : StaticComponent
         {
             if (component.BlockX < 0)
             {
@@ -119,6 +118,12 @@
             {
                 throw new ArgumentException($"{nameof(component.BlockY)} could not be >= than maximum field heigth. It is {component.BlockY} vs {Const.BlockHeigth}");
             }
+        }
+
+        public void InitializeStartState()
+        {
+            Pause();
+            Continue();
         }
     }
 }

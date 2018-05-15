@@ -1,4 +1,5 @@
 ﻿using LodeRunner.Control;
+using LodeRunner.Model.DynamicComponents;
 
 namespace LodeRunner.Services.Rules
 {
@@ -10,7 +11,7 @@ namespace LodeRunner.Services.Rules
 
         public override bool Check()
         {
-            player.SetImage(Textures.Stand);
+            player.State = PlayerState.Stay;
             return true;
         }
     }

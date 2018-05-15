@@ -2,18 +2,17 @@
 using LodeRunner.Services.Timer;
 using System;
 using System.Drawing;
-using System.Runtime.Serialization;
 
 namespace LodeRunner.Animation
 {
     [Serializable]
-    public class AnimationImage : IAnimationImage, IPause
+    public class Animation : IAnimation, IPause
     {
         protected int currentFrame;
         protected Bitmap[] frames;
         protected ITimer myTimer;
 
-        public AnimationImage(string animationImagePath, int frameLength, ITimer myTimer)
+        public Animation(string animationImagePath, int frameLength, ITimer myTimer)
         {
             var animationImage = new Bitmap(animationImagePath);
             ArgumentsCheck(animationImage, frameLength);
@@ -21,7 +20,7 @@ namespace LodeRunner.Animation
             frames = SplitImageOnFrames(animationImage, frameLength);
 
             this.myTimer = myTimer;
-            myTimer.SetEventHandler(TimerTick);
+            this.myTimer.SetEventHandler(TimerTick);
         }
 
         public event EventHandler AnimationComplete;
@@ -29,31 +28,22 @@ namespace LodeRunner.Animation
         public void Start()
         {
             myTimer.Start();
+            currentFrame = 0;
         }
 
-        public void Stop()
+        public void Pause()
         {
             myTimer.Stop();
         }
 
-        public void Reset()
+        public void Continue()
         {
-            currentFrame = 0;
+            myTimer.Resume();
         }
 
         public Bitmap GetCurrentFrame()
         {
             return frames[currentFrame];
-        }
-
-        public void Freeze()
-        {
-            myTimer.Stop();
-        }
-
-        public void Unfreeze()
-        {
-            myTimer.Resume();
         }
 
         private void ArgumentsCheck(Bitmap animationImage, int frameLength)
@@ -63,7 +53,7 @@ namespace LodeRunner.Animation
                 throw new ArgumentException($"{nameof(frameLength)} has to be >= 1");
             }
 
-            if (animationImage.Size.Width < frameLength)
+            if (animationImage.Size.Width < frameLength) // or width or change message
             {
                 throw new ArgumentException($"Width of {nameof(animationImage)} has to be longer than {nameof(frameLength)}");
             }
@@ -85,7 +75,7 @@ namespace LodeRunner.Animation
 
         private void TimerTick(object sender, EventArgs e)
         {
-            if (++currentFrame >= frames.Length)
+            if (currentFrame++ >= frames.Length-1)
             {
                 currentFrame = 0;
                 AnimationComplete?.Invoke(this, EventArgs.Empty);

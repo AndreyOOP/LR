@@ -21,6 +21,7 @@
             View = view;
             Initialization();
             InitializeTimer();
+            Model.InitializeStartState();
         }
 
         public Model GetModelForDraw()

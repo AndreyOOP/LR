@@ -2,6 +2,7 @@
 {
     using LodeRunner.Control;
     using LodeRunner.Model;
+    using LodeRunner.Model.DynamicComponents;
     using LodeRunner.Model.SingleComponents;
     using static LodeRunner.Services.Intersection;
 
@@ -15,8 +16,8 @@
         {
             if (IsTopOnWater() || IsTopInBrick())
             {
-                model.Message = new GameOver((Const.WindowWidth-200)/2, 100);
-                model.Freeze();
+                model.Message = new GameOver((Const.WindowWidth-200)/2, 100, Textures.GameOver);
+                model.Pause();
                 controller.Commands.AllowedChars = Const.GameOverInput;
 
                 return false;
@@ -36,9 +37,9 @@
 
             if(element is Brick)
             {
-                if (((Brick)element).state == BrickState.Visible)
+                if (((Brick)element).State == BrickState.Visible)
                 {
-                    model.Player.SetImage(Textures.StairsDown); //todo change to ? nothing ? In Brick ?
+                    model.Player.State = PlayerState.RunDown; //todo change to ? nothing ? In Brick ?
                     return true;
                 }
             }

@@ -1,8 +1,6 @@
 ﻿using LodeRunner;
 using LodeRunner.Model;
-using LodeRunner.Model.SingleComponents;
 using LodeRunner.Services;
-using LodeRunner.Services.Timer;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,6 +13,7 @@ namespace LevelEditor
         private Bitmap currentObject = new Bitmap(1, 1);
         private ModelLoadService mls;
         private int pointerX, pointerY;
+        private BlockFactory blockFactory;
 
         public Editor()
         {
@@ -32,6 +31,8 @@ namespace LevelEditor
 
             mls = new ModelLoadService();
             model = new Model();
+
+            blockFactory = new BlockFactory();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -150,32 +151,32 @@ namespace LevelEditor
                 switch (selectedObject)
                 {
                     case '1':
-                        model.Add(new Stone(x, y));
+                        model.Add(blockFactory.GetStone(x, y));
                         break;
 
                     case '2':
-                        model.Add(new Water(x, y));
+                        model.Add(blockFactory.GetWater(x, y));
                         break;
 
                     case '3':
-                        model.Add(new Brick(x, y, new MyTimer(Const.BrickGrowPeriod)));
+                        model.Add(blockFactory.GetBrick(x, y));
                         break;
 
                     case '4':
-                        model.Add(new Stairs(x, y));
+                        model.Add(blockFactory.GetStairs(x, y));
                         break;
 
                     case '5':
-                        model.Add(new Rail(x, y));
+                        model.Add(blockFactory.GetRail(x, y));
                         break;
 
                     case '6':
-                        model.Add(new Gold(x, y));
+                        model.Add(blockFactory.GetGold(x, y));
                         model.MaxScore++;
                         break;
 
                     case '7':
-                        model.Player = new Player(x, y);
+                        model.Player = blockFactory.GetPlayer(x, y);
                         break;
                 }
             }
