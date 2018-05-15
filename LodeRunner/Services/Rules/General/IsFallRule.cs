@@ -38,7 +38,7 @@
             {
                 var brick1 = (Brick)element1;
                 var brick2 = (Brick)element2;
-                return (brick1.state == BrickState.Burn || brick1.state == BrickState.NotVisible) && (brick2.state == BrickState.Burn || brick2.state == BrickState.NotVisible);
+                return (brick1.State == BrickState.Burn || brick1.State == BrickState.NotVisible) && (brick2.State == BrickState.Burn || brick2.State == BrickState.NotVisible);
             }
 
             return false;

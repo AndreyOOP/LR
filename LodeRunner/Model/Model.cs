@@ -75,7 +75,7 @@
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.State != BrickState.Visible))
             {
                 brick.Pause();
             }
@@ -91,7 +91,7 @@
                 break;
             }
 
-            foreach (var brick in field.OfType<Brick>().Where(b => b.state != BrickState.Visible))
+            foreach (var brick in field.OfType<Brick>().Where(b => b.State != BrickState.Visible))
             {
                 brick.Continue();
             }

@@ -36,7 +36,7 @@
 
             if(element is Brick)
             {
-                if (((Brick)element).state == BrickState.Visible)
+                if (((Brick)element).State == BrickState.Visible)
                 {
                     model.Player.SetImage(Textures.StairsDown); //todo change to ? nothing ? In Brick ?
                     return true;

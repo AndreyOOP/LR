@@ -32,6 +32,11 @@
             {
                 state = value;
 
+                foreach (var s in dynamicStates)
+                {
+                    s.Value.Pause();
+                }
+
                 if (dynamicStates.ContainsKey(state))
                 {
                     dynamicStates[state].Start();
@@ -61,7 +66,7 @@
             }
         }
 
-        public void Pause()
+        public virtual void Pause()
         {
             if (dynamicStates.ContainsKey(state))
             {
@@ -69,7 +74,7 @@
             }
         }
 
-        public void Continue()
+        public virtual void Continue()
         {
             if (dynamicStates.ContainsKey(state))
             {

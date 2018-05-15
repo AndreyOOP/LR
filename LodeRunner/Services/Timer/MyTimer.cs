@@ -39,7 +39,7 @@
         {
             timer.Stop();
             stopwatch.Stop();
-            resumeInt = interval - (int)stopwatch.ElapsedMilliseconds % interval;
+            resumeInt = interval - (int)stopwatch.ElapsedMilliseconds % interval; // todo check bug with multiple 'short' pauses
         }
 
         public void Resume()

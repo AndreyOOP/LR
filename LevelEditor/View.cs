@@ -164,7 +164,20 @@ namespace LevelEditor
                         break;
 
                     case '3':
-                        model.Add(new Brick(x, y, new MyTimer(Const.BrickGrowPeriod)));
+                        var brick = new Brick(x, y, new MyTimer(Const.BrickGrowPeriod));
+
+                        var grow = new Animation(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
+                        grow.AnimationComplete += brick.OnGrowAnimationFinished;
+
+                        var burn = new Animation(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
+                        burn.AnimationComplete += brick.OnBurnAnimationFinished;
+
+                        brick.AddDynamicState(BrickState.Burn, burn);
+                        brick.AddDynamicState(BrickState.Grow, grow);
+                        brick.AddStaticState(BrickState.Visible, Textures.Brick);
+                        brick.AddStaticState(BrickState.NotVisible, new Bitmap(1, 1));
+                        brick.State = BrickState.Visible;
+                        model.Add(brick);
                         break;
 
                     case '4':

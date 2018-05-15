@@ -36,7 +36,7 @@
             if(el is Brick)
             {
                 var brick = (Brick)el;
-                return brick.state == BrickState.Burn || brick.state == BrickState.NotVisible;
+                return brick.State == BrickState.Burn || brick.State == BrickState.NotVisible;
             }
 
             return false;
