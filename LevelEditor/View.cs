@@ -1,11 +1,6 @@
 ﻿using LodeRunner;
-using LodeRunner.Animation;
 using LodeRunner.Model;
-using LodeRunner.Model.DynamicComponents;
-using LodeRunner.Model.SingleComponents;
 using LodeRunner.Services;
-using LodeRunner.Services.Timer;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,6 +13,7 @@ namespace LevelEditor
         private Bitmap currentObject = new Bitmap(1, 1);
         private ModelLoadService mls;
         private int pointerX, pointerY;
+        private BlockFactory blockFactory;
 
         public Editor()
         {
@@ -35,6 +31,8 @@ namespace LevelEditor
 
             mls = new ModelLoadService();
             model = new Model();
+
+            blockFactory = new BlockFactory();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -153,48 +151,32 @@ namespace LevelEditor
                 switch (selectedObject)
                 {
                     case '1':
-                        model.Add(new Stone(x, y, Textures.Stone));
+                        model.Add(blockFactory.GetStone(x, y));
                         break;
 
                     case '2':
-                        var water = new Water(x, y);
-                        water.AddDynamicState(WaterState.Animated, Animations.Water);
-                        water.State = WaterState.Animated;
-                        model.Add(water);
+                        model.Add(blockFactory.GetWater(x, y));
                         break;
 
                     case '3':
-                        var brick = new Brick(x, y, new MyTimer(Const.BrickGrowPeriod));
-
-                        var grow = new Animation(Const.BrickGrowAnimation, Const.BlockSize, new MyTimer(200));
-                        grow.AnimationComplete += brick.OnGrowAnimationFinished;
-
-                        var burn = new Animation(Const.BrickBurnAnimation, Const.BlockSize, new MyTimer(200));
-                        burn.AnimationComplete += brick.OnBurnAnimationFinished;
-
-                        brick.AddDynamicState(BrickState.Burn, burn);
-                        brick.AddDynamicState(BrickState.Grow, grow);
-                        brick.AddStaticState(BrickState.Visible, Textures.Brick);
-                        brick.AddStaticState(BrickState.NotVisible, new Bitmap(1, 1));
-                        brick.State = BrickState.Visible;
-                        model.Add(brick);
+                        model.Add(blockFactory.GetBrick(x, y));
                         break;
 
                     case '4':
-                        model.Add(new Stairs(x, y, Textures.Stairs));
+                        model.Add(blockFactory.GetStairs(x, y));
                         break;
 
                     case '5':
-                        model.Add(new Rail(x, y, Textures.Rail));
+                        model.Add(blockFactory.GetRail(x, y));
                         break;
 
                     case '6':
-                        model.Add(new Gold(x, y, Textures.Gold));
+                        model.Add(blockFactory.GetGold(x, y));
                         model.MaxScore++;
                         break;
 
                     case '7':
-                        model.Player = new Player(x, y);
+                        model.Player = blockFactory.GetPlayer(x, y);
                         break;
                 }
             }

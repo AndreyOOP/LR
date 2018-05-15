@@ -1,8 +1,7 @@
 ﻿using LodeRunner;
 using LodeRunner.Animation;
-using LodeRunner.Model;
-using LodeRunner.Model.DynamicComponents;
 using LodeRunner.Model.SingleComponents;
+using LodeRunner.Services;
 using LodeRunner.Services.Timer;
 using LodeRunnerTests.Animation;
 using LodeRunnerTests.VisualTester;
@@ -34,25 +33,39 @@ public class ManualTests
     [TestMethod]
     public void StaticComponentsDisplay()
     {
+        var blockFactory = new BlockFactory();
         var visualizer = new ElementVisualizaer();
 
-        visualizer.Add(new Stone(0, 0, Textures.Stone));
-        visualizer.Add(new Stairs(20, 0, Textures.Stairs));
-        visualizer.Add(new Gold(40, 0, Textures.Gold));
-        visualizer.Add(new Rail(60, 0, Textures.Rail));
-        visualizer.Add(new GameOver(0, 40, Textures.GameOver));
+        visualizer.Add(blockFactory.GetStone(0, 0));
+        visualizer.Add(blockFactory.GetStairs(20, 0));
+        visualizer.Add(blockFactory.GetGold(40, 0));
+        visualizer.Add(blockFactory.GetRail(60, 0));
+        visualizer.Add(blockFactory.GetGameOver(0, 40));
+
         visualizer.Start();
     }
 
     [TestMethod]
     public void WaterDrawTest()
     {
-        var water = new Water(40, 40);
-        water.AddDynamicState(WaterState.Animated, Animations.Water);
-        water.State = WaterState.Animated;
-
         var visualizer = new ElementVisualizaer();
-        visualizer.Add(water);
+        visualizer.Add(new BlockFactory().GetWater(40, 40));
+        visualizer.Start();
+    }
+
+    [TestMethod]
+    public void BrickDrawManualTest()
+    {
+        var blockFactory = new BlockFactory();
+        var visualizer = new ElementVisualizaer();
+
+        var brick = blockFactory.GetBrick(0, 20);
+        visualizer.Add(brick);
+
+        brick = blockFactory.GetBrick(20, 20);
+        brick.State = BrickState.Burn;
+        visualizer.Add(brick);
+
         visualizer.Start();
     }
 
