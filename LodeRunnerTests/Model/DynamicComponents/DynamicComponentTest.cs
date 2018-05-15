@@ -30,10 +30,10 @@ public class DynamicComponentTest
         var burnMock = new AnimationMock(Const.BrickTexture, Const.BlockSize, timer1);
         var growMock = new AnimationMock(Const.BrickTexture, Const.BlockSize, timer2);
 
-        dynamicStates.Add(BrickState.Burn, burnMock);
-        dynamicStates.Add(BrickState.Grow, growMock);
-
-        component = new DynamicComponent<BrickState>(0, 0, dynamicStates, staticStates, BrickState.Visible);
+        component = new DynamicComponent<BrickState>(0, 0);
+        component.AddDynamicState(BrickState.Burn, burnMock);
+        component.AddDynamicState(BrickState.Grow, growMock);
+        component.State = BrickState.Visible;
     }
 
     [TestMethod]
@@ -47,10 +47,6 @@ public class DynamicComponentTest
     {
         component.State = BrickState.Grow;       
         Assert.AreEqual(AnimationMockState.Started, ((AnimationMock)GetValue(component, BrickState.Grow)).InnerState);
-
-        //timer1.NextTick();
-        //component.Draw(null);
-        //Assert.AreEqual(AnimationMockState.ReturnFrame, ((AnimationMock)GetValue(component, BrickState.Grow)).InnerState);
     }
 
     private Animation GetValue(object obj, BrickState key)

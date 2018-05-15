@@ -157,9 +157,10 @@ namespace LevelEditor
                         break;
 
                     case '2':
-                        var d = new Dictionary<WaterState, Animation>();
-                        d.Add(WaterState.Animated, Animations.Water);
-                        model.Add(new Water(x, y, d, null, WaterState.Animated));
+                        var water = new Water(x, y);
+                        water.AddDynamicState(WaterState.Animated, Animations.Water);
+                        water.State = WaterState.Animated;
+                        model.Add(water);
                         break;
 
                     case '3':

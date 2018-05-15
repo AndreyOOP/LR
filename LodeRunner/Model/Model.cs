@@ -23,7 +23,6 @@
         
         public Model()
         {
-            //MaxScore = field.OfType<Gold>().Count();
         }
 
         public void Add<T>(T component) where T : StaticComponent
@@ -119,6 +118,12 @@
             {
                 throw new ArgumentException($"{nameof(component.BlockY)} could not be >= than maximum field heigth. It is {component.BlockY} vs {Const.BlockHeigth}");
             }
+        }
+
+        public void InitializeStartState()
+        {
+            Pause();
+            Continue();
         }
     }
 }

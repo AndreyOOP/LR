@@ -68,9 +68,6 @@
     <Compile Include="Model\DynamicComponents\AnimationMock.cs" />
     <Compile Include="Model\DynamicComponents\DynamicComponentTest.cs" />
     <Compile Include="Model\ModelTests.cs" />
-    <Compile Include="Model\DynamicComponents\PlayerTests.cs" />
-    <Compile Include="Model\DynamicComponents\BrickTests.cs" />
-    <Compile Include="Model\DynamicComponents\WaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementVisualizaer.cs">
       <SubType>Form</SubType>

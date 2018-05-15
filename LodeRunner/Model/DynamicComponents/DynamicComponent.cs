@@ -15,13 +15,6 @@
         private Dictionary<T, Animation> dynamicStates;
         private Dictionary<T, Image> staticStates;
 
-        public DynamicComponent(int x, int y, Dictionary<T, Animation> dynamicStates, Dictionary<T, Image> staticStates, T state) : base(x, y)
-        {
-            this.dynamicStates = dynamicStates == null ? new Dictionary<T, Animation>() : dynamicStates;
-            this.staticStates = staticStates == null ? new Dictionary<T, Image>() : staticStates;
-            State = state;
-        }
-
         public DynamicComponent(int x, int y) : base(x, y)
         {
             dynamicStates = new Dictionary<T, Animation>();
