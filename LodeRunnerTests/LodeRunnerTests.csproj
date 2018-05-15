@@ -67,6 +67,7 @@
     <Compile Include="Manual\ManualTests.cs" />
     <Compile Include="Model\DynamicComponents\AnimationMock.cs" />
     <Compile Include="Model\DynamicComponents\DynamicComponentTest.cs" />
+    <Compile Include="Model\DynamicComponents\BrickTest.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementVisualizaer.cs">

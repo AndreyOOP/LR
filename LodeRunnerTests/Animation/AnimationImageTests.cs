@@ -51,7 +51,7 @@ public class AnimationImageTests
     {
         try
         {
-            new Animation(path, frameLength + 1, new TimerMock());
+            new Animation(path, frameQty * frameLength + 1, new TimerMock());
             Assert.Fail("No argument exception thrown");
         }
         catch (ArgumentException ex)

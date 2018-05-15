@@ -39,9 +39,12 @@
             State = MockTimerState.Stop;
         }
 
-        public void NextTick()
+        public void NextTick(int qty = 1)
         {
-            Handler(null, null);
+            for(int i=0; i<qty; i++)
+            {
+                Handler(null, null);
+            }
         }
     }
 }

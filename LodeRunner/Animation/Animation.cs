@@ -53,7 +53,7 @@ namespace LodeRunner.Animation
                 throw new ArgumentException($"{nameof(frameLength)} has to be >= 1");
             }
 
-            if (animationImage.Size.Height < frameLength)
+            if (animationImage.Size.Width < frameLength) // or width or change message
             {
                 throw new ArgumentException($"Width of {nameof(animationImage)} has to be longer than {nameof(frameLength)}");
             }
